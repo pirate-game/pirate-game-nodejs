@@ -31,11 +31,12 @@ li a{
 	transition-duration: 0.4s;
 	border-radius: 6px;
 }
+
 li a:hover{
 	background-color:cornflowerblue;
 }
 
-li img {
+#logo:hover {
 	background-color:unset;
 }
 
