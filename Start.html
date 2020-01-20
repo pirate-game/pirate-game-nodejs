@@ -81,21 +81,21 @@
                         recvId.innerHTML = "ID: " + peer.id;
                         status.innerHTML = "Awaiting connection...";
                     });
-                    /*peer.on('connection', function (c) {
+                    peer.on('connection', function (c) {
                         // Allow only a single connection
-                        if (conn) {
+                        /*if (conn) {
                             c.on('open', function() {
                                 c.send("Already connected to another client");
                                 setTimeout(function() { c.close(); }, 500);
                             });
                             return;
-                        }
+                        }*/
 
                         conn = c;
                         console.log("Connected to: " + conn.peer);
                         status.innerHTML = "Connected"
                         ready();
-                    });*/
+                    });
                     peer.on('disconnected', function () {
                         status.innerHTML = "Connection lost. Please reconnect";
                         console.log('Connection lost. Please reconnect');
