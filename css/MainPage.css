@@ -1,6 +1,9 @@
 * {cursor: cell;}
 
-body {background-color:#DCDCC4;}
+body {
+	background-color:#DCDCC4;
+	font-family:calibri;
+}
 
 img, button, a {cursor:pointer;}
 
@@ -30,6 +33,10 @@ li a{
 }
 li a:hover{
 	background-color:cornflowerblue;
+}
+
+li img {
+	background-color:unset;
 }
 
 #title{
