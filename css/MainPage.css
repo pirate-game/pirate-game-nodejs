@@ -1,1 +1,5 @@
 * {cursor: cell;}
+
+body {background-color:#DCDCC4;}
+
+img, button, a {cursor:pointer;}
