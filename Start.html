@@ -81,7 +81,7 @@
                         recvId.innerHTML = "ID: " + peer.id;
                         status.innerHTML = "Awaiting connection...";
                     });
-                    peer.on('connection', function (c) {
+                    /*peer.on('connection', function (c) {
                         // Allow only a single connection
                         if (conn) {
                             c.on('open', function() {
@@ -95,7 +95,7 @@
                         console.log("Connected to: " + conn.peer);
                         status.innerHTML = "Connected"
                         ready();
-                    });
+                    });*/
                     peer.on('disconnected', function () {
                         status.innerHTML = "Connection lost. Please reconnect";
                         console.log('Connection lost. Please reconnect');
