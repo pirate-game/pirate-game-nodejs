@@ -32,4 +32,9 @@ li a:hover{
 	background-color:lightblue;
 }
 
-#title{color:white}
+#title{
+	color:white;
+	left-margin:auto;
+  	right-margin:auto;
+  	text-align:center;
+}
