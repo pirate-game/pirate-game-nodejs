@@ -5,7 +5,7 @@ var port = process.env.PORT || 3000;
 
 app.get('/', function(req, res){
   console.log(req.url);
-  if (req.url == "") {
+  if (req.url == "/") {
     res.sendFile(__dirname + '/index.html');
   } else {
     res.sendFile(__dirname + '/css/MainPage.css');
