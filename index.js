@@ -9,7 +9,7 @@ app.get('/', function(req, res){
 
 app.use(express.static('public'));
 
-io.on('connection', function(socket){
+/*io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
@@ -18,3 +18,4 @@ io.on('connection', function(socket){
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
+*/
