@@ -9,6 +9,7 @@ app.get('/', function(req, res){
     res.sendFile(__dirname + '/public/index.html');
   } else {
     res.sendFile(__dirname + '/404.html');
+  };
 });
 
 app.use(express.static('public'));
