@@ -7,7 +7,8 @@ var port = process.env.PORT || 3000;
 app.get('/', function(req, res){
   if (req.url == "/") {
     res.sendFile(__dirname + '/public/index.html');
-  }; 
+  } else {
+    res.sendFile(__dirname + '/404.html');
 });
 
 app.use(express.static('public'));
