@@ -1,10 +1,15 @@
-/*var app = require('express')();
+var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  if (req.url == "") {
+    res.sendFile(__dirname + '/index.html');
+  } else {
+    res.sendFile(__dirname + '/404.html')
+  };
+                      
 });
 
 io.on('connection', function(socket){
@@ -15,12 +20,4 @@ io.on('connection', function(socket){
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
-});*/
-var static = require('node-static');
-var http = require('http');
-
-var file = new(static.Server)();
-
-http.createServer(function (req, res) {
-  file.serve(req, res);
-}).listen(8080);
+});
