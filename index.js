@@ -16,3 +16,5 @@ io.on('connection', function(socket){
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
+
+app.use(express.static('css'));
