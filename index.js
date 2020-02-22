@@ -8,10 +8,6 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/404.html', function(req, res){
-  res.sendFile(__dirname + '/404.html');
-});
-
 app.use(express.static('public'));
 
 io.on('connection', function(socket){
@@ -22,4 +18,8 @@ io.on('connection', function(socket){
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
+});
+
+app.use(function (req, res, next) {
+  res.status(404).sendFile(__dirname + '/404.html');
 });
