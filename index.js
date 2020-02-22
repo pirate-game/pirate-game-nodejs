@@ -8,10 +8,11 @@ app.get('/', function(req, res){
   if (req.url == "/") {
     res.sendFile(__dirname + '/index.html');
   } else {
+    //console.log('Oh no');
   };                     
 });
 
-app.use(expresss.static('public'));
+app.use(express.static('public'));
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
@@ -22,3 +23,5 @@ io.on('connection', function(socket){
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
+
+//app.listen(port);
