@@ -8,7 +8,7 @@ app.get('/', function(req, res){
   if (req.url == "/") {
     res.sendFile(__dirname + '/index.html');
   } else {
-    //console.log('Oh no');
+    res.sendFile(__dirname + '/404.html');
   };                     
 });
 
@@ -23,5 +23,3 @@ io.on('connection', function(socket){
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
-
-//app.listen(port);
