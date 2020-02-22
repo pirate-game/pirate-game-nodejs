@@ -10,10 +10,6 @@ app.get('/', function(req, res){
   }; 
 });
 
-app.get('*', function(req, res){
-  res.sendFile(__dirname + '/public/404.html');
-});
-
 app.use(express.static('public'));
 
 io.on('connection', function(socket){
