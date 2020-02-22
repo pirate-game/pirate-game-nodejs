@@ -1,7 +1,7 @@
 {
-  "name": "socket-chat-example",
+  "name": "The Pirate Game",
   "version": "0.0.1",
-  "description": "my first socket.io app",
+  "description": "The Pirate Game Website",
   "dependencies": {
     "express": "^4.15.2",
     "socket.io": "^1.7.3"
