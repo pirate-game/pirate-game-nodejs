@@ -7,9 +7,10 @@ app.get('/', function(req, res){
   if (req.url == "/") {
     res.sendFile(__dirname + '/index.html');
   } else {
-    res.sendFile(req.url);
   };                     
 });
+
+app.use(app.static('css'));
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
