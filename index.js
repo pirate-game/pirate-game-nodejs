@@ -4,6 +4,7 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 app.get('/', function(req, res){
+  console.log(req.url);
   if (req.url == "") {
     res.sendFile(__dirname + '/index.html');
   } else {
