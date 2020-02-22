@@ -7,7 +7,7 @@ app.get('/', function(req, res){
   if (req.url == "") {
     res.sendFile(__dirname + '/index.html');
   } else {
-    res.sendFile(__dirname + req.url);
+    res.sendFile(__dirname + '/css/MainPage.css');
   };
                       
 });
