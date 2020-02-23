@@ -1,56 +1,56 @@
 input[type=text], input[type=email], select, textarea {
-  width: -webkit-fill-available;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
+        width: -webkit-fill-available;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
 }
 
 label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
+        padding: 12px 12px 12px 0;
+        display: inline-block;
 }
 
 input[type=submit] {
-  background-color: #22971D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-  float: right;
-  border-radius: 10px;
+        background-color: #22971D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        float: right;
+        border-radius: 10px;
 }
 
 input[type=submit]:hover {
-  background-color: cornflowerblue;
+        background-color: cornflowerblue;
 }
 
 .contactform {
-  border-radius: 10px;
-  padding: 20px;
+        border-radius: 10px;
+        padding: 20px;
 }
 
 .col-25 {
-  float: left;
-  width: 25%;
-  margin-top: 6px;
+        float: left;
+        width: 25%;
+        margin-top: 6px;
 }
 
 .col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
+        float: left;
+        width: 75%;
+        margin-top: 6px;
 }
 
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+        content: "";
+        display: table;
+        clear: both;
 }
 
 @media screen and (max-width: 600px) {
-  .col-25, .col-75, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
-  }
+        .col-25, .col-75, input[type=submit] {
+                width: 100%;
+                margin-top: 0;
+        }
 }
