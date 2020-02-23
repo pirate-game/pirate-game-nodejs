@@ -5,24 +5,27 @@ body {
 	font-family:calibri;
 }
 
-div{border-radius: 10px;}
+div {border-radius: 10px;}
 
 img, button, a {cursor:pointer;}
 
-#nav{
+#nav {
 	overflow: hidden;
 	background-color:#CC6600;
 	position: relative;
 	top:0;
 }
-ul{
+
+#nav ul {
 	list-style-type: none;
 }
-li{
+
+#nav li {
 	float: left;
 	margin: 0 5px 15px;
 }
-li a{
+
+#nav li a {
 	display: block;
 	color: white;
 	text-align: center;
@@ -34,7 +37,7 @@ li a{
 	border-radius: 6px;
 }
 
-li a:hover{
+#nav li a:hover {
 	background-color:cornflowerblue;
 }
 
@@ -42,72 +45,15 @@ li a:hover{
 	background-color:unset;
 }
 
-#title{
+#title {
 	color:white;
 	left-margin:auto;
   	right-margin:auto;
   	text-align:center;
 }
 
-.sometext{
-  padding:25px;
-  margin:auto;
-  font-size: 18px;
-}
-
-input[type=text], input[type=email], select, textarea {
-  width: -webkit-fill-available;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-}
-
-input[type=submit] {
-  background-color: #22971D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-  float: right;
-  border-radius: 10px;
-}
-
-input[type=submit]:hover {
-  background-color: cornflowerblue;
-}
-
-.contactform {
-  border-radius: 10px;
-  padding: 20px;
-}
-
-.col-25 {
-  float: left;
-  width: 25%;
-  margin-top: 6px;
-}
-
-.col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-@media screen and (max-width: 600px) {
-  .col-25, .col-75, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
-  }
+.sometext {
+	padding:25px;
+	margin:auto;
+	font-size: 18px;
 }
