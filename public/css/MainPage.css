@@ -45,6 +45,11 @@ img, button, a {cursor:pointer;}
 	background-color:unset;
 }
 
+#logo img {
+	width:100px;
+	height:auto;
+}
+
 #title {
 	color:white;
 	left-margin:auto;
