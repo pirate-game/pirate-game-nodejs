@@ -17,7 +17,7 @@ io.on('connection', function(socket){
 });
 
 http.listen(port, function(){
-  //console.log('listening on *:' + port);
+  console.log('listening on *:' + port);
 });
 
 app.use(function (req, res, next) {
