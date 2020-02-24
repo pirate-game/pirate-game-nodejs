@@ -1,10 +1,10 @@
 
 {
-  "name": "Socket-Chat-Example",
-  "description": "my first socket.io app",
-  "website": "https://github.com/socketio/chat-example",
-  "repository": "https://github.com/socketio/chat-example",
-  "logo": "https://node-js-sample.herokuapp.com/node.svg",
+  "name": "The-Pirate-Game",
+  "description": "the pirate game",
+  "website": "https://the-pirate-game.herokuapp.com",
+  "repository": "https://github.com/pirate-game/pirate-game-nodejs",
+  "logo": "http://the-pirate-game.herokuapp.com/logo.png",
   "success_url": "/",
   "keywords": [
     "node",
