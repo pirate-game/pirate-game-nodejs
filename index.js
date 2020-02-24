@@ -11,14 +11,15 @@ app.get('/', function(req, res){
 app.use(express.static('public'));
 
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+  socket.on('pirate game', function(msg){
+    io.emit('pirate game', msg);
   });
 });
 
-http.listen(port, function(){
+/*http.listen(port, function(){
   console.log('listening on *:' + port);
-});
+});*/
+//This may be needed?
 
 app.use(function (req, res, next) {
   res.status(404).sendFile(__dirname + '/404.html');
