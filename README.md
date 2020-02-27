@@ -2,4 +2,4 @@
 
 An online version of The Pirate Game as provided by <a href=https://www.tes.com/teaching-resource/the-pirate-game-end-of-term-activity-6258063>paulcollins</a> and <a href="https://www.tes.com/teaching-resource/the-pirate-game-square-picker-6437335">htmort</a> on tes.
 
-This branch is the one I will edit. I will then pull the changes to master and deploy them to the website.
+I will edit toedit. I will then pull the changes to master and deploy them to the website.
