@@ -1,5 +1,5 @@
 function Nbsp() {
-  return ' ';
+  return '\u00A0';
 }
 
 const navbar = <div>
