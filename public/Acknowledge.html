@@ -6,18 +6,13 @@
 		<link rel="stylesheet" type="text/css" href="css/MainPage.css" />
 		<link rel="stylesheet" type="text/css" href="css/form.css" />
 		<link rel="icon" href="logo.png" type="image/x-icon" />
+		<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+		<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     	</head>
     	<body>
-		<div id="nav">
-	    		<ul>
-				<li><a id="logo" href="index.html"><img border="0" src="logo.png"></a></li>
-				<li><a href="Start.html">Start&nbspa<br />Game</a></li>
-				<li><a href="Join.html">Join&nbspa<br />Game</a></li>
-				<li><a href="Watch.html">Watch&nbspa<br />Game</a></li>
-				<li><a href="Acknowledge.html">Acknowledgements</a></li>
-	    		</ul>
-	    		<h1 id="title"><u>&nbspAcknowledgements&nbsp</u></h1>
-		</div>
+		<div id="nav"></div>
+		<script type="text/babel" src="navbar.js"></script>
 		<br />
 		<div class="sometext" style="background-color:lightblue;">
         		<p style="margin-left:4em;text-indent:-4em;">Ya-harr! We here at The Pirate Game be wanting to thank:<br />
@@ -37,7 +32,7 @@
 				<input name="_redirect" type="hidden" id="name" value="https://the-pirate-game.herokuapp.com/Submitted.html" />
 				<div class="row">
     					<div class="col-25"><label>What ye be called:</label></div>
-					<div class="col-75"><input name="name" type="text" id="name"></div>
+					<div class="col-75"><input name="name" type="text" id="theirname"></div>
 				</div>
 				<div class="row">
     					<div class="col-25"><label>Email Address:</label></div>
