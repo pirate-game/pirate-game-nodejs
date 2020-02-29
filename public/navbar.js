@@ -1,6 +1,6 @@
 const navbar = <div>
 	    		<ul>
-				<li><a id="logo" href="index.html"><img border="0" src="logo.png"></a></li>
+				<li><a id="logo" href="index.html"><img border="0" src="logo.png" /></a></li>
 				<li><a href="Start.html">Start&nbspa<br />Game</a></li>
 				<li><a href="Join.html">Join&nbspa<br />Game</a></li>
 				<li><a href="Watch.html">Watch&nbspa<br />Game</a></li>
