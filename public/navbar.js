@@ -1,3 +1,7 @@
+function Nbsp() {
+  return ' ';
+}
+
 const navbar = <div>
 	    		<ul>
 				<li><a id="logo" href="index.html"><img border="0" src="logo.png" /></a></li>
