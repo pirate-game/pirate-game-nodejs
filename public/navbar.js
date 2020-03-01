@@ -7,6 +7,6 @@ const navbar = <div>
 				<li><a href="Watch.html">Watch&nbspa<br />Game</a></li>
 				<li><a href="Acknowledge.html">Acknowledgements</a></li>
 	    		</ul>
-			<h1 id="title">{&nbspThe&nbspPirate&nbspGame&nbsp}</h1>
+			<h1 id="title">{"&nbspThe&nbspPirate&nbspGame&nbsp"}</h1>
 		</div>;
 ReactDOM.render(navbar, document.getElementById("nav"));
