@@ -1,3 +1,5 @@
+import './navbar.css';
+
 function Nbsp() {
   return '\u00A0';
 }
