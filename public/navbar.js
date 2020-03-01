@@ -1,10 +1,9 @@
-import './navbar.css';
-
 function Nbsp() {
   return '\u00A0';
 }
 
 const navbar = <div>
+      			<link rel="stylesheet" type="text/css" href="css/navbar.css" />
 	    		<ul>
 				<li><a id="logo" href="index.html"><img border="0" src="logo.png" /></a></li>
 				<li><a href="Start.html">Start<Nbsp />a<br />Game</a></li>
