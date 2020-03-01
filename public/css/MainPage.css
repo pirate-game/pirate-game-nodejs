@@ -11,9 +11,7 @@ img, button, a {cursor:pointer;}
 
 #title {
 	color:white;
-	left-margin:auto;
-  	right-margin:auto;
-  	text-align:center;
+	text-align:center;
 	text-decoration: underline;
 }
 
