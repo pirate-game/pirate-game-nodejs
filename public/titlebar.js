@@ -4,6 +4,6 @@ function Nbsp() {
 
 const titlebar = <div>
       			<link rel="stylesheet" type="text/css" href="css/titlebar.css" />
-	    		  <h1 id="title"><u><Nbsp />The<Nbsp />Pirate<Nbsp />Game<Nbsp /></u></h1>
+	    		  <h1 id="title"><Nbsp />The<Nbsp />Pirate<Nbsp />Game<Nbsp /></h1>
 		</div>;
 ReactDOM.render(titlebar, document.getElementById("titlebar"));
