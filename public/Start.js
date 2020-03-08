@@ -5,10 +5,10 @@ var key = '';
 class KeyBox extends React.Component {
   constructor() {
     super();
-    this.state = {visibilty: 'hidden'};
+    this.state = {visibility: 'hidden'};
   }
   render() {
-    return <h2 style={{visibilty: this.state.visibility}}> Key: {key} </h2>;
+    return <h2 style={{visibility: this.state.visibility}}> Key: {key} </h2>;
   }
 };
 
