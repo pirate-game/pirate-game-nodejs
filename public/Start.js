@@ -5,23 +5,16 @@ var key = '';
 class KeyBox extends React.Component {
   constructor() {
     super();
-    this.state = {visibility: 'hidden'};
+    this.state = {key: ''};
   }
   render() {
-    return <h2 style={{visibility: this.state.visibility}}> Key: {key} </h2>;
+    return <h2> Key: {this.state.key} </h2>;
   }
-  show = () => {this.setState({visibility: 'visible'})}
+  socket.on('key', msg => {key = msg;this.setState({key: key})});
 };
 
-//var keyBox = <KeyBox />;
-var keyBox = new KeyBox();
-keyBox.show();
+var keyBox = <KeyBox />;
 
 ReactDOM.render(keyBox, root);
-
-socket.on('key', function(msg){
-  key = msg;
-  
-});
 
 socket.emit('request_key', '');
