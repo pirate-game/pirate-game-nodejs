@@ -9,7 +9,7 @@ class KeyBox extends React.Component {
   }
   render() {
     return <h2> Key: {this.state.key} </h2>;
-  }
+  };
   socket.on('key', msg => {key = msg;this.setState({key: key})});
 };
 
