@@ -9,7 +9,7 @@ class KeyBox extends React.Component {
     socket.on('key', msg => {key = msg;this.setState({key: key})});
   }
   render() {
-    return <div className="sometext">
+    return <div className="sometext" style={{backgroundColor: "lightblue"}}>
       <h2> Key: {this.state.key} </h2>
     </div>;
   };
@@ -17,7 +17,7 @@ class KeyBox extends React.Component {
 
 var toRender = <div style={{position: 'relative'}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
-    <div className="sometext" style={{backgroundColor: "lightblue"}}><KeyBox /></div>
+    <KeyBox />
     <button id="crewAssembled">Crew Assembled!</button>
     </div>;
 
