@@ -6,11 +6,11 @@ class KeyBox extends React.Component {
   constructor() {
     super();
     this.state = {key: ''};
+    socket.on('key', msg => {key = msg;this.setState({key: key})});
   }
   render() {
     return <h2> Key: {this.state.key} </h2>;
   };
-  socket.on('key', msg => {key = msg;this.setState({key: key})});
 };
 
 var keyBox = <KeyBox />;
