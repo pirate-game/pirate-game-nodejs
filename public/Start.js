@@ -15,7 +15,7 @@ class KeyBox extends React.Component {
   };
 };
 
-var toRender = <div>
+var toRender = <div style={{position: 'relative', min-height: '60vh'}}>
   <div style={{position: 'relative',top: '-10%'}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
     <button id="crewAssembled">Crew Assembled!</button>
