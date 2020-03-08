@@ -9,13 +9,14 @@ class KeyBox extends React.Component {
   }
   render() {
     return <h2 style={{visibility: this.state.visibility}}> Key: {key} </h2>;
-  };
-  show = () => {this.setState({visibility: 'visible'});};
-  hide = () => {this.setState({visibility: 'hidden'});};
+  }
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
 };
 
 var keyBox = <KeyBox />;
-keyBox.show();
+keyBox.speak();
 
 ReactDOM.render(keyBox, root);
 
