@@ -16,12 +16,12 @@ class KeyBox extends React.Component {
 };
 
 var toRender = <div>
-  <div style={{position: 'relative',top:-10%}}>
+  <div style={{position: "relative",top:-10%}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
     <button id="crewAssembled">Crew Assembled!</button>
     <KeyBox />
   </div>
-  <h2 style={{fontSize: '50px'}}>Crew:</h2>
+  <h2 style={{fontSize: "50px"}}>Crew:</h2>
   <div id="crewDiv" style={{height: '50%'}}>
     <ul>
       <li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li>
