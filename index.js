@@ -10,11 +10,39 @@ app.get('/', function(req, res){
 
 app.use(express.static('public'));
 
-io.on('connection', function(socket){
+//Game Section
+
+var chars = "0123456789ABCDEF";
+var keys_in_use = [""];
+var games = [];
+
+function new_key(){
+  var out = "";
+  while (keys_in_use.includes(out)){
+    for (var i = 0; i < 6; i++){
+      out += chars[Math.floor(Math.random() * 16)];
+    };
+  };
+  keys_in_use.push(out);
+  return out;
+};
+
+io.on('connection' function(socket){
+  socket.on('request_key', function(msg){
+    var key = new_key();
+    socket.emit('key', key);
+    var game = {leader: socket, game_room: key};
+    games.push(game);
+  });
+});
+
+/*io.on('connection', function(socket){
   socket.on('pirate game', function(msg){
     io.emit('pirate game', msg);
   });
-});
+});*///old
+
+//End of Game Section
 
 http.listen(port, function(){});
 
