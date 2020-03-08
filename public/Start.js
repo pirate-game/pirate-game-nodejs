@@ -20,7 +20,7 @@ var toRender = <div>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
     <button id="crewAssembled">Crew Assembled!</button>
     <KeyBox />
-    <h2 style={{float: left;}}>Crew:</h2>
+    <h2 style={{float: left}}>Crew:</h2>
   </div>
   <div id="crewDiv">
     <ul>
