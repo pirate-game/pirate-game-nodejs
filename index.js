@@ -27,7 +27,7 @@ function new_key(){
   return out;
 };
 
-io.on('connection' function(socket){
+io.on('connection', function(socket){
   socket.on('request_key', function(msg){
     var key = new_key();
     socket.emit('key', key);
