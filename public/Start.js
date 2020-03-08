@@ -10,12 +10,6 @@ class KeyBox extends React.Component {
   render() {
     return <h2 style={{visibilty: this.state.visibility}}> Key: {key} </h2>;
   }
-  show(){
-    this.state.visibility = 'visible';
-  }
-  hide(){
-    this.state.visibility = 'hidden';
-  }
 };
 
 var keyBox = <KeyBox />;
@@ -24,7 +18,7 @@ ReactDOM.render(keyBox, root);
 
 socket.on('key', function(msg){
   key = msg;
-  keyBox.show();
+  keyBox.state.visibility = 'visible';
 });
 
 socket.emit('request_key', '');
