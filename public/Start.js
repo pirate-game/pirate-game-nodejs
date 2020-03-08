@@ -15,6 +15,7 @@ class KeyBox extends React.Component {
   }
   hide(){
     this.state.visibility = 'hidden';
+  }
 };
 
 ReactDOM.render(<KeyBox id='KeyBox' />, root);
