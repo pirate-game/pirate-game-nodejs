@@ -17,7 +17,7 @@ class KeyBox extends React.Component {
 
 var toRender = <div style={{position: 'relative'}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
-    <KeyBox />
+    <div className="sometext" style={{backgroundColor: "lightblue"}}><KeyBox /></div>
     <button id="crewAssembled">Crew Assembled!</button>
     </div>;
 
