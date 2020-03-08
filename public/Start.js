@@ -18,11 +18,13 @@ class KeyBox extends React.Component {
   }
 };
 
-ReactDOM.render(<KeyBox id='KeyBox' />, root);
+var keyBox = <KeyBox />;
+
+ReactDOM.render(keyBox, root);
 
 socket.on('key', function(msg){
   key = msg;
-  document.getElementById('KeyBox').show();
+  keyBox.show();
 });
 
 socket.emit('request_key', '');
