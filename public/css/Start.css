@@ -28,3 +28,20 @@
 #crewAssembled:hover {
   background-color: cornflowerblue;
 }
+
+#crewDiv {
+  column-count: 2;
+  background: #000;
+}
+
+#crewDiv ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#crewDiv ul li {
+  padding: 5px 10px;
+}
+
+#crewDiv ul li:nth-child(odd) { background: #eee; }
