@@ -15,11 +15,19 @@ class KeyBox extends React.Component {
   };
 };
 
-var toRender = <div style={{position: 'relative'}}>
+var toRender = <div>
+  <div style={{position: 'relative'}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
     <button id="crewAssembled">Crew Assembled!</button>
     <KeyBox />
-    </div>;
+    <h2 style={{float: left;}}>Crew:</h2>
+  </div>
+  <div id="crewDiv">
+    <ul>
+      <li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li>
+    </ul>
+  </div>
+</div>;
 
 ReactDOM.render(toRender, root);
 
