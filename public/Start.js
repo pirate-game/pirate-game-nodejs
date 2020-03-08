@@ -9,12 +9,17 @@ class KeyBox extends React.Component {
     socket.on('key', msg => {key = msg;this.setState({key: key})});
   }
   render() {
-    return <h2> Key: {this.state.key} </h2>;
+    return <div className="sometext">
+      <h2> Key: {this.state.key} </h2>
+    </div>;
   };
 };
 
-var keyBox = <KeyBox />;
+var toRender = <div>
+    <KeyBox />
+    <button id="crewAssembled">Crew Assembled!</button>
+    </div>;
 
-ReactDOM.render(keyBox, root);
+ReactDOM.render(toRender, root);
 
 socket.emit('request_key', '');
