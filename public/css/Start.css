@@ -1,18 +1,19 @@
 KeyBox {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 10%;
   right: 40%;
 }
 
 #crewAssembled {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 60%;
   right: 80%;
   display: block;
-  color: white;
   text-align: center;
+  font-family: calibri;
+  background-color: #CC6600;
   font-size: 20px;
   font-weight: bold;
   padding: 14px 16px;
