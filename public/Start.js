@@ -10,10 +10,10 @@ class KeyBox extends React.Component {
   render() {
     return <h2 style={{visibilty: this.state.visibility}}> Key: {key} </h2>;
   }
-  function show(){
+  show(){
     this.state.visibility = "visible";
   }
-  function hide(){
+  hide(){
     this.state.visibility = "hidden";
 };
 
