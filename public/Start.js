@@ -17,12 +17,11 @@ class KeyBox extends React.Component {
     this.state.visibility = 'hidden';
 };
 
+ReactDOM.render(<KeyBox id='KeyBox' />, root);
+
 socket.on('key', function(msg){
   key = msg;
   document.getElementById('KeyBox').show();
 });
 
 socket.emit('request_key', '');
-
-var element = <KeyBox id='KeyBox' />;
-ReactDOM.render(element, root);
