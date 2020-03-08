@@ -31,7 +31,9 @@
 
 #crewDiv {
   position: absolute;
-  left: 0; right: 0; bottom: 0; top: auto;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
   background: #fff;
   overflow: auto;
 }
