@@ -11,7 +11,7 @@
   float: right;
   display: block;
   text-align: center;
-  font-family: calibri;
+  font-family: 'Calibri', Fallback, sans-serif;
   background-color: #CC6600;
   color: white;
   font-size: 20px;
