@@ -11,5 +11,27 @@
 @media screen and (orientation: portrait) {.first, .last {width: 100%;}}
 
 h2 {
-    text-align: center;
+  text-align: center;
+}
+
+#join {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  font-family: 'Calibri', Fallback, sans-serif;
+  background-color: #CC6600;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  border-radius: 6px;
+  border-width: 0;
+  height: 50px;
+  margin: 0 5px 15px;
+}
+
+#join:hover {
+  background-color: cornflowerblue;
 }
