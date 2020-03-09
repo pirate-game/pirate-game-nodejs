@@ -2,7 +2,7 @@
 
 body {
 	background-color:#DCDCC4;
-	font-family:calibri;
+	font-family: 'Calibri', Fallback, sans-serif;
 }
 
 div {border-radius: 10px;}
