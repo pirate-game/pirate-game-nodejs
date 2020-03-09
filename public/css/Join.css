@@ -9,3 +9,7 @@
 }
 
 @media screen and (orientation: portrait) {.first, .last {width: 100%;}}
+
+h2 {
+    text-align: center;
+}
