@@ -1,0 +1,11 @@
+.first {
+  float: left;
+  width: 50%;
+}
+
+.last {
+  float: right;
+  width: 50%;
+}
+
+@media screen and (orientation: portrait) {.first, .last {width: 100%;}}
