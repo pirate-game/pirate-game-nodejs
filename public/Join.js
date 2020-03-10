@@ -35,8 +35,8 @@ var toRender = <div>
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
-<div id="waiting"><p>Waiting</p></div>
-<div id="noSuchGame"><p>noSuchGame</p></div>
+<div id="waiting" style={{visibility: "visible"}}><p>waiting</p></div>
+<div id="noSuchGame" style={{visibility: "visible"}}><p>noSuchGame</p></div>
 </div>;
 
 ReactDOM.render(toRender, root);
