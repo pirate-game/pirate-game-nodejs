@@ -13,12 +13,12 @@ function hidePopUps(){
 socket.on('no_such_game', function(){
   document.getElementById("gameKey").value = "";
   hidePopUps();
-  document.getElementById("noSuchGame").visibility = "visible";  
+  document.getElementById("noSuchGame").style.visibility = "visible";  
 });
 
 function attemptJoin(){
   hidePopUps();
-  document.getElementById("waiting").visibility = "visible";
+  document.getElementById("waiting").style.visibility = "visible";
   socket.emit('attempt_join', document.getElementById("pirateName").value, document.getElementById("gameKey").value);
 };
 
