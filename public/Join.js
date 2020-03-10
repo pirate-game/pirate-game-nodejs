@@ -4,7 +4,7 @@ var key = '';
 
 function hidePopUps(){
   for (var t in popUps){
-    t.style.visibility = "hidden";
+    t["style"]["visibility"] = "hidden";
   };
 };
 
