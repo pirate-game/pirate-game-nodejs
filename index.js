@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 //Game Section
 
-var chars = "0123456789ABCDEF";
+var chars = "0123456789abcdef";
 var keys_in_use = [""];
 var games = [];
 
@@ -34,6 +34,21 @@ io.on('connection', function(socket){
     var game = {leader: socket, game_room: key};
     games.push(game);
   });
+  
+  socket.on('attempt_join', function(name, key){
+    var not_there = true;
+    for (game in games) {
+      if (game.game_room == key) {
+        not_there = false;
+        game.leader.emit('request_join', name);
+        break;
+      };
+    };
+    if (not_there) {
+      socket.emit('no_such_game');
+    };
+  });
+  
 });
 
 /*io.on('connection', function(socket){
