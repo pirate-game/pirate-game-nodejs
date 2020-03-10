@@ -2,8 +2,6 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 
-var popUps = [document.getElementById("waiting"), document.getElementById("nameTaken"), document.getElementById("noSuchGame")];
-
 function hidePopUps(){
   for (var t in popUps){
     t.style.visibility = "hidden";
@@ -37,6 +35,8 @@ var toRender = <div>
 </div>
 <div id="waiting" style={{visibility: "hidden"}}><p>waiting</p></div>
 <div id="noSuchGame" style={{visibility: "hidden"}}><p>noSuchGame</p></div>
+<div id="nameTaken" style={{visibility: "hidden"}}><p>nameTaken</p></div>
 </div>;
 
 ReactDOM.render(toRender, root);
+var popUps = [document.getElementById("waiting"), document.getElementById("nameTaken"), document.getElementById("noSuchGame")];
