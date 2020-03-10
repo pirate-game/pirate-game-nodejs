@@ -31,7 +31,7 @@ io.on('connection', function(socket){
   socket.on('request_key', function(msg){
     var key = new_key();
     socket.emit('key', key);
-    var game = {leader: socket, game_room: key};
+    var game = {leader: socket, game_room: key, crew: []};
     games.push(game);
   });
   
@@ -40,7 +40,11 @@ io.on('connection', function(socket){
     for (game in games) {
       if (game.game_room == key) {
         not_there = false;
-        game.leader.emit('request_join', name);
+        if (game.crew.includes(name)) {
+          socket.emit('name_taken');
+        } else {
+          game.leader.emit('request_join', name);
+        };
         break;
       };
     };
