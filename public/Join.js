@@ -7,9 +7,11 @@ var toRender =
   <link rel="stylesheet" type="text/css" href="css/Join.css" />
   <div className="first">
     <h2>What be your name?</h2>
+    <input type="text" id="pirateName" />
   </div>
   <div className="last">
     <h2>What game be ye joinin&apos;?</h2>
+    <input type="text" id="gameKey" />
   </div>
   <button id="join">Join</button>
 </div>;
