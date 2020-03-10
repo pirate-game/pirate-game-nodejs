@@ -3,8 +3,8 @@ var socket = io();
 var key = '';
 
 function hidePopUps(){
-  for (var t in popUps){
-    t["style"]["visibility"] = "hidden";
+  for (var t in popUps.length()){
+    popUps[t].style.visibility = "hidden";
   };
 };
 
