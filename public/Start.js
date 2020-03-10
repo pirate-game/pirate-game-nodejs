@@ -28,7 +28,7 @@ class CrewUl extends React.Component {
   render() {
     return <div id="crewDiv">
       <ul id="crewUl">
-          {this.state.crew(crewMember => (
+          {this.state.crew.map(crewMember => (
             <li>{crewMember}</li>
           ))}
       </ul>
