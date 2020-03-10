@@ -15,6 +15,29 @@ class KeyBox extends React.Component {
   };
 };
 
+var crewUl = document.getElementById("crewUl");
+
+class CrewUl extends React.Component {
+  constructor() {
+    super();
+    this.state = {crew: []};
+  }
+  render() {
+    return <div id="crewDiv">
+      <ul id="crewUl">
+          {this.state.crew(crewMember => (
+            <li>{crewMember.name}</li>
+          ))}
+      </ul>
+    </div>;
+  };
+
+  socket.on('request_join', function(name){
+  });
+};
+
+
+
 var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
   <div style={{position: 'relative',top: '-10%'}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
@@ -22,11 +45,7 @@ var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px
     <KeyBox />
   </div>
   <h2 style={{fontSize: '50px', margin: '0px', marginLeft: '10px'}}>Crew:</h2>
-  <div id="crewDiv">
-    <ul>
-      <li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li><li>Sometext</li>
-    </ul>
-  </div>
+  <CrewUl />
 </div>;
 
 ReactDOM.render(toRender, root);
