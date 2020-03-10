@@ -2,11 +2,11 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 
-socket.on('no_such_game'){
+socket.on('no_such_game', function(){
   document.getElementById("gameKey").value = "";
   document.getElementById("waiting").visibility = "hidden";
-  document.getElementById("noSuchGame").visibility = "visible";
-};
+  document.getElementById("noSuchGame").visibility = "visible";  
+});
 
 function attemptJoin(){
   document.getElementById("waiting").visibility = "visible";
