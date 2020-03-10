@@ -5,8 +5,7 @@ var key = '';
 var popUps = [document.getElementById("waiting"), document.getElementById("nameTaken"), document.getElementById("noSuchGame")];
 
 function hidePopUps(){
-  var t;
-  for (t in popUps){
+  for (var t in popUps){
     t.style.visibility = "hidden";
   };
 };
