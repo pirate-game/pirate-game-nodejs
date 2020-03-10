@@ -34,6 +34,7 @@
   left: 10px;
   right: 10px;
   top: 60px;
+  min-height: 60px;
   max-height: -webkit-fill-available;
   background: #fff;
   overflow: auto;
