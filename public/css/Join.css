@@ -28,8 +28,19 @@ h2 {
   transition-duration: 0.4s;
   border-radius: 6px;
   border-width: 0;
+  position: relative;
+  top: 40px;
 }
 
 #join:hover {
   background-color: cornflowerblue;
+}
+
+input {
+    width: 70%;
+    font-family: 'Calibri', Fallback, sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    display: block;
+    margin: auto;
 }
