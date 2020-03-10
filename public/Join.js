@@ -11,7 +11,7 @@ var toRender =
   </div>
   <div className="last">
     <h2>What game be ye joinin&apos;?</h2>
-    <input type="text" id="gameKey" maxLength=6/>
+    <input type="text" id="gameKey" maxLength="6" />
   </div>
   <button id="join">Join</button>
 </div>;
