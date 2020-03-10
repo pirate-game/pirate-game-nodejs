@@ -1,3 +1,8 @@
+h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
 .first {
   float: left;
   width: 50%;
