@@ -2,13 +2,22 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 
+var popUps = [document.getElementById("waiting"), document.getElementById("nameTaken"), document.getElementById("noSuchGame")];
+
+function hidePopUps(){
+  for (t in popUps){
+    t.style.visibility = "hidden";
+  };
+};
+
 socket.on('no_such_game', function(){
   document.getElementById("gameKey").value = "";
-  document.getElementById("waiting").visibility = "hidden";
+  hidePopUps();
   document.getElementById("noSuchGame").visibility = "visible";  
 });
 
 function attemptJoin(){
+  hidePopUps();
   document.getElementById("waiting").visibility = "visible";
   socket.emit('attempt_join', document.getElementById("pirateName").value, document.getElementById("gameKey").value);
 };
