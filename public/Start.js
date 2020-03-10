@@ -21,19 +21,19 @@ class CrewUl extends React.Component {
   constructor() {
     super();
     this.state = {crew: []};
+    socket.on('request_join', function(name){
+      this.setState({crew:this.state.crew+[name]);
+    });
   }
   render() {
     return <div id="crewDiv">
       <ul id="crewUl">
           {this.state.crew(crewMember => (
-            <li>{crewMember.name}</li>
+            <li>{crewMember}</li>
           ))}
       </ul>
     </div>;
   };
-
-  socket.on('request_join', function(name){
-  });
 };
 
 
