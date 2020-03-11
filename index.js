@@ -28,7 +28,7 @@ function new_key(){
 };
 
 io.on('connection', function(socket){
-  socket.on('request_key', function(msg){
+  socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
     var game = {leader: socket, game_room: key, crew: []};
