@@ -26,7 +26,6 @@ class CrewUl extends React.Component {
     });
   }
   render() {
-    console.log(this.state.crew);
     return <div id="crewDiv">
       <ul id="crewUl">
           {this.state.crew.map(crewMember => (
