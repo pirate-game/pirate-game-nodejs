@@ -21,7 +21,7 @@ class CrewUl extends React.Component {
   constructor() {
     super();
     this.state = {crew: []};
-    socket.on('request_join', function(name){
+    socket.on('request_join', name => {
       this.setState({crew:this.state.crew+[name]});
     });
   }
