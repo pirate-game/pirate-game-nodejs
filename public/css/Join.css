@@ -1,6 +1,6 @@
 h2 {
-    text-align: center;
-    font-size: 40px;
+  text-align: center;
+  font-size: 40px;
 }
 
 .first {
@@ -42,12 +42,11 @@ h2 {
 }
 
 input {
-    width: 70%;
-    font-family: 'Calibri', Fallback, sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-    display: block;
-    margin: auto;
+  width: 70%;
+  font-family: 'Calibri', Fallback, sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  display: block;
+  margin: auto;
+  text-align: center;
 }
-
-#gameKey {text-align: center;}
