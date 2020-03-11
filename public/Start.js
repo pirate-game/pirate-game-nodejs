@@ -22,7 +22,7 @@ class CrewUl extends React.Component {
     super();
     this.state = {crew: []};
     socket.on('request_join', name => {
-      this.setState({crew:this.state.crew+[name]});
+      this.setState({crew:this.state.crew.concat([name])});
     });
   }
   render() {
