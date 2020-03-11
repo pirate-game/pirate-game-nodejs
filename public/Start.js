@@ -50,4 +50,4 @@ var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px
 
 ReactDOM.render(toRender, root);
 
-socket.emit('request_key', '');
+socket.emit('request_key');
