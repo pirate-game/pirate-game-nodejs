@@ -35,15 +35,15 @@ io.on('connection', function(socket){
     games.push(game);
   });
   
-  socket.on('attempt_join', function(name, key){
+socket.on('attempt_join', function(name, key){
     var not_there = true;
-    for (game in games) {
-      if (game.game_room == key) {
+    for (var i = 0; i < games.length; i++) {
+      if (games[i].game_room == key) {
         not_there = false;
-        if (game.crew.includes(name)) {
+        if (games[i].crew.includes(name)) {
           socket.emit('name_taken');
         } else {
-          game.leader.emit('request_join', name);
+          games[i].leader.emit('request_join', name);
         };
         break;
       };
