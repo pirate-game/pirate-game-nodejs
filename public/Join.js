@@ -14,6 +14,12 @@ socket.on('no_such_game', function(){
   document.getElementById("noSuchGame").style.visibility = "visible";  
 });
 
+socket.on('name_taken', function(){
+  document.getElementById("pirateName").value = "";
+  hidePopUps();
+  document.getElementById("nameTaken").style.visibility = "visible";  
+});
+
 function attemptJoin(){
   hidePopUps();
   document.getElementById("waiting").style.visibility = "visible";
