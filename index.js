@@ -40,9 +40,10 @@ socket.on('attempt_join', function(name, key){
     for (var i = 0; i < games.length; i++) {
       if (games[i].game_room == key) {
         not_there = false;
-        if (games[i].crew.includes(name)) {
+        if (games[i].crew.map(x => x.pirateName).includes(name)) {
           socket.emit('name_taken');
         } else {
+          games[i].crew.push({pirate: socket, pirateName: name});
           games[i].leader.emit('request_join', name);
         };
         break;
