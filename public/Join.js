@@ -1,6 +1,8 @@
 var root = document.getElementById('root');
 var socket = io();
-var key = '';
+
+const namePattern = /^[\w| ]*$/;
+const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 
 function hidePopUps(){
   for (var t = 0; t < popUps.length; t++){
@@ -40,10 +42,11 @@ var toRender = <div>
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
+<div id="invalidKey" className="popUp"><p>invalidKey</p></div>
 <div id="waiting" className="popUp"><p>waiting</p></div>
 <div id="noSuchGame" className="popUp"><p>noSuchGame</p></div>
 <div id="nameTaken" className="popUp"><p>nameTaken</p></div>
 </div>;
 
 ReactDOM.render(toRender, root);
-var popUps = [document.getElementById("waiting"), document.getElementById("nameTaken"), document.getElementById("noSuchGame")];
+var popUps = document.getElementsByClassName("popUp");
