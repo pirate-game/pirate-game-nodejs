@@ -1,5 +1,5 @@
 .popUp {
-  display: none;
+  visibility: hidden;
   position: fixed;
   background-color: lightblue;
   text-align: center;
