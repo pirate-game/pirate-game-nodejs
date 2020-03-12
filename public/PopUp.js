@@ -1,5 +1,10 @@
 class PopUp extends React.Component {
+  const popUpStyle = {
+    
+  };
   render() {
-    return <div>{this.props.children}</div>;
+    var X = this.props.style;
+    Object.assign(X, popUpStyle);
+    return <div id={this.props.id} className={this.props.className} style={X}>{this.props.children}</div>;
   }
 };
