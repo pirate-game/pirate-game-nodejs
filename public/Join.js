@@ -1,4 +1,3 @@
-import "PopUp.js";
 var root = document.getElementById('root');
 var socket = io();
 var key = '';
@@ -41,9 +40,9 @@ var toRender = <div>
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
-<PopUp id="waiting" style={{visibility: "hidden"}}><p>waiting</p></PopUp>
-<PopUp id="noSuchGame" style={{visibility: "hidden"}}><p>noSuchGame</p></PopUp>
-<PopUp id="nameTaken" style={{visibility: "hidden"}}><p>nameTaken</p></PopUp>
+<div id="waiting" className="popUp" style={{visibility: "hidden"}}><p>waiting</p></div>
+<div id="noSuchGame" className="popUp" style={{visibility: "hidden"}}><p>noSuchGame</p></div>
+<div id="nameTaken" className="popUp" style={{visibility: "hidden"}}><p>nameTaken</p></div>
 </div>;
 
 ReactDOM.render(toRender, root);
