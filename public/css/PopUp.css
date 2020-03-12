@@ -8,6 +8,15 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #DCDCC4;
+  background-color: #B0B09D;
   background-color: rgba(0,0,0,0.4);
+}
+
+.popUp > div {
+  background-color: #DCDCC4;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80%;
 }
