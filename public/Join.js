@@ -23,9 +23,21 @@ socket.on('name_taken', function(){
 });
 
 function attemptJoin(){
-  hidePopUps();
-  document.getElementById("waiting").style.visibility = "visible";
-  socket.emit('attempt_join', document.getElementById("pirateName").value, document.getElementById("gameKey").value);
+  var name = document.getElementById("pirateName").value;
+  var key = document.getElementById("gameKey").value;
+  if (namePattern.test(name)) {
+    if (keyPattern.test(key)) {
+      hidePopUps();
+      document.getElementById("waiting").style.visibility = "visible";
+      socket.emit('attempt_join', name, key);
+    } else {
+      hidePopUps();
+      document.getElementById("invalidKey").style.visibility = "visible";
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidName").style.visibility = "visible";
+  };
 };
 
 var toRender = <div>
@@ -42,6 +54,7 @@ var toRender = <div>
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
+<div id="invalidName" className="popUp"><p>invalidName</p></div>
 <div id="invalidKey" className="popUp"><p>invalidKey</p></div>
 <div id="waiting" className="popUp"><p>waiting</p></div>
 <div id="noSuchGame" className="popUp"><p>noSuchGame</p></div>
