@@ -27,6 +27,7 @@ function attemptJoin(){
 };
 
 var toRender = <div>
+<script src="PopUp.js"></script>
 <div>
   <link rel="stylesheet" type="text/css" href="css/Join.css" />
   <div className="first">
@@ -39,9 +40,9 @@ var toRender = <div>
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
-<div id="waiting" style={{visibility: "hidden"}}><p>waiting</p></div>
-<div id="noSuchGame" style={{visibility: "hidden"}}><p>noSuchGame</p></div>
-<div id="nameTaken" style={{visibility: "hidden"}}><p>nameTaken</p></div>
+<PopUp id="waiting" style={{visibility: "hidden"}}><p>waiting</p></div>
+<PopUp id="noSuchGame" style={{visibility: "hidden"}}><p>noSuchGame</p></div>
+<PopUp id="nameTaken" style={{visibility: "hidden"}}><p>nameTaken</p></div>
 </div>;
 
 ReactDOM.render(toRender, root);
