@@ -39,6 +39,7 @@ class CrewUl extends React.Component {
 
 
 var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
+  <script src="PopUp.js"></script>
   <div style={{position: 'relative',top: '-10%'}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
     <button id="crewAssembled">Crew Assembled!</button>
