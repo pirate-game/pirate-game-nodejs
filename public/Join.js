@@ -1,3 +1,4 @@
+import "PopUp.js";
 var root = document.getElementById('root');
 var socket = io();
 var key = '';
@@ -28,7 +29,6 @@ function attemptJoin(){
 
 var toRender = <div>
 <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
-<script src="PopUp.js"></script>
 <div>
   <link rel="stylesheet" type="text/css" href="css/Join.css" />
   <div className="first">
