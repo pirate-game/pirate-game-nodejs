@@ -40,9 +40,9 @@ var toRender = <div>
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
-<PopUp id="waiting" style={{visibility: "hidden"}}><p>waiting</p></div>
-<PopUp id="noSuchGame" style={{visibility: "hidden"}}><p>noSuchGame</p></div>
-<PopUp id="nameTaken" style={{visibility: "hidden"}}><p>nameTaken</p></div>
+<PopUp id="waiting" style={{visibility: "hidden"}}><p>waiting</p></PopUp>
+<PopUp id="noSuchGame" style={{visibility: "hidden"}}><p>noSuchGame</p></PopUp>
+<PopUp id="nameTaken" style={{visibility: "hidden"}}><p>nameTaken</p></PopUp>
 </div>;
 
 ReactDOM.render(toRender, root);
