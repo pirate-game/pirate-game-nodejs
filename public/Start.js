@@ -1,4 +1,3 @@
-import "PopUp.js";
 var root = document.getElementById('root');
 var socket = io();
 var key = '';
