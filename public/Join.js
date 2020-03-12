@@ -27,6 +27,7 @@ function attemptJoin(){
 };
 
 var toRender = <div>
+<link rel="stylesheet" type="text/css" href="css/PopUp.css" />
 <script src="PopUp.js"></script>
 <div>
   <link rel="stylesheet" type="text/css" href="css/Join.css" />
