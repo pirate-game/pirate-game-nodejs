@@ -3,32 +3,6 @@ h2 {
   font-size: 40px;
 }
 
-#nameH2 {
-}
-
-#keyH2 {
-}
-
-#nameInput {
-}
-
-#keyInput {
-}
-
-@media screen and (orientation: landscape) {
-  #nameH2 {
-  }
-
-  #keyH2 {
-  }
-
-  #nameInput {
-  }
-
-  #keyInput {
-  }
-}
-
 #join {
   margin: 0 auto;
   display: block;
