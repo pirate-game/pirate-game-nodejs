@@ -46,17 +46,19 @@ var toRender = <div>
   <link rel="stylesheet" type="text/css" href="css/Join.css" />
   <div className="inputsDiv">
     <h2 id="nameH2">What be your name?</h2>
-    <input type="text" id="nameInput" maxLength="172" />
-    <h2 id="keyH2">What game be ye joinin&apos;?</h2>
-    <input type="text" id="keyInput" maxLength="6" />
+    <input type="text" id="pirateName" maxLength="172" />
+    <h2>What game be ye joinin&apos;?</h2>
+    <input type="text" id="gameKey" maxLength="6" />
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
-<div id="invalidName" className="popUp"><p>invalidName</p></div>
-<div id="invalidKey" className="popUp"><p>invalidKey</p></div>
-<div id="waiting" className="popUp"><p>waiting</p></div>
-<div id="noSuchGame" className="popUp"><p>noSuchGame</p></div>
-<div id="nameTaken" className="popUp"><p>nameTaken</p></div>
+<div id="popUps">
+  <div id="invalidName" className="popUp"><p>invalidName</p></div>
+  <div id="invalidKey" className="popUp"><p>invalidKey</p></div>
+  <div id="waiting" className="popUp"><p>waiting</p></div>
+  <div id="noSuchGame" className="popUp"><p>noSuchGame</p></div>
+  <div id="nameTaken" className="popUp"><p>nameTaken</p></div>
+</div>
 </div>;
 
 ReactDOM.render(toRender, root);
