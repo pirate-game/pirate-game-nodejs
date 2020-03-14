@@ -6,20 +6,20 @@ const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9
 
 function hidePopUps(){
   for (var t = 0; t < popUps.length; t++){
-    popUps[t].style.visibility = "hidden";
+    popUps[t].style.display = "none";
   };
 };
 
 socket.on('no_such_game', function(){
   document.getElementById("gameKey").value = "";
   hidePopUps();
-  document.getElementById("noSuchGame").style.visibility = "visible";  
+  document.getElementById("noSuchGame").style.display = "block";  
 });
 
 socket.on('name_taken', function(){
   document.getElementById("pirateName").value = "";
   hidePopUps();
-  document.getElementById("nameTaken").style.visibility = "visible";  
+  document.getElementById("nameTaken").style.display = "block";  
 });
 
 function attemptJoin(){
@@ -28,15 +28,15 @@ function attemptJoin(){
   if (namePattern.test(name)) {
     if (keyPattern.test(key)) {
       hidePopUps();
-      document.getElementById("waiting").style.visibility = "visible";
+      document.getElementById("waiting").style.display = "block";
       socket.emit('attempt_join', name, key);
     } else {
       hidePopUps();
-      document.getElementById("invalidKey").style.visibility = "visible";
+      document.getElementById("invalidKey").style.display = "block";
     };
   } else {
     hidePopUps();
-    document.getElementById("invalidName").style.visibility = "visible";
+    document.getElementById("invalidName").style.display = "block";
   };
 };
 
