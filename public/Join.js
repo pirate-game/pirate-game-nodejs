@@ -45,14 +45,10 @@ var toRender = <div>
 <div>
   <link rel="stylesheet" type="text/css" href="css/Join.css" />
   <div className="inputsDiv">
-    <div className="first">
-      <h2>What be your name?</h2>
-      <input type="text" id="pirateName" maxLength="172" />
-    </div>
-    <div className="last">
-      <h2>What game be ye joinin&apos;?</h2>
-      <input type="text" id="gameKey" maxLength="6" />
-    </div>
+    <h2 id="nameH2">What be your name?</h2>
+    <input type="text" id="nameInput" maxLength="172" />
+    <h2 id="keyH2">What game be ye joinin&apos;?</h2>
+    <input type="text" id="keyInput" maxLength="6" />
   </div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
