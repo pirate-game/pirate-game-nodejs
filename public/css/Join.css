@@ -15,10 +15,6 @@ h2 {
 
 @media screen and (orientation: portrait) {.first, .last {width: 100%;}}
 
-h2 {
-  text-align: center;
-}
-
 #join {
   margin: 0 auto;
   display: block;
