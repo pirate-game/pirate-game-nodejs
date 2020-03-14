@@ -4,11 +4,9 @@ h2 {
 }
 
 #nameH2 {
-  text-align: center;
 }
 
 #keyH2 {
-  text-align: center;
 }
 
 #nameInput {
@@ -17,7 +15,7 @@ h2 {
 #keyInput {
 }
 
-@media screen and (orientation: portrait) {
+@media screen and (orientation: landscape) {
   #nameH2 {
   }
 
@@ -54,7 +52,7 @@ h2 {
 }
 
 input {
-  width: 40%;
+  width: 70%;
   font-family: 'Calibri', Fallback, sans-serif;
   font-size: 40px;
   font-weight: bold;
