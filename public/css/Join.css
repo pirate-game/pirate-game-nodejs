@@ -3,17 +3,33 @@ h2 {
   font-size: 40px;
 }
 
-.first {
-  float: left;
-  width: 50%;
+#nameH2 {
+  text-align: center;
 }
 
-.last {
-  float: right;
-  width: 50%;
+#keyH2 {
+  text-align: center;
 }
 
-@media screen and (orientation: portrait) {.first, .last {width: 100%;}}
+#nameInput {
+}
+
+#keyInput {
+}
+
+@media screen and (orientation: portrait) {
+  #nameH2 {
+  }
+
+  #keyH2 {
+  }
+
+  #nameInput {
+  }
+
+  #keyInput {
+  }
+}
 
 #join {
   margin: 0 auto;
@@ -38,7 +54,7 @@ h2 {
 }
 
 input {
-  width: 70%;
+  width: 40%;
   font-family: 'Calibri', Fallback, sans-serif;
   font-size: 40px;
   font-weight: bold;
