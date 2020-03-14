@@ -53,11 +53,11 @@ var toRender = <div>
   <button id="join" onClick={attemptJoin}>Join</button>
 </div>
 <div id="popUps">
-  <div id="invalidName" className="popUp"><p>invalidName</p></div>
-  <div id="invalidKey" className="popUp"><p>invalidKey</p></div>
-  <div id="waiting" className="popUp"><p>waiting</p></div>
-  <div id="noSuchGame" className="popUp"><p>noSuchGame</p></div>
-  <div id="nameTaken" className="popUp"><p>nameTaken</p></div>
+  <div id="invalidName" className="popUp"><div><p>invalidName</p></div></div>
+  <div id="invalidKey" className="popUp"><div><p>invalidKey</p></div></div>
+  <div id="waiting" className="popUp"><div><p>waiting</p></div></div>
+  <div id="noSuchGame" className="popUp"><div><p>noSuchGame</p></div></div>
+  <div id="nameTaken" className="popUp"><div><p>nameTaken</p></div></div>
 </div>
 </div>;
 
