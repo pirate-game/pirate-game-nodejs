@@ -3,6 +3,8 @@ h2 {
   font-size: 40px;
 }
 
+#nameH2 {margin-top: 0;}
+
 #join {
   margin: 0 auto;
   display: block;
