@@ -31,20 +31,24 @@ io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
-    var game = {leader: socket, game_room: key, crew: []};
+    var game = {leader: socket, game_key: key, crew: [], available: true};
     games.push(game);
   });
   
-socket.on('attempt_join', function(name, key){
+  socket.on('attempt_join', function(name, key){
     var not_there = true;
     for (var i = 0; i < games.length; i++) {
-      if (games[i].game_room == key) {
+      if (games[i].game_key == key) {
         not_there = false;
-        if (games[i].crew.map(x => x.pirateName).includes(name)) {
-          socket.emit('name_taken');
+        if (games[i].available) {
+          if (games[i].crew.map(x => x.pirateName).includes(name)) {
+            socket.emit('name_taken');
+          } else {
+            games[i].crew.push({pirate: socket, pirateName: name});
+            games[i].leader.emit('request_join', name);
+          };
         } else {
-          games[i].crew.push({pirate: socket, pirateName: name});
-          games[i].leader.emit('request_join', name);
+          socket.emit('game_unavailable');
         };
         break;
       };
@@ -55,12 +59,6 @@ socket.on('attempt_join', function(name, key){
   });
   
 });
-
-/*io.on('connection', function(socket){
-  socket.on('pirate game', function(msg){
-    io.emit('pirate game', msg);
-  });
-});*///old
 
 //End of Game Section
 
