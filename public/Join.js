@@ -1,7 +1,7 @@
 var root = document.getElementById('root');
 var socket = io();
 
-const namePattern = /^[\w\'\-\" ]*$/;
+const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 
