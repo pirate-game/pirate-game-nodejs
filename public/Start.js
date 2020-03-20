@@ -71,7 +71,7 @@ var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px
   <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
   <div style={{position: 'relative',top: '-10%'}}>
     <link rel="stylesheet" type="text/css" href="css/Start.css" />
-    <button id="crewAssembled" onclick={assembleCrew}>Crew Assembled!</button>
+    <button id="crewAssembled" onClick={assembleCrew}>Crew Assembled!</button>
     <KeyBox />
   </div>
   <h2 style={{fontSize: '50px', margin: '0px', marginLeft: '10px'}}>Crew:</h2>
