@@ -2,6 +2,12 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 
+function hidePopUps(){
+  for (var t = 0; t < popUps.length; t++){
+    popUps[t].style.display = "none";
+  };
+};
+
 class KeyBox extends React.Component {
   constructor() {
     super();
@@ -22,6 +28,10 @@ class CrewUl extends React.Component {
     socket.on('request_join', name => {
       this.setState({crew:this.state.crew.concat([name])});
     });
+    socket.on('show_provisional_crew', () => {
+      hidePopUps();
+      document.getElementById("crewAssembled").style.display = "block";
+    });
   }
   render() {
     return 
@@ -36,8 +46,9 @@ class CrewUl extends React.Component {
       <div id="crewAssembled" className="popUp"><div>
         <h3>Crew Assembled</h3>
         <hr />
-        <p></p>
-        <button className="close" onClick={hidePopUps}>Okay!</button>
+        <p>Those currently in your crew are below. You can remove them with the crosses.</p>
+        <button onClick={}>Start<br />Game</button>
+        <button onClick={}>Change<br />Crew</button>
         <div id="popUpCrewDiv" className="crewDiv">
           <ul>
             {this.state.crew.map(crewMember => (
@@ -50,7 +61,11 @@ class CrewUl extends React.Component {
   };
 };
 
-
+function assembleCrew(){
+  hidePopUps();
+  document.getElementById("waiting").style.display = "block";
+  socket.emit('crew_assembled');
+};
 
 var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
   <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
@@ -61,8 +76,15 @@ var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px
   </div>
   <h2 style={{fontSize: '50px', margin: '0px', marginLeft: '10px'}}>Crew:</h2>
   <CrewUl />
+  <div id="waiting" className="popUp"><div>
+      <h3>Waiting</h3>
+      <hr />
+      <p>This won&apos;t take too long, I hope!</p>
+  </div></div>
 </div>;
 
 ReactDOM.render(toRender, root);
+
+var popUps = document.getElementsByClassName("popUp");  
 
 socket.emit('request_key');
