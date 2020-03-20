@@ -63,12 +63,14 @@ var toRender = <div>
       
   <div id="invalidName" className="popUp"><div>
       <h3>Invalid Name</h3>
+      <hr />
       <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>
   </div></div>
       
   <div id="invalidKey" className="popUp"><div>
       <h3>Invalid Key</h3>
+      <hr />
       <p>Please correctly type the key you have been given. It should be 6 hexadecimal digits e.g. &quot;beef54&quot;.
         <br />Please use all lower-case letters.</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>
@@ -76,25 +78,29 @@ var toRender = <div>
       
   <div id="waiting" className="popUp"><div>
       <h3>Waiting</h3>
+      <hr />
       <p>This usually means that the game is about to start. :) 
         <br />However, sometimes it means that something has gone wrong and you may need to try to join again. :(</p>
   </div></div>
   
   <div id="noSuchGame" className="popUp"><div>
       <h3>No Such Game</h3>
+      <hr />                                                                                                       
       <p>You&apos;ve probably mistyped your key. Try again.</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>                                                                     
   </div></div>
                                                                                                                  
   <div id="nameTaken" className="popUp"><div>
       <h3>Name Taken</h3>
+      <hr />                                                                                                                 
       <p>Great minds think alike! (and fools&apos; seldom differ)
         <br /> Someone&apos;s taken your name already. Choose another one.</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>
   </div></div>
     
   <div id="gameUnavailable" className="popUp"><div>
-    <h3>Game Unavailable</h3>
+      <h3>Game Unavailable</h3>
+      <hr />
       <p>Unfortunately for you, this probably means they&apos;ve started without you. :(</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>
   </div></div>
