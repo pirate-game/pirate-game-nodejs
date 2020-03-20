@@ -15,8 +15,6 @@ class KeyBox extends React.Component {
   };
 };
 
-var crewUl = document.getElementById("crewUl");
-
 class CrewUl extends React.Component {
   constructor() {
     super();
@@ -26,13 +24,29 @@ class CrewUl extends React.Component {
     });
   }
   render() {
-    return <div id="crewDiv">
-      <ul id="crewUl">
+    return 
+    <React.Fragment>
+      <div id="firstCrewDiv" className="crewDiv">
+        <ul>
           {this.state.crew.map(crewMember => (
             <li>{crewMember}</li>
           ))}
-      </ul>
-    </div>;
+        </ul>
+      </div>
+      <div id="crewAssembled" className="popUp"><div>
+        <h3>Crew Assembled</h3>
+        <hr />
+        <p></p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
+        <div id="popUpCrewDiv" className="crewDiv">
+          <ul>
+            {this.state.crew.map(crewMember => (
+              <li>{crewMember}</li>
+            ))}
+          </ul>
+        </div>
+      </div></div>
+    </React.Fragment>;
   };
 };
 
