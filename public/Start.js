@@ -43,7 +43,7 @@ class CrewUl extends React.Component {
           ))}
         </ul>
       </div>
-      <div id="crewAssembled" className="popUp"><div>
+      <div id="crewAssembledPopUp" className="popUp"><div>
         <h3>Crew Assembled</h3>
         <hr />
         <p>Those currently in your crew are below. You can remove them with the crosses.</p>
