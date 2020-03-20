@@ -55,3 +55,22 @@
 }
 
 .crewDiv ul li:nth-child(odd) { background: #eee; }
+
+#crewAssembledPopUp button {
+  text-align: center;
+  font-family: 'Calibri', Fallback, sans-serif;
+  background-color: #CC6600;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 9px 12px;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  border-radius: 6px;
+  border-width: 0;
+  margin: 6px;
+}
+
+#crewAssembledPopUp button:hover {
+  background-color: cornflowerblue;
+}
