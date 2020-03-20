@@ -47,8 +47,8 @@ class CrewUl extends React.Component {
         <h3>Crew Assembled</h3>
         <hr />
         <p>Those currently in your crew are below. You can remove them with the crosses.</p>
-        <button onClick={}>Start<br />Game</button>
-        <button onClick={}>Change<br />Crew</button>
+        <button>Start<br />Game</button>
+        <button>Change<br />Crew</button>
         <div id="popUpCrewDiv" className="crewDiv">
           <ul>
             {this.state.crew.map(crewMember => (
