@@ -29,7 +29,7 @@
   background-color: cornflowerblue;
 }
 
-#crewDiv {
+.crewDiv {
   position: absolute;
   left: 10px;
   right: 10px;
@@ -40,14 +40,14 @@
   overflow: auto;
 }
 
-#crewDiv ul {
+.crewDiv ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-#crewDiv ul li {
+.crewDiv ul li {
   padding: 5px 10px;
 }
 
-#crewDiv ul li:nth-child(odd) { background: #eee; }
+.crewDiv ul li:nth-child(odd) { background: #eee; }
