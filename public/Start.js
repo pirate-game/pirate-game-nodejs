@@ -30,7 +30,7 @@ class CrewUl extends React.Component {
     });
     socket.on('show_provisional_crew', () => {
       hidePopUps();
-      document.getElementById("crewAssembled").style.display = "block";
+      document.getElementById("crewAssembledPopUp").style.display = "block";
     });
   }
   render() {
