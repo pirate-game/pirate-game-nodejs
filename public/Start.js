@@ -34,7 +34,7 @@ class CrewUl extends React.Component {
     });
   }
   render() {
-    return 
+    return (
     <React.Fragment>
       <div id="firstCrewDiv" className="crewDiv">
         <ul>
@@ -57,7 +57,7 @@ class CrewUl extends React.Component {
           </ul>
         </div>
       </div></div>
-    </React.Fragment>;
+    </React.Fragment>);
   };
 };
 
