@@ -31,7 +31,7 @@
 }
 
 #logo:hover {
-	background-color:unset;
+    background-color: unset!important;
 }
 
 #logo img {
