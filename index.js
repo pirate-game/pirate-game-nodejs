@@ -46,37 +46,23 @@ function leaderToGame(someLeader){
   return -1;
 };
 
+function gameAndNameToPlayer(someGame, someName){
+  var theCrew = games[someGame].crew;
+  for (var i = 0; i < theCrew.length; i++){
+    if (theCrew[i].pirateName == someName){
+      return theCrew[i].pirate;
+    };
+  };
+  return {};
+};
+
 io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
     var game = {leader: socket, game_key: key, crew: [], available: true};
     games.push(game);
-  });
-  
-  /*socket.on('attempt_join', function(name, key){
-    var not_there = true;
-    for (var i = 0; i < games.length; i++){
-      if (games[i].game_key == key){
-        not_there = false;
-        if (games[i].available){
-          if (games[i].crew.map(x => x.pirateName).includes(name)){
-            socket.emit('name_taken');
-          } else {
-            games[i].crew.push({pirate: socket, pirateName: name});
-            games[i].leader.emit('request_join', name);
-          };
-        } else {
-          socket.emit('game_unavailable');
-        };
-        break;
-      };
-    };
-    if (not_there) {
-      socket.emit('no_such_game');
-    };
-  });*/
-  
+  }); 
     
   socket.on('attempt_join', function(name, key){
     var pos = keyToGame(key);
@@ -101,6 +87,13 @@ io.on('connection', function(socket){
     if (pos != -1){
       games[pos].available = false;
       socket.emit('show_provisional_crew');
+    };
+  });
+  
+  socket.on('remove_player', function(who){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      gameAndNameToPlayer(games[pos], who).emit('join_rejected')
     };
   });
   
