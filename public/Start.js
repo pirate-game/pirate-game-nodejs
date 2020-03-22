@@ -39,7 +39,10 @@ class CrewUl extends React.Component {
       <div id="firstCrewDiv" className="crewDiv">
         <ul>
           {this.state.crew.map(crewMember => (
-            <li>{crewMember}</li>
+            <li>
+              <div className="cross">&times;</div>
+              <div className="nameLiDiv">{crewMember}</div>
+            </li>
           ))}
         </ul>
       </div>
@@ -47,7 +50,7 @@ class CrewUl extends React.Component {
         <h3>Crew Assembled</h3>
         <hr />
         <div>
-          <p style={{display: 'inline-block', width: 'calc( 100% - 190px)'}}>Those currently in your crew are below. You can remove them with the crosses.</p>
+          <p style={{display: 'inline-block', width: 'calc(100% - 190px)'}}>Those currently in your crew are below. You can remove them with the crosses.</p>
           <div style={{display: 'inline-block'}}>
             <button>Start<br />Game</button>
             <button>Change<br />Crew</button>
@@ -56,7 +59,10 @@ class CrewUl extends React.Component {
         <div id="popUpCrewDiv" className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
           <ul>
             {this.state.crew.map(crewMember => (
-              <li>{crewMember}</li>
+              <li>
+                <div className="cross">&times;</div>
+                <div className="nameLiDiv">{crewMember}</div>
+              </li>
             ))}
           </ul>
         </div>
