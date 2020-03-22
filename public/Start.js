@@ -80,11 +80,13 @@ var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px
   </div>
   <h2 style={{fontSize: '50px', margin: '0px', marginLeft: '10px'}}>Crew:</h2>
   <CrewUl />
-  <div id="waiting" className="popUp"><div>
+  <div id="popUps">
+    <div id="waiting" className="popUp"><div>
       <h3>Waiting</h3>
       <hr />
       <p>This won&apos;t take too long, I hope!</p>
-  </div></div>
+    </div></div>
+  </div>
 </div>;
 
 ReactDOM.render(toRender, root);
