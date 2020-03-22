@@ -38,7 +38,7 @@ function keyToGame(someKey){
 
 function leaderToKey(someLeader){
   for (var i = 0; i < games.length; i++){
-    if (games[i].leader == someLeader){
+    if (games[i].leader.id == someLeader.id){
       return i;
     };
   };
