@@ -37,11 +37,15 @@ function keyToGame(someKey){
 };
 
 function leaderToKey(someLeader){
+  socket.emit('debugmsg', "1")
   for (var i = 0; i < games.length; i++){
+    socket.emit('debugmsg', i)
     if (games[i].leader.id == someLeader.id){
+      socket.emit('debugmsg', "return")
       return i;
     };
   };
+  socket.emit('debugmsg', "-1")
   return -1;
 };
 
@@ -98,6 +102,7 @@ io.on('connection', function(socket){
   socket.on('crew_assembled', function(){
     socket.emit('debugmsg', "Before");
     var pos = leaderToGame(socket);
+    socket.emit('debugmsg', "After");
     socket.emit('debugmsg', pos);
     if (pos != -1){
       //games[pos].available = false;
