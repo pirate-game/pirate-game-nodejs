@@ -46,9 +46,13 @@ class CrewUl extends React.Component {
       <div id="crewAssembledPopUp" className="popUp"><div>
         <h3>Crew Assembled</h3>
         <hr />
-        <p>Those currently in your crew are below. You can remove them with the crosses.</p>
-        <button>Start<br />Game</button>
-        <button>Change<br />Crew</button>
+        <div>
+          <p style={{display: 'inline-block', width: 'calc( 100% - 190px)'}}>Those currently in your crew are below. You can remove them with the crosses.</p>
+          <div style={{display: 'inline-block'}}>
+            <button>Start<br />Game</button>
+            <button>Change<br />Crew</button>
+          </div>
+        </div>
         <div id="popUpCrewDiv" className="crewDiv">
           <ul>
             {this.state.crew.map(crewMember => (
