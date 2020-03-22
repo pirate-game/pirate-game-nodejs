@@ -97,13 +97,13 @@ io.on('connection', function(socket){
   
   socket.on('crew_assembled', function(){
     socket.emit('debugmsg', "Before");
-    var pos = leaderIdToGame(socket.id);
+    //var pos = leaderIdToGame(socket.id);
     socket.emit('debugmsg', "After");
-    socket.emit('debugmsg', pos);
-    if (pos != -1){
-      //games[pos].available = false;
-      //socket.emit('show_provisional_crew');
-    };
+    //socket.emit('debugmsg', pos);
+    /*if (pos != -1){
+      games[pos].available = false;
+      socket.emit('show_provisional_crew');
+    };*/
   });
   
 });
