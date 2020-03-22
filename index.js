@@ -36,12 +36,13 @@ function keyToGame(someKey){
   return -1;
 };
 
-function leaderIdToKey(someLeaderId){
-  /*for (var i = 0; i < games.length; i++){
+function leaderToGame(someLeader){
+  var someLeaderId = someLeader.id;
+  for (var i = 0; i < games.length; i++){
     if (games[i].leader.id == someLeaderId){
       return i;
     };
-  };*/
+  };
   return -1;
 };
 
@@ -96,15 +97,11 @@ io.on('connection', function(socket){
   });
   
   socket.on('crew_assembled', function(){
-    socket.emit('debugmsg', "Before");
-    socket.emit('debugmsg', socket.id);
-    //var pos = leaderIdToGame(socket.id);
-    socket.emit('debugmsg', "After");
-    //socket.emit('debugmsg', pos);
-    /*if (pos != -1){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
       games[pos].available = false;
       socket.emit('show_provisional_crew');
-    };*/
+    };
   });
   
 });
