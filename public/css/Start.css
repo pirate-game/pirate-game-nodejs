@@ -88,6 +88,6 @@
 }
 
 .nameLiDiv {
-  display: inline;
+  width: calc(100% - 30px);
   overflow-wrap: break-word;
 }
