@@ -18,6 +18,7 @@
   overflow: auto;
   background-color: rgb(220,220,196);
   background-color: rgba(0,0,0,0.4);
+  border-radius: 0;
 }
 
 .popUp > div {
