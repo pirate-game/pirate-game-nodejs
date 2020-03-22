@@ -37,11 +37,11 @@ function keyToGame(someKey){
 };
 
 function leaderIdToKey(someLeaderId){
-  for (var i = 0; i < games.length; i++){
+  /*for (var i = 0; i < games.length; i++){
     if (games[i].leader.id == someLeaderId){
       return i;
     };
-  };
+  };*/
   return -1;
 };
 
@@ -97,9 +97,9 @@ io.on('connection', function(socket){
   
   socket.on('crew_assembled', function(){
     socket.emit('debugmsg', "Before");
-    //var pos = leaderIdToGame(socket.id);
+    var pos = leaderIdToGame(socket.id);
     socket.emit('debugmsg', "After");
-    //socket.emit('debugmsg', pos);
+    socket.emit('debugmsg', pos);
     /*if (pos != -1){
       games[pos].available = false;
       socket.emit('show_provisional_crew');
