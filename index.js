@@ -97,8 +97,9 @@ io.on('connection', function(socket){
   
   socket.on('crew_assembled', function(){
     var pos = leaderToGame(socket);
+    socket.emit('debugmsg', pos);
     if (pos != -1){
-      games[pos].available = false;
+      //games[pos].available = false;
       //socket.emit('show_provisional_crew');
     };
   });
