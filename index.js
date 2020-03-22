@@ -96,6 +96,7 @@ io.on('connection', function(socket){
   });
   
   socket.on('crew_assembled', function(){
+    socket.emit('debugmsg', "Before");
     var pos = leaderToGame(socket);
     socket.emit('debugmsg', pos);
     if (pos != -1){
