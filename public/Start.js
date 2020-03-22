@@ -39,7 +39,7 @@ class CrewUl extends React.Component {
       <div id="firstCrewDiv" className="crewDiv">
         <ul>
           {this.state.crew.map(crewMember => (
-            <li>
+            <li style={{position:'relative'}}>
               <div className="cross">&times;</div>
               <div className="nameLiDiv">{crewMember}</div>
             </li>
@@ -59,7 +59,7 @@ class CrewUl extends React.Component {
         <div id="popUpCrewDiv" className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
           <ul>
             {this.state.crew.map(crewMember => (
-              <li>
+              <li style={{position:'relative'}}>
                 <div className="cross">&times;</div>
                 <div className="nameLiDiv">{crewMember}</div>
               </li>
