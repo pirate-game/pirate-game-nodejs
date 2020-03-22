@@ -91,11 +91,14 @@ io.on('connection', function(socket){
   });
   
   socket.on('remove_player', function(who){
+    socket.emit('debugmsg', games.length);
     var pos = leaderToGame(socket);
+    socket.emit('debugmsg', games.length);
+    socket.emit('debugmsg', pos);
     if (pos != -1){
       var player = gameAndNameToPlayer(games[pos], who);
       if (player != {}){
-        player.emit('join_rejected')
+        player.emit('join_rejected');
       };
     };
   });
