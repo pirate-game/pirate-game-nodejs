@@ -37,15 +37,15 @@ function keyToGame(someKey){
 };
 
 function leaderToKey(someLeader){
-  socket.emit('debugmsg', "1")
+  someLeader.emit('debugmsg', "1")
   for (var i = 0; i < games.length; i++){
-    socket.emit('debugmsg', i)
+    someLeader.emit('debugmsg', i)
     if (games[i].leader.id == someLeader.id){
-      socket.emit('debugmsg', "return")
+      someLeader.emit('debugmsg', "return")
       return i;
     };
   };
-  socket.emit('debugmsg', "-1")
+  someLeader.emit('debugmsg', "-1")
   return -1;
 };
 
