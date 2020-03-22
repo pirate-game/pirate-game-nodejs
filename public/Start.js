@@ -35,6 +35,10 @@ class CrewUl extends React.Component {
       document.getElementById("crewAssembledPopUp").style.display = "block";
     });
   }
+  removePlayer(somePlayer){
+    this.setState({crew:this.state.crew.filter((x)=>(x!=somePlayer))});
+    socket.emit('remove_player', somePlayer);
+  }
   render() {
     return (
     <React.Fragment>
@@ -42,7 +46,7 @@ class CrewUl extends React.Component {
         <ul>
           {this.state.crew.map(crewMember => (
             <li style={{position:'relative'}}>
-              <div className="cross">&times;</div>
+              <div className="cross" onClick={() => this.removePlayer(crewMember)}>&times;</div>
               <div className="nameLiDiv">{crewMember}</div>
             </li>
           ))}
@@ -62,7 +66,7 @@ class CrewUl extends React.Component {
           <ul>
             {this.state.crew.map(crewMember => (
               <li style={{position:'relative'}}>
-                <div className="cross">&times;</div>
+                <div className="cross" onClick={() => this.removePlayer(crewMember)}>&times;</div>
                 <div className="nameLiDiv">{crewMember}</div>
               </li>
             ))}
