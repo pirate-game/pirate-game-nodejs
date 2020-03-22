@@ -74,3 +74,17 @@
 #crewAssembledPopUp button:hover {
   background-color: cornflowerblue;
 }
+
+.cross {
+  display: inline-block;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.nameLiDiv {
+  display: inline;
+  overflow-wrap: break-word;
+}
