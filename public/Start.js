@@ -53,7 +53,7 @@ class CrewUl extends React.Component {
             <button>Change<br />Crew</button>
           </div>
         </div>
-        <div id="popUpCrewDiv" className="crewDiv">
+        <div id="popUpCrewDiv" className="crewDiv" style={{height: 'calc(100vh - 400px)'}}>
           <ul>
             {this.state.crew.map(crewMember => (
               <li>{crewMember}</li>
