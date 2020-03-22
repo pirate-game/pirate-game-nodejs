@@ -2,6 +2,8 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 
+socket.on('debugmsg', function(msg){console.log(msg)});
+
 function hidePopUps(){
   for (var t = 0; t < popUps.length; t++){
     popUps[t].style.display = "none";
