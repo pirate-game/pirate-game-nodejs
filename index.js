@@ -83,33 +83,21 @@ io.on('connection', function(socket){
   });
   
   socket.on('crew_assembled', function(){
-    socket.emit('debugmsg', games.toString());
-    socket.emit('debugmsg', 'First');
     var pos = leaderToGame(socket);
-    socket.emit('debugmsg', 'Second');
     if (pos != -1){
-      socket.emit('debugmsg', 'Third');
       games[pos].available = false;
-      socket.emit('debugmsg', 'Fourth');
       socket.emit('show_provisional_crew');
-      socket.emit('debugmsg', 'Fifth');
     };
-    socket.emit('debugmsg', games.toString());
   });
   
   socket.on('remove_player', function(who){
-    socket.emit('debugmsg', games.toString());
-    socket.emit('debugmsg', 'First');
     var pos = leaderToGame(socket);
-    socket.emit('debugmsg', pos);
     if (pos != -1){
-      socket.emit('debugmsg', games[pos]);
       var player = gameAndNameToPlayer(games[pos], who);
       if (player != {}){
         player.emit('join_rejected')
       };
     };
-    socket.emit('debugmsg', games.toString());
   });
   
 });
