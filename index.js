@@ -36,6 +36,15 @@ function keyToGame(someKey){
   return -1;
 };
 
+function leaderToKey(someLeader){
+  for (var i = 0; i < games.length; i++){
+    if (games[i].leader == someLeader){
+      return i;
+    };
+  };
+  return -1;
+};
+
 io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
@@ -46,11 +55,11 @@ io.on('connection', function(socket){
   
   /*socket.on('attempt_join', function(name, key){
     var not_there = true;
-    for (var i = 0; i < games.length; i++) {
-      if (games[i].game_key == key) {
+    for (var i = 0; i < games.length; i++){
+      if (games[i].game_key == key){
         not_there = false;
-        if (games[i].available) {
-          if (games[i].crew.map(x => x.pirateName).includes(name)) {
+        if (games[i].available){
+          if (games[i].crew.map(x => x.pirateName).includes(name)){
             socket.emit('name_taken');
           } else {
             games[i].crew.push({pirate: socket, pirateName: name});
@@ -73,8 +82,8 @@ io.on('connection', function(socket){
     if (pos == -1){
       socket.emit('no_such_game');
     } else {
-      if (games[pos].available) {
-        if (games[pos].crew.map(x => x.pirateName).includes(name)) {
+      if (games[pos].available){
+        if (games[pos].crew.map(x => x.pirateName).includes(name)){
           socket.emit('name_taken');
         } else {
           games[pos].crew.push({pirate: socket, pirateName: name});
@@ -83,6 +92,14 @@ io.on('connection', function(socket){
       } else {
         socket.emit('game_unavailable');
       };
+    };
+  });
+  
+  socket.on('crew_assembled', function(){
+    var pos = leaderToGame(socket);
+    if (pos == -1){} else {
+      games[pos].available = false;
+      socket.emit('show_provisional_crew');
     };
   });
   
