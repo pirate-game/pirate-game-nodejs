@@ -83,7 +83,7 @@ io.on('connection', function(socket){
   });
   
   socket.on('crew_assembled', function(){
-    socket.emit('debugmsg', games);
+    socket.emit('debugmsg', games.toString());
     socket.emit('debugmsg', 'First');
     var pos = leaderToGame(socket);
     socket.emit('debugmsg', 'Second');
@@ -94,11 +94,11 @@ io.on('connection', function(socket){
       socket.emit('show_provisional_crew');
       socket.emit('debugmsg', 'Fifth');
     };
-    socket.emit('debugmsg', games);
+    socket.emit('debugmsg', games.toString());
   });
   
   socket.on('remove_player', function(who){
-    socket.emit('debugmsg', games);
+    socket.emit('debugmsg', games.toString());
     socket.emit('debugmsg', 'First');
     var pos = leaderToGame(socket);
     socket.emit('debugmsg', pos);
@@ -109,7 +109,7 @@ io.on('connection', function(socket){
         player.emit('join_rejected')
       };
     };
-    socket.emit('debugmsg', games);
+    socket.emit('debugmsg', games.toString());
   });
   
 });
