@@ -29,6 +29,12 @@ socket.on('game_unavailable', function(){
   document.getElementById("gameUnavailable").style.display = "block";  
 });
 
+socket.on('join_rejected', function(){
+  document.getElementById("gameKey").value = "";
+  hidePopUps();
+  document.getElementById("joinRejected").style.display = "block";  
+});
+
 function attemptJoin(){
   var name = document.getElementById("pirateName").value;
   var key = document.getElementById("gameKey").value;
@@ -104,6 +110,13 @@ var toRender = <div>
       <p>Unfortunately for you, this probably means they&apos;ve started without you. :(</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>
   </div></div>
+  
+  <div id="joinRejected" className="popUp"><div>
+      <h3>Join Rejected</h3>
+      <hr />
+      <p>You have not been allowed to join that game (yet). Maybe they don&apos;t like your Pirate Name. Or, maybe they can&apos;t stand how you always beat them.</p>
+      <button className="close" onClick={hidePopUps}>Okay!</button>
+  </div></div>                                                                                      
 </div>
 </div>;
 
