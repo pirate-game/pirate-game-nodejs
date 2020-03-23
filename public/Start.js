@@ -42,6 +42,8 @@ class CrewUl extends React.Component {
     socket.emit('remove_player', somePlayer);
   }
   changeCrew(){
+    socket.emit('change_crew');
+    hidePopUps();
   }
   render() {
     return (
