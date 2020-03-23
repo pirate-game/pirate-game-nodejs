@@ -114,7 +114,7 @@ io.on('connection', function(socket){
     var pos = leaderToGame(socket);
     if (pos != -1){
       var theCrew = games[pos].crew;
-      for (var i; i < theCrew.length; i++){
+      for (var i = 0; i < theCrew.length; i++){
         theCrew[i].pirate.emit('start_game');
       };
     };
