@@ -47,7 +47,7 @@ function leaderToGame(someLeader){
 };
 
 function gameAndNameToPlayer(someGame, someName){
-  var theCrew = games[someGame].crew;
+  var theCrew = someGame.crew;
   for (var i = 0; i < theCrew.length; i++){
     if (theCrew[i].pirateName == someName){
       return theCrew[i].pirate;
@@ -96,10 +96,10 @@ io.on('connection', function(socket){
     socket.emit('debugmsg', games.length);
     socket.emit('debugmsg', pos);
     if (pos != -1){
-      /*var player = gameAndNameToPlayer(games[pos], who);
+      var player = gameAndNameToPlayer(games[pos], who);
       if (player != {}){
         player.emit('join_rejected');
-      };*/
+      };
     };
   });
   
