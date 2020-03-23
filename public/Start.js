@@ -21,7 +21,7 @@ function hideStage(stage){
 
 function hidePopUps(){
   var popUps = document.getElementsByClassName("popUp");
-  for (var i; i < stageElements.length; i++){
+  for (var i; i < popUps.length; i++){
     popUps[i].style.display = "none";
   };
 };
