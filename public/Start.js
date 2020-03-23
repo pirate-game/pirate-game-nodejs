@@ -99,7 +99,7 @@ function assembleCrew(){
 function startGame(){
   hidePopUps();
   if (globalCrew.length >= 2){
-    /*Stuff*/
+    socket.emit('start_game');
   } else {
     document.getElementById("tooFew").style.display = "block";
   };
