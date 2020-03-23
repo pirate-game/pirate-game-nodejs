@@ -37,14 +37,13 @@ function keyToGame(someKey){
 };
 
 function leaderToGame(someLeader){
-  var someLeaderId = someLeader.id;//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  /*for (var i = 0; i < games.length; i++){
+  var someLeaderId = someLeader.id;
+  for (var i = 0; i < games.length; i++){
     if (games[i].leader.id == someLeaderId){
       return i;
     };
-  };*/
-  //return -1;
-  return 0;
+  };
+  return -1;
 };
 
 function gameAndNameToPlayer(someGame, someName){
@@ -97,10 +96,10 @@ io.on('connection', function(socket){
     socket.emit('debugmsg', games.length);
     socket.emit('debugmsg', pos);
     if (pos != -1){
-      var player = gameAndNameToPlayer(games[pos], who);
+      /*var player = gameAndNameToPlayer(games[pos], who);
       if (player != {}){
         player.emit('join_rejected');
-      };
+      };*/
     };
   });
   
