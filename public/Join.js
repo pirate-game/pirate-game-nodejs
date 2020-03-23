@@ -30,6 +30,7 @@ socket.on('game_unavailable', function(){
 });
 
 socket.on('join_rejected', function(){
+  document.getElementById("pirateName").value = "";
   document.getElementById("gameKey").value = "";
   hidePopUps();
   document.getElementById("joinRejected").style.display = "block";  
