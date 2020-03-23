@@ -7,21 +7,21 @@ const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9
 
 function showStage(stage){
   var stageElements = document.getElementsByClassName(stage);
-  for (var i; i < stageElements.length; i++){
+  for (var i = 0; i < stageElements.length; i++){
     stageElements[i].style.display = "block";
   };
 };
 
 function hideStage(stage){
   var stageElements = document.getElementsByClassName(stage);
-  for (var i; i < stageElements.length; i++){
+  for (var i = 0; i < stageElements.length; i++){
     stageElements[i].style.display = "none";
   };
 };
 
 function hidePopUps(){
   var popUps = document.getElementsByClassName("popUp");
-  for (var i; i < popUps.length; i++){
+  for (var i = 0; i < popUps.length; i++){
     popUps[i].style.display = "none";
   };
 };
