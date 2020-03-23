@@ -5,11 +5,32 @@ const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 
+function showStage(stage){
+  var stageElements = document.getElementsByClassName(stage);
+  for (var i; i < stageElements.length; i++){
+    stageElements[i].style.display = "block";
+  };
+};
+
+function hideStage(stage){
+  var stageElements = document.getElementsByClassName(stage);
+  for (var i; i < stageElements.length; i++){
+    stageElements[i].style.display = "none";
+  };
+};
+
 function hidePopUps(){
+  var popUps = document.getElementsByClassName("popUp");
+  for (var i; i < stageElements.length; i++){
+    popUps[i].style.display = "none";
+  };
+};
+
+/*function hidePopUps(){
   for (var t = 0; t < popUps.length; t++){
     popUps[t].style.display = "none";
   };
-};
+};*/
 
 socket.on('no_such_game', function(){
   document.getElementById("gameKey").value = "";
@@ -123,4 +144,5 @@ var toRender = <div>
 </div>;
 
 ReactDOM.render(toRender, root);
-var popUps = document.getElementsByClassName("popUp");  
+
+//var popUps = document.getElementsByClassName("popUp");
