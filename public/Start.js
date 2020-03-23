@@ -1,6 +1,7 @@
 var root = document.getElementById('root');
 var socket = io();
 var key = '';
+var globalCrew = [];
 
 socket.on('debugmsg', function(msg){console.log(msg)});
 
@@ -29,6 +30,7 @@ class CrewUl extends React.Component {
     this.state = {crew: []};
     socket.on('request_join', name => {
       this.setState({crew:this.state.crew.concat([name])});
+      globalCrew.push(name);
     });
     socket.on('show_provisional_crew', () => {
       hidePopUps();
@@ -39,6 +41,7 @@ class CrewUl extends React.Component {
   }
   removePlayer(somePlayer){
     this.setState({crew:this.state.crew.filter((x)=>(x!=somePlayer))});
+    globalCrew = globalCrew.filter((x)=>(x!=somePlayer));
     socket.emit('remove_player', somePlayer);
   }
   changeCrew(){
@@ -85,8 +88,12 @@ class CrewUl extends React.Component {
 
 function assembleCrew(){
   hidePopUps();
-  document.getElementById("waiting").style.display = "block";
-  socket.emit('crew_assembled');
+  if (globalCrew.length >= 2){
+    document.getElementById("waiting").style.display = "block";
+    socket.emit('crew_assembled');
+  } else {
+    document.getElementById("tooFew").style.display = "block";
+  };
 };
 
 function startGame(){
@@ -108,6 +115,12 @@ var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px
       <p>This won&apos;t take too long, I hope!</p>
     </div></div>
   </div>
+  <div id="tooFew" className="popUp"><div>
+      <h3>Too Few Crewmembers</h3>
+      <hr />
+      <p>Yarr, ye be needin&apos; at least 2 players.</p>
+      <button className="close" onClick={hidePopUps}>Okay!</button>
+  </div></div> 
 </div>;
 
 ReactDOM.render(toRender, root);
