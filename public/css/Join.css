@@ -1,3 +1,5 @@
+.stage1, .stage2 {display: none;}
+
 h2 {
   text-align: center;
   font-size: 40px;
