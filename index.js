@@ -43,7 +43,8 @@ function leaderToGame(someLeader){
       return i;
     };
   };*/
-  return -1;
+  //return -1;
+  return 0;
 };
 
 function gameAndNameToPlayer(someGame, someName){
