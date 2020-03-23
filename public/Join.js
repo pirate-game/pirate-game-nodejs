@@ -71,7 +71,8 @@ var toRender = <div>
   <div id="invalidName" className="popUp"><div>
       <h3>Invalid Name</h3>
       <hr />
-      <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.</p>
+      <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.
+        <br />We be sorry if ye&apos;s name be &apos;aving accented characters in it etc.</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>
   </div></div>
       
