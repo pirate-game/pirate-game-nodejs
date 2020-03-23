@@ -97,6 +97,12 @@ function assembleCrew(){
 };
 
 function startGame(){
+  hidePopUps();
+  if (globalCrew.length >= 2){
+    /*Stuff*/
+  } else {
+    document.getElementById("tooFew").style.display = "block";
+  };
 };
 
 var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
