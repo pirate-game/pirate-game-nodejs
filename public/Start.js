@@ -120,35 +120,43 @@ function assembleCrew(){
 function startGame(){
   hidePopUps();
   if (globalCrew.length >= 2){
-    document.getElementById("").style.display = "none";
     socket.emit('start_game');
+    hideStage("stage0");
+    showStage("stage1");
   } else {
     document.getElementById("tooFew").style.display = "block";
   };
 };
 
-var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
-  <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
-  <div style={{position: 'relative',top: '-10%'}}>
-    <link rel="stylesheet" type="text/css" href="css/Start.css" />
-    <button id="crewAssembled" onClick={assembleCrew}>Crew Assembled!</button>
-    <KeyBox />
+var toRender = <div>
+    <div className="stage0">
+      <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
+        <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
+        <div style={{position: 'relative',top: '-10%'}}>
+          <link rel="stylesheet" type="text/css" href="css/Start.css" />
+          <button id="crewAssembled" onClick={assembleCrew}>Crew Assembled!</button>
+          <KeyBox />
+        </div>
+        <h2 style={{fontSize: '50px', margin: '0px', marginLeft: '10px'}}>Crew:</h2>
+        <CrewUl />
+        <div id="popUps">
+          <div id="waiting" className="popUp"><div>
+              <h3>Waiting</h3>
+              <hr />
+              <p>This won&apos;t take too long, I hope!</p>
+           </div></div>
+        <div id="tooFew" className="popUp"><div>
+            <h3>Too Few Crewmembers</h3>
+            <hr />
+            <p>Yarr, ye be needin&apos; at least 2 players.</p>
+            <button className="close" onClick={hidePopUps}>Okay!</button>
+        </div></div>
+      </div> 
+    </div>
   </div>
-  <h2 style={{fontSize: '50px', margin: '0px', marginLeft: '10px'}}>Crew:</h2>
-  <CrewUl />
-  <div id="popUps">
-    <div id="waiting" className="popUp"><div>
-      <h3>Waiting</h3>
-      <hr />
-      <p>This won&apos;t take too long, I hope!</p>
-    </div></div>
-    <div id="tooFew" className="popUp"><div>
-      <h3>Too Few Crewmembers</h3>
-      <hr />
-      <p>Yarr, ye be needin&apos; at least 2 players.</p>
-      <button className="close" onClick={hidePopUps}>Okay!</button>
-    </div></div>
-  </div> 
+  <div className="stage1">
+    <h4>Hey</h4>
+  </div>
 </div>;
 
 ReactDOM.render(toRender, root);
