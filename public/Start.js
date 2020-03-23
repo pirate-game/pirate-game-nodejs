@@ -34,10 +34,14 @@ class CrewUl extends React.Component {
       hidePopUps();
       document.getElementById("crewAssembledPopUp").style.display = "block";
     });
+    
+    this.changeCrew = this.changeCrew.bind(this);//Fancy js thing
   }
   removePlayer(somePlayer){
     this.setState({crew:this.state.crew.filter((x)=>(x!=somePlayer))});
     socket.emit('remove_player', somePlayer);
+  }
+  changeCrew(){
   }
   render() {
     return (
@@ -58,8 +62,8 @@ class CrewUl extends React.Component {
         <div>
           <p style={{display: 'inline-block', width: 'calc(100% - 190px)'}}>Those currently in your crew are below. You can remove them with the crosses.</p>
           <div style={{display: 'inline-block'}}>
-            <button>Start<br />Game</button>
-            <button>Change<br />Crew</button>
+            <button onClick={startGame}>Start<br />Game</button>
+            <button onClick={this.changeCrew}>Change<br />Crew</button>
           </div>
         </div>
         <div id="popUpCrewDiv" className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
@@ -81,6 +85,9 @@ function assembleCrew(){
   hidePopUps();
   document.getElementById("waiting").style.display = "block";
   socket.emit('crew_assembled');
+};
+
+function startGame(){
 };
 
 var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
