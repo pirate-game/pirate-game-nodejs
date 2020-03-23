@@ -1,3 +1,5 @@
+.stage1, .stage2 {display: none;}
+
 #keyBox {
   float: right;
   height: 50px;
