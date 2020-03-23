@@ -5,11 +5,32 @@ var globalCrew = [];
 
 socket.on('debugmsg', function(msg){console.log(msg)});
 
+function showStage(stage){
+  var stageElements = document.getElementsByClassName(stage);
+  for (var i; i < stageElements.length; i++){
+    stageElements[i].style.display = "block";
+  };
+};
+
+function hideStage(stage){
+  var stageElements = document.getElementsByClassName(stage);
+  for (var i; i < stageElements.length; i++){
+    stageElements[i].style.display = "none";
+  };
+};
+
 function hidePopUps(){
+  var popUps = document.getElementsByClassName("popUp");
+  for (var i; i < stageElements.length; i++){
+    popUps[i].style.display = "none";
+  };
+};
+
+/*function hidePopUps(){
   for (var t = 0; t < popUps.length; t++){
     popUps[t].style.display = "none";
   };
-};
+};*/
 
 class KeyBox extends React.Component {
   constructor() {
@@ -99,6 +120,7 @@ function assembleCrew(){
 function startGame(){
   hidePopUps();
   if (globalCrew.length >= 2){
+    document.getElementById("").style.display = "none";
     socket.emit('start_game');
   } else {
     document.getElementById("tooFew").style.display = "block";
@@ -120,17 +142,17 @@ var toRender = <div style={{position: 'relative', minHeight: 'calc(100vh - 230px
       <hr />
       <p>This won&apos;t take too long, I hope!</p>
     </div></div>
-  </div>
-  <div id="tooFew" className="popUp"><div>
+    <div id="tooFew" className="popUp"><div>
       <h3>Too Few Crewmembers</h3>
       <hr />
       <p>Yarr, ye be needin&apos; at least 2 players.</p>
       <button className="close" onClick={hidePopUps}>Okay!</button>
-  </div></div> 
+    </div></div>
+  </div> 
 </div>;
 
 ReactDOM.render(toRender, root);
 
-var popUps = document.getElementsByClassName("popUp");  
+//var popUps = document.getElementsByClassName("popUp");  
 
 socket.emit('request_key');
