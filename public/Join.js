@@ -57,6 +57,12 @@ socket.on('join_rejected', function(){
   document.getElementById("joinRejected").style.display = "block";  
 });
 
+socket.on('start_game', function(){
+  hidePopUps();
+  hideStage("stage0");
+  showStage("stage1");
+});
+
 function attemptJoin(){
   var name = document.getElementById("pirateName").value;
   var key = document.getElementById("gameKey").value;
