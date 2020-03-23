@@ -103,6 +103,13 @@ io.on('connection', function(socket){
     };
   });
   
+  socket.on('change_crew', function(){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      games[pos].available = true;
+    };
+  });
+  
 });
 
 //End of Game Section
