@@ -59,7 +59,8 @@ socket.on('start_game', function(){
 
 socket.on('too_slow', function(){
   hidePopUps();
-  document.getElementById("tooSlow").style.display = "block";  
+  document.getElementById("tooSlow").style.display = "block";
+  document.removeEventListener("beforeunload",unloadFn);
 });
 
 function attemptJoin(){
