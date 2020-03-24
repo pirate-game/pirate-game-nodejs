@@ -141,7 +141,7 @@ io.on('connection', function(socket){
   socket.on('too_slow', function(who){
     var pos = leaderToGame(socket);
     if (pos != -1){
-      for (var i = 0; i < games[pos].length; i++){
+      for (var i = 0; i < who.length; i++){
         var player = gameAndNameToPlayer(games[pos], who[i]);
         if (player != {}){
           player.emit('too_slow');
