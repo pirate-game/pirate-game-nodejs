@@ -69,7 +69,7 @@ function gameAndPlayerToName(someGame, somePlayer){
 function crewmemberToGame(someCrewmember){
   var someCrewmemberId = someCrewmember.id;
   for (var i = 0; i < games.length; i++){
-    if (games[i].crew.map(x=>x.pirate.id == someCrewmemberId){
+    if (games[i].crew.map(x=>x.pirate.id).includes(someCrewmemberId)){
       return i;
     };
   };
