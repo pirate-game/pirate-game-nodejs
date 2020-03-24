@@ -121,11 +121,13 @@ io.on('connection', function(socket){
   socket.on('too_slow', function(who){
     var pos = leaderToGame(socket);
     if (pos != -1){
-      var player = gameAndNameToPlayer(games[pos], who);
-      if (player != {}){
-        player.emit('too_slow');
-        games[pos].crew = games[pos].crew.filter((x)=>(x!=player));
-      };
+      for (var i = 0; i < game[pos].length; i++){
+        var player = gameAndNameToPlayer(games[pos], who[i]);
+        if (player != {}){
+          player.emit('too_slow');
+          games[pos].crew = games[pos].crew.filter((x)=>(x!=player));
+        };
+      }; 
     };
   });
   
