@@ -28,7 +28,7 @@
   margin: 0 5px 15px;
 }
 
-#crewAssembled:hover {
+#crewAssembled:hover, #doneBtn:hover {
   background-color: cornflowerblue;
 }
 
@@ -93,4 +93,9 @@
 .nameLiDiv {
   width: calc(100% - 30px);
   overflow-wrap: break-word;
+}
+
+.stage1col {
+  width: 45%;
+  float left;
 }
