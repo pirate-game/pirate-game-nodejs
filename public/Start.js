@@ -129,13 +129,14 @@ class Stage1 extends React.Component {
   constructor() {
     super();
     this.state = {waitingFor: globalCrew, ready: []};
+    this.forceUpdate();
     
     this.tooSlow = this.tooSlow.bind(this);
     
     x = this;//////////////////
   }
   tooSlow(somePlayer){
-    if (globalCrewthis.state.ready.length >= 2){
+    if (this.state.ready.length >= 2){
       this.setState({waitingFor:this.state.waitingFor.filter((x)=>(x!=somePlayer))});
       globalCrew = globalCrew.filter((x)=>(x!=somePlayer));
       socket.emit('too_slow', somePlayer);
