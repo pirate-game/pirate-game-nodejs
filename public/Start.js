@@ -3,6 +3,8 @@ var socket = io();
 var key = '';
 var globalCrew = [];
 
+var x;//////////////
+
 socket.on('debugmsg', function(msg){console.log(msg)});
 
 function showStage(stage){
@@ -130,6 +132,8 @@ class Stage1 extends React.Component {
     this.setState({waitingFor:globalCrew});
     
     this.tooSlow = this.tooSlow.bind(this);
+    
+    x = this;//////////////////
   }
   tooSlow(somePlayer){
     if (globalCrewthis.state.ready.length >= 2){
