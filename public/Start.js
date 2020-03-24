@@ -157,7 +157,7 @@ class Stage1 extends React.Component {
       </div>
       <button id="doneBtn" onClick={this.stage1Done}>Done</button>
       <div>
-        <div className="stage1col">
+        <div className="stage1col" style={{left: '10px'}}>
           <h2>Waiting for:</h2>
           <div className="crewDiv">
             <ul>
@@ -169,7 +169,7 @@ class Stage1 extends React.Component {
             </ul>
           </div>
         </div>
-        <div className="stage1col">
+        <div className="stage1col" style={{right: '10px'}}>
           <h2>Ready:</h2>
           <div className="crewDiv">
             <ul>
