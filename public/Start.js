@@ -156,25 +156,31 @@ class Stage1 extends React.Component {
         <h2 style={{fontSize: '30px', padding: '10px'}}>Fill in your boards</h2>
       </div>
       <button id="doneBtn" onClick={this.stage1Done}>Done</button>
-      <h2>Waiting for:</h2>
-      <div className="crewDiv">
-        <ul>
-          {this.state.waitingFor.map(crewMember => (
-            <li style={{position:'relative'}}>
-              <div className="nameLiDiv">{crewMember}</div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <h2>Ready:</h2>
-      <div className="crewDiv">
-        <ul>
-          {this.state.ready.map(crewMember => (
-            <li style={{position:'relative'}}>
-              <div className="nameLiDiv">{crewMember}</div>
-            </li>
-          ))}
-        </ul>
+      <div>
+        <div className="stage1col">
+          <h2>Waiting for:</h2>
+          <div className="crewDiv">
+            <ul>
+              {this.state.waitingFor.map(crewMember => (
+                <li style={{position:'relative'}}>
+                  <div className="nameLiDiv">{crewMember}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="stage1col">
+          <h2>Ready:</h2>
+          <div className="crewDiv">
+            <ul>
+              {this.state.ready.map(crewMember => (
+                <li style={{position:'relative'}}>
+                  <div className="nameLiDiv">{crewMember}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>;
   }
