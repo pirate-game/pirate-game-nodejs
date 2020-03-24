@@ -1,6 +1,6 @@
-.stage1, .stage2 {display: none;}
+.stage1, .stage2, .stage3 {display: none;}
 
-#keyBox {
+#keyBox, #fillBoards {
   float: right;
   height: 50px;
   padding: 0 8px;
@@ -9,7 +9,7 @@
   margin: 0 5px 15px;
 }
 
-#crewAssembled {
+#crewAssembled, #doneBtn {
   float: right;
   display: block;
   text-align: center;
