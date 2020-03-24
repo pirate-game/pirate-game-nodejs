@@ -1,13 +1,14 @@
 .stage1, .stage2, .stage3 {display: none;}
 
 #keyBox, #fillBoards {
-  float: right;
   height: 50px;
   padding: 0 8px;
   display: flex;
   align-items: center;
   margin: 0 5px 15px;
 }
+#keyBox {float: right;}
+#fillBoards {float: left;}
 
 #crewAssembled, #doneBtn {
   float: right;
