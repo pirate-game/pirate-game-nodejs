@@ -26,12 +26,6 @@ function hidePopUps(){
   };
 };
 
-/*function hidePopUps(){
-  for (var t = 0; t < popUps.length; t++){
-    popUps[t].style.display = "none";
-  };
-};*/
-
 socket.on('no_such_game', function(){
   document.getElementById("gameKey").value = "";
   hidePopUps();
@@ -61,6 +55,11 @@ socket.on('start_game', function(){
   hidePopUps();
   hideStage("stage0");
   showStage("stage1");
+});
+
+socket.on('too_slow', function(){
+  hidePopUps();
+  document.getElementById("tooSlow").style.display = "block";  
 });
 
 function attemptJoin(){
@@ -164,5 +163,3 @@ var toRender = <div>
 </div>;
 
 ReactDOM.render(toRender, root);
-
-//var popUps = document.getElementsByClassName("popUp");
