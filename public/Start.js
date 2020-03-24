@@ -157,21 +157,25 @@ class Stage1 extends React.Component {
       </div>
       <button id="doneBtn" onClick={this.stage1Done}>Done</button>
       <h2>Waiting for:</h2>
-      <ul>
-        {this.state.waitingFor.map(crewMember => (
-          <li style={{position:'relative'}}>
-            <div className="nameLiDiv">{crewMember}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="crewDiv">
+        <ul>
+          {this.state.waitingFor.map(crewMember => (
+            <li style={{position:'relative'}}>
+              <div className="nameLiDiv">{crewMember}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
       <h2>Ready:</h2>
-      <ul>
-        {this.state.ready.map(crewMember => (
-          <li style={{position:'relative'}}>
-            <div className="nameLiDiv">{crewMember}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="crewDiv">
+        <ul>
+          {this.state.ready.map(crewMember => (
+            <li style={{position:'relative'}}>
+              <div className="nameLiDiv">{crewMember}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>;
   }
 };
