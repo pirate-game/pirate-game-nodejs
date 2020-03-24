@@ -131,17 +131,22 @@ class Stage1 extends React.Component {
     super();
     this.state = {waitingFor: globalCrew, ready: []};
     
-    this.tooSlow = this.tooSlow.bind(this);
+    this.stage1Done = this.stage1Done.bind(this);
+    
+    socket.on('board_ready', player => {
+      this.setState({waitingFor: this.state.waitingFor.filter((x)=>(x!=player)), ready:this.state.ready.concat(player)});
+    });
     
     x = this;//////////////////
   }
-  tooSlow(somePlayer){
+  stage1Done(){
+    hidePopUps();
     if (this.state.ready.length >= 2){
-      this.setState({waitingFor:this.state.waitingFor.filter((x)=>(x!=somePlayer))});
-      globalCrew = globalCrew.filter((x)=>(x!=somePlayer));
-      socket.emit('too_slow', somePlayer);
+      globalCrew = this.state.ready;
+      socket.emit('too_slow', this.state.waitingFor);
+      hideStage("stage1");
+      showStage("stage2");
     } else {
-      hidePopUps();
       document.getElementById("tooFewReady").style.display = "block";
     };
   }
@@ -150,12 +155,11 @@ class Stage1 extends React.Component {
       <div style={{backgroundColor: 'lightblue'}}>
         <h2>Fill in your boards</h2>
       </div>
-      <button>Done</button>
+      <button onClick={this.stage1Done}>Done</button>
       <h2>Waiting for:</h2>
       <ul>
         {this.state.waitingFor.map(crewMember => (
           <li style={{position:'relative'}}>
-            <div className="cross" onClick={() => this.tooSlow(crewMember)}>&times;</div>
             <div className="nameLiDiv">{crewMember}</div>
           </li>
         ))}
