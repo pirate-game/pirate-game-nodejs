@@ -120,6 +120,7 @@ function startGame(){
     socket.emit('start_game');
     hideStage("stage0");
     showStage("stage1");
+    ReactDOM.render(<Stage1 />, document.getElementById("stage1");
   } else {
     document.getElementById("tooFew").style.display = "block";
   };
@@ -129,7 +130,6 @@ class Stage1 extends React.Component {
   constructor() {
     super();
     this.state = {waitingFor: globalCrew, ready: []};
-    this.forceUpdate();
     
     this.tooSlow = this.tooSlow.bind(this);
     
@@ -185,9 +185,7 @@ var toRender = <div>
         <CrewUl />
       </div> 
     </div>
-    <div className="stage1">
-      <Stage1 />
-    </div>
+    <div id="stage1" className="stage1"></div>
     <div id="popUps">
       <div id="waiting" className="popUp"><div>
           <h3>Waiting</h3>
