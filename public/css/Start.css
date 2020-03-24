@@ -96,6 +96,9 @@
 }
 
 .stage1col {
-  width: 45%;
-  float: left;
+  position: fixed;
+  width: calc(50% - 15px);
+  bottom: 10px;
 }
+
+.stage1col ul {height: calc(100vh - 290px);}
