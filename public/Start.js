@@ -152,10 +152,10 @@ class Stage1 extends React.Component {
   }
   render() {
     return <div>
-      <div style={{backgroundColor: 'lightblue'}}>
-        <h2>Fill in your boards</h2>
+      <div id="fillBoards" style={{backgroundColor: 'lightblue'}}>
+        <h2 style={{fontSize: '30px', padding: '10px'}}>Fill in your boards</h2>
       </div>
-      <button onClick={this.stage1Done}>Done</button>
+      <button id="doneBtn" onClick={this.stage1Done}>Done</button>
       <h2>Waiting for:</h2>
       <ul>
         {this.state.waitingFor.map(crewMember => (
