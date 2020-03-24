@@ -126,7 +126,8 @@ function startGame(){
 class Stage1 extends React.Component {
   constructor() {
     super();
-    this.state = {waitingFor: globalCrew, ready: []};
+    this.state = {waitingFor: [], ready: []};
+    this.setState({waitingFor:globalCrew});
     
     this.tooSlow = this.tooSlow.bind(this);
   }
