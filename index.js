@@ -56,6 +56,26 @@ function gameAndNameToPlayer(someGame, someName){
   return {};
 };
 
+function gameAndPlayerToName(someGame, somePlayer){
+  var theCrew = someGame.crew;
+  for (var i = 0; i < theCrew.length; i++){
+    if (theCrew[i].pirate == somePlayer){
+      return theCrew[i].pirateName;
+    };
+  };
+  return "";
+};
+
+function crewmemberToGame(someCrewmember){
+  var someCrewmemberId = someCrewmember.id;
+  for (var i = 0; i < games.length; i++){
+    if (games[i].crew.map(x=>x.pirate.id == someCrewmemberId){
+      return i;
+    };
+  };
+  return -1;
+};
+
 io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
@@ -128,6 +148,16 @@ io.on('connection', function(socket){
           games[pos].crew = games[pos].crew.filter((x)=>(x!=player));
         };
       }; 
+    };
+  });
+  
+  socket.on('board_ready', function(){
+    var thisGame = crewmemberToGame(socket);
+    if (thisGame != -1){
+      var thisName = gameAndPlayerToName(thisGame, socket);
+      if (thisName != ""){
+        games[thisGame].leader.emit('board_ready', thisName);
+      };
     };
   });
   
