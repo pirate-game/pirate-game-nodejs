@@ -96,7 +96,7 @@ io.on('connection', function(socket){
       var player = gameAndNameToPlayer(games[pos], who);
       if (player != {}){
         player.emit('join_rejected');
-        games[pos].crew = crew.filter((x)=>(x!=player));
+        games[pos].crew = games[pos].crew.filter((x)=>(x!=player));
       };
     };
   });
@@ -124,7 +124,7 @@ io.on('connection', function(socket){
       var player = gameAndNameToPlayer(games[pos], who);
       if (player != {}){
         player.emit('too_slow');
-        games[pos].crew = crew.filter((x)=>(x!=player));
+        games[pos].crew = games[pos].crew.filter((x)=>(x!=player));
       };
     };
   });
