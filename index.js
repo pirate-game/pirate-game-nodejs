@@ -59,7 +59,7 @@ function gameAndNameToPlayer(someGame, someName){
 function gameAndPlayerToName(someGame, somePlayer){
   var theCrew = someGame.crew;
   for (var i = 0; i < theCrew.length; i++){
-    if (theCrew[i].pirate == somePlayer){
+    if (theCrew[i].pirate.id == somePlayer.id){
       return theCrew[i].pirateName;
     };
   };
@@ -154,7 +154,7 @@ io.on('connection', function(socket){
   socket.on('board_ready', function(){
     var thisGame = crewmemberToGame(socket);
     if (thisGame != -1){
-      var thisName = gameAndPlayerToName(thisGame, socket);
+      var thisName = gameAndPlayerToName(games[thisGame], socket);
       if (thisName != ""){
         games[thisGame].leader.emit('board_ready', thisName);
       };
