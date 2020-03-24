@@ -120,7 +120,7 @@ function startGame(){
     socket.emit('start_game');
     hideStage("stage0");
     showStage("stage1");
-    ReactDOM.render(<Stage1 />, document.getElementById("stage1");
+    ReactDOM.render(<Stage1 />, document.getElementById("stage1"));
   } else {
     document.getElementById("tooFew").style.display = "block";
   };
