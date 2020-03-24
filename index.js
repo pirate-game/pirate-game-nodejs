@@ -91,14 +91,12 @@ io.on('connection', function(socket){
   });
   
   socket.on('remove_player', function(who){
-    socket.emit('debugmsg', games.length);
     var pos = leaderToGame(socket);
-    socket.emit('debugmsg', games.length);
-    socket.emit('debugmsg', pos);
     if (pos != -1){
       var player = gameAndNameToPlayer(games[pos], who);
       if (player != {}){
         player.emit('join_rejected');
+        games[pos].crew = crew.filter((x)=>(x!=player));
       };
     };
   });
@@ -116,6 +114,17 @@ io.on('connection', function(socket){
       var theCrew = games[pos].crew;
       for (var i = 0; i < theCrew.length; i++){
         theCrew[i].pirate.emit('start_game');
+      };
+    };
+  });
+  
+  socket.on('too_slow', function(who){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var player = gameAndNameToPlayer(games[pos], who);
+      if (player != {}){
+        player.emit('too_slow');
+        games[pos].crew = crew.filter((x)=>(x!=player));
       };
     };
   });
