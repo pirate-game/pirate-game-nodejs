@@ -180,28 +180,28 @@ var toRender = <div>
         <CrewUl />
       </div> 
     </div>
+    <div className="stage1">
+      <Stage1 />
+    </div>
+    <div id="popUps">
+      <div id="waiting" className="popUp"><div>
+          <h3>Waiting</h3>
+          <hr />
+          <p>This won&apos;t take too long, I hope!</p>
+      </div></div>
+      <div id="tooFew" className="popUp"><div>
+          <h3>Too Few Crewmembers</h3>
+          <hr />
+          <p>Yarr, ye be needin&apos; at least 2 players.</p>
+          <button className="close" onClick={hidePopUps}>Okay!</button>
+      </div></div>
+      <div id="tooFewReady" className="popUp"><div>
+          <h3>Too Few Crewmembers Ready</h3>
+          <hr />
+          <p>Yarr, ye be needin&apos; at least 2 ready players before ye can drop people for bein&apos; slow.</p>
+          <button className="close" onClick={hidePopUps}>Okay!</button>
+      </div></div>
   </div>
-  <div className="stage1">
-    <Stage1 />
-  </div>
-  <div id="popUps">
-    <div id="waiting" className="popUp"><div>
-        <h3>Waiting</h3>
-        <hr />
-        <p>This won&apos;t take too long, I hope!</p>
-    </div></div>
-    <div id="tooFew" className="popUp"><div>
-        <h3>Too Few Crewmembers</h3>
-        <hr />
-        <p>Yarr, ye be needin&apos; at least 2 players.</p>
-        <button className="close" onClick={hidePopUps}>Okay!</button>
-    </div></div>
-    <div id="tooFewReady" className="popUp"><div>
-        <h3>Too Few Crewmembers Ready</h3>
-        <hr />
-        <p>Yarr, ye be needin&apos; at least 2 ready players before ye can drop people for bein&apos; slow.</p>
-        <button className="close" onClick={hidePopUps}>Okay!</button>
-    </div></div>
 </div>;
 
 ReactDOM.render(toRender, root);
