@@ -17,8 +17,8 @@ const things = {
   "shield":<img src="imgs/shield.svg" />,
   "mirror":<img src="imgs/mirror.png" />,
   "bomb":<img src="imgs/bomb.svg" />,
-  "double":"&times;2",
-  "bank":<b>B</b>
+  "double":<div style={{fontWeight: 'lighter', display: 'contents'}}>&times; 2</div>,
+  "bank":"B"
 };
 
 function showStage(stage){
