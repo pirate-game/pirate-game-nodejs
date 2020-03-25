@@ -81,7 +81,42 @@ function attemptJoin(){
   };
 };
 
-function Board(props) {
+class Board extends React.Component {
+  constructor(){
+    super();
+    var board = [];
+    for (var i = 0; i < 7; i++){
+      for (var j = 0; j < 7; j++){
+        board[["A","B","C","D","E","F","G"][i]+["1","2","3","4","5","6","7"][j]] = null;
+      };
+    };
+    this.state = {board:{}};
+  }
+  render(){
+    return <table id="board">
+      <tr class="edge">
+        <th class="edge"></th>
+        <th class="edge">A</th>
+        <th class="edge">B</th>
+        <th class="edge">C</th>
+        <th class="edge">D</th>
+        <th class="edge">E</th>
+        <th class="edge">F</th>
+        <th class="edge">G</th>
+      </tr>
+      {["1","2","3","4","5","6","7"].map(col => (
+        <tr class="edge">
+          <th class="edge">{col}</th>
+          {["A","B","C","D","E","F","G"].map(row => (
+            <td id={row+col} class="square">{this.state.board[row+col]}</td>
+          ))}
+        </tr>
+      ))}
+      </table>;
+  }
+};
+
+/*function Board(props) {
   return <table id="board">
     <tr class="edge">
       <th class="edge"></th>
@@ -164,7 +199,7 @@ function Board(props) {
       <td id="G7" class="square"></td>
     </tr>
 </table>; 
-};
+};*/
 
 var toRender = <div>
   <div className="stage0">
