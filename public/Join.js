@@ -110,7 +110,7 @@ class Board extends React.Component {
         board[["A","B","C","D","E","F","G"][i]+["1","2","3","4","5","6","7"][j]] = null;
       };
     };
-    this.state = {board:{}};
+    this.state = {board:{}, done:[]};
     
     x=this;/////////////////////////////
   }
@@ -119,23 +119,31 @@ class Board extends React.Component {
     temp[square] = things[thing];
     this.setState({board:temp});
   }
+  squareDone(square){
+    var temp = Object.assign({}, this.state.board);
+    temp.done.push(square);
+    this.setState({board:temp});
+  }
   render(){
     return <table id="board">
-      <tr class="edge">
-        <th class="edge"></th>
-        <th class="edge">A</th>
-        <th class="edge">B</th>
-        <th class="edge">C</th>
-        <th class="edge">D</th>
-        <th class="edge">E</th>
-        <th class="edge">F</th>
-        <th class="edge">G</th>
+      <tr className="edge">
+        <th className="edge"></th>
+        <th className="edge">A</th>
+        <th className="edge">B</th>
+        <th className="edge">C</th>
+        <th className="edge">D</th>
+        <th className="edge">E</th>
+        <th className="edge">F</th>
+        <th className="edge">G</th>
       </tr>
       {["1","2","3","4","5","6","7"].map(col => (
-        <tr class="edge">
-          <th class="edge">{col}</th>
+        <tr className="edge">
+          <th className="edge">{col}</th>
           {["A","B","C","D","E","F","G"].map(row => (
-            <td id={row+col} class="square">{this.state.board[row+col]}</td>
+            <td id={row+col} className="square">
+              {this.state.board[row+col]}
+              {this.state.done.includes(row+col) ? <div className="cross" /> : null}
+            </td>
           ))}
         </tr>
       ))}
