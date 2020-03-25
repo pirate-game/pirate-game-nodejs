@@ -38,3 +38,18 @@ input {
   margin: auto;
   text-align: center;
 }
+
+#board {font-size: calc((100vw - 80px)/14);}
+.square {
+  height: calc((100vw - 80px)/7);
+  width: calc((100vw - 80px)/7);
+}
+
+
+@media screen and (orientation:landscape){
+  #board {font-size: calc((100vh - 220px)/14);}
+  .square {
+    height: calc((100vh - 220px)/7);
+    width: calc((100vh - 220px)/7);
+  }
+}
