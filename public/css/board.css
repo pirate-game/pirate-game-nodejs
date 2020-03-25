@@ -19,4 +19,5 @@ table, th {border-collapse: collapse;}
   display: block;
   margin-left: auto;
   margin-right: auto;
+  cursor: cell;
 }
