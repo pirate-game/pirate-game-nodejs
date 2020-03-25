@@ -12,3 +12,11 @@ table, th {border-collapse: collapse;}
 
 .square {background-color:white}
 .edge {border:0px solid transparent;}
+
+.square img {
+  max-height: 95%;
+  max-width: 95%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
