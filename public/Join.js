@@ -120,9 +120,7 @@ class Board extends React.Component {
     this.setState({board:temp});
   }
   squareDone(square){
-    var temp = Object.assign({}, this.state.board);
-    temp.done.push(square);
-    this.setState({board:temp});
+    this.setState({done:this.state.done.concat([square])});
   }
   render(){
     return <table id="board">
