@@ -1,1 +1,2 @@
-window.addEventListener("beforeunload",function(event){event.returnValue="";});
+function unloadFn(event){event.returnValue="";};
+window.addEventListener("beforeunload",unloadFn);

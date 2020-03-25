@@ -1,0 +1,10 @@
+#titlebar {
+	overflow: hidden;
+	background-color:#CC6600;
+	position: relative;
+	top:0;
+}
+
+#titlebar h1 {
+	font-size: 3em;
+}
