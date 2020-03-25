@@ -1,5 +1,6 @@
 #board {
   font-weight: bold;
+  position: absolute;
 }
 
 tr, td {
