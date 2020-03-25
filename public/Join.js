@@ -7,6 +7,20 @@ const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 
+const things = {
+  "rob":<img src="imgs/rob.png" />,
+  "kill":<img src="imgs/kill.svg" />,
+  "present":<img src="imgs/present.png" />,
+  "parrot":<img src="imgs/parrot.png" />,
+  "swap":<img src="imgs/swap.png" />,
+  "choose":<img src="imgs/c.png" />,
+  "shield":<img src="imgs/shield.svg" />,
+  "mirror":<img src="imgs/mirror.png" />,
+  "bomb":<img src="imgs/bomb.svg" />,
+  "double":"&times;2",
+  "bank":<b>B</b>
+};
+
 function showStage(stage){
   var stageElements = document.getElementsByClassName(stage);
   for (var i = 0; i < stageElements.length; i++){
@@ -95,6 +109,11 @@ class Board extends React.Component {
     this.state = {board:{}};
     
     x=this;/////////////////////////////
+  }
+  updateBoard(square, thing){
+    var temp = Object.assign({}, this.state.board);
+    temp[square] = things[thing];
+    this.setState({board:temp});
   }
   render(){
     return <table id="board">
