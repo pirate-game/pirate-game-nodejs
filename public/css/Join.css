@@ -38,3 +38,17 @@ input {
   margin: auto;
   text-align: center;
 }
+
+#board {
+  font-weight: bold;
+}
+
+tr, td {
+    border: 0.1vw solid black;
+    border-collapse: collapse;
+}
+
+table, th {border-collapse: collapse;}
+
+.square {background-color:white}
+.edge {border:0px solid transparent;}
