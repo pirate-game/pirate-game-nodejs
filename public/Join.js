@@ -81,96 +81,89 @@ function attemptJoin(){
   };
 };
 
-class Board extends React.Component {
-  constructor() {
-    super();
-    var props = this.props;
-    this.state = {thisStyle: Object.assign({fontSize: props.height*0.07, position:'fixed'}, props.style)};
-  }
-  render() {
-    return <table id="board" style={this.state.thisStyle}>
-      <tr class="edge">
-        <th class="edge"></th>
-        <th class="edge">A</th>
-        <th class="edge">B</th>
-        <th class="edge">C</th>
-        <th class="edge">D</th>
-        <th class="edge">E</th>
-        <th class="edge">F</th>
-        <th class="edge">G</th>
-      </tr>
-      <tr class="edge">
-        <th class="edge">1</th>
-        <td id="A1" class="square"></td>
-        <td id="B1" class="square"></td>
-        <td id="C1" class="square"></td>
-        <td id="D1" class="square"></td>
-        <td id="E1" class="square"></td>
-        <td id="F1" class="square"></td>
-        <td id="G1" class="square"></td>
-      </tr>
-      <tr class="edge">
-        <th class="edge">2</th>
-        <td id="A2" class="square"></td>
-        <td id="B2" class="square"></td>
-        <td id="C2" class="square"></td>
-        <td id="D2" class="square"></td>
-        <td id="E2" class="square"></td>
-        <td id="F2" class="square"></td>
-        <td id="G2" class="square"></td>
-      </tr>
-      <tr class="edge">
-        <th class="edge">3</th>
-        <td id="A3" class="square"></td>
-        <td id="B3" class="square"></td>
-        <td id="C3" class="square"></td>
-        <td id="D3" class="square"></td>
-        <td id="E3" class="square"></td>
-        <td id="F3" class="square"></td>
-        <td id="G3" class="square"></td>
-      </tr>
-      <tr class="edge">
-        <th class="edge">4</th>
-        <td id="A4" class="square"></td>
-        <td id="B4" class="square"></td>
-        <td id="C4" class="square"></td>
-        <td id="D4" class="square"></td>
-        <td id="E4" class="square"></td>
-        <td id="F4" class="square"></td>
-        <td id="G4" class="square"></td>
-      </tr>
-      <tr class="edge">
-        <th class="edge">5</th>
-        <td id="A5" class="square"></td>
-        <td id="B5" class="square"></td>
-        <td id="C5" class="square"></td>
-        <td id="D5" class="square"></td>
-        <td id="E5" class="square"></td>
-        <td id="F5" class="square"></td>
-        <td id="G5" class="square"></td>
-      </tr>
-      <tr class="edge">
-        <th class="edge">6</th>
-        <td id="A6" class="square"></td>
-        <td id="B6" class="square"></td>
-        <td id="C6" class="square"></td>
-        <td id="D6" class="square"></td>
-        <td id="E6" class="square"></td>
-        <td id="F6" class="square"></td>
-        <td id="G6" class="square"></td>
-      </tr>
-      <tr class="edge">
-        <th class="edge">7</th>
-        <td id="A7" class="square"></td>
-        <td id="B7" class="square"></td>
-        <td id="C7" class="square"></td>
-        <td id="D7" class="square"></td>
-        <td id="E7" class="square"></td>
-        <td id="F7" class="square"></td>
-        <td id="G7" class="square"></td>
-      </tr>
-  </table>; 
-  };
+function Board(props) {
+  return <table id="board">
+    <tr class="edge">
+      <th class="edge"></th>
+      <th class="edge">A</th>
+      <th class="edge">B</th>
+      <th class="edge">C</th>
+      <th class="edge">D</th>
+      <th class="edge">E</th>
+      <th class="edge">F</th>
+      <th class="edge">G</th>
+    </tr>
+    <tr class="edge">
+      <th class="edge">1</th>
+      <td id="A1" class="square"></td>
+      <td id="B1" class="square"></td>
+      <td id="C1" class="square"></td>
+      <td id="D1" class="square"></td>
+      <td id="E1" class="square"></td>
+      <td id="F1" class="square"></td>
+      <td id="G1" class="square"></td>
+    </tr>
+    <tr class="edge">
+      <th class="edge">2</th>
+      <td id="A2" class="square"></td>
+      <td id="B2" class="square"></td>
+      <td id="C2" class="square"></td>
+      <td id="D2" class="square"></td>
+      <td id="E2" class="square"></td>
+      <td id="F2" class="square"></td>
+      <td id="G2" class="square"></td>
+    </tr>
+    <tr class="edge">
+      <th class="edge">3</th>
+      <td id="A3" class="square"></td>
+      <td id="B3" class="square"></td>
+      <td id="C3" class="square"></td>
+      <td id="D3" class="square"></td>
+      <td id="E3" class="square"></td>
+      <td id="F3" class="square"></td>
+      <td id="G3" class="square"></td>
+    </tr>
+    <tr class="edge">
+      <th class="edge">4</th>
+      <td id="A4" class="square"></td>
+      <td id="B4" class="square"></td>
+      <td id="C4" class="square"></td>
+      <td id="D4" class="square"></td>
+      <td id="E4" class="square"></td>
+      <td id="F4" class="square"></td>
+      <td id="G4" class="square"></td>
+    </tr>
+    <tr class="edge">
+      <th class="edge">5</th>
+      <td id="A5" class="square"></td>
+      <td id="B5" class="square"></td>
+      <td id="C5" class="square"></td>
+      <td id="D5" class="square"></td>
+      <td id="E5" class="square"></td>
+      <td id="F5" class="square"></td>
+      <td id="G5" class="square"></td>
+    </tr>
+    <tr class="edge">
+      <th class="edge">6</th>
+      <td id="A6" class="square"></td>
+      <td id="B6" class="square"></td>
+      <td id="C6" class="square"></td>
+      <td id="D6" class="square"></td>
+      <td id="E6" class="square"></td>
+      <td id="F6" class="square"></td>
+      <td id="G6" class="square"></td>
+    </tr>
+    <tr class="edge">
+      <th class="edge">7</th>
+      <td id="A7" class="square"></td>
+      <td id="B7" class="square"></td>
+      <td id="C7" class="square"></td>
+      <td id="D7" class="square"></td>
+      <td id="E7" class="square"></td>
+      <td id="F7" class="square"></td>
+      <td id="G7" class="square"></td>
+    </tr>
+</table>; 
 };
 
 var toRender = <div>
@@ -190,7 +183,7 @@ var toRender = <div>
     </div>
   </div>
   <div className="stage1">
-    <Board height="70vh"/>
+    <Board />
   </div>
   <div id="popUps">
 
