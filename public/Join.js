@@ -84,7 +84,8 @@ function attemptJoin(){
 class Board extends React.Component {
   constructor() {
     super();
-    this.state = {thisStyle: Object.assign({fontSize: this.props.height*0.07, position:'fixed'}, this.props.style)};
+    var props = this.props;
+    this.state = {thisStyle: Object.assign({fontSize: props.height*0.07, position:'fixed'}, props.style)};
   }
   render() {
     return <table id="board" style={this.state.thisStyle}>
