@@ -101,6 +101,51 @@ function attemptJoin(){
   };
 };
 
+function ordThing(i){
+  switch(i){
+    case 0:
+      return <img src="imgs/rob.png" />;
+      break;
+    case 1:
+      return <img src="imgs/kill.svg" />;
+      break;
+    case 2:
+      return <img src="imgs/present.png" />;
+      break;
+    case 3:
+      return <img src="imgs/parrot.png" />;
+      break;
+    case 4:
+      return <img src="imgs/swap.png" />;
+      break;
+    case 5:
+      return <img src="imgs/c.png" />;
+      break;
+    case 6:
+      return <img src="imgs/shield.svg" />;
+      break;
+    case 7:
+      return <img src="imgs/mirror.png" />;
+      break;
+    case 8:
+      return <img src="imgs/bomb.svg" />;
+      break;
+    case 9:
+      return <div style={{fontWeight: 'lighter', display: 'contents'}}>&times; 2</div>;
+      break;
+    case 10;
+      return "B";
+      break;
+    case 11:
+      return <div style={{fontWeight: 'lighter', display: 'contents'}}>5000</div>;
+      break;
+    default:
+      if (i < 14){return <div style={{fontWeight: 'lighter', display: 'contents'}}>3000</div>;}
+      else if (i < 24){return <div style={{fontWeight: 'lighter', display: 'contents'}}>1000</div>}
+      else {return <div style={{fontWeight: 'lighter', display: 'contents'}}>200</div>};
+  };
+};
+
 class Board extends React.Component {
   constructor(){
     super();
@@ -113,6 +158,22 @@ class Board extends React.Component {
     this.state = {board:{}, done:[]};
     
     x=this;/////////////////////////////
+  }
+  fillRandom(){
+    var possibleSquares = ["A1","A2","A3","A4","A5","A6","A7",
+                           "B1","B2","B3","B4","B5","B6","B7",
+                           "C1","C2","C3","C4","C5","C6","C7",
+                           "D1","D2","D3","D4","D5","D6","D7",
+                           "E1","E2","E3","E4","E5","E6","E7",
+                           "F1","F2","F3","F4","F5","F6","F7",
+                           "G1","G2","G3","G4","G5","G6","G7"];
+    var randBoard = {};
+    for (var i = 0; i < 49; i++){
+      var current = possibleSquares[Math.floor(Math.random()*possibleSquares.length)];
+      possibleSquares = possibleSquares.filter((e)=>(e!=current));
+      randBoard[current] = ordThing(i);
+    };
+    this.setState({board:randBoard});
   }
   updateBoard(square, thing){
     var temp = Object.assign({}, this.state.board);
