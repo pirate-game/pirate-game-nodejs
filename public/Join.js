@@ -18,7 +18,11 @@ const things = {
   "mirror":<img src="imgs/mirror.png" />,
   "bomb":<img src="imgs/bomb.svg" />,
   "double":<div style={{fontWeight: 'lighter', display: 'contents'}}>&times; 2</div>,
-  "bank":"B"
+  "bank":"B",
+  "200":<div style={{fontWeight: 'lighter', display: 'contents'}}>200</div>,
+  "1000":<div style={{fontWeight: 'lighter', display: 'contents'}}>1000</div>,
+  "3000":<div style={{fontWeight: 'lighter', display: 'contents'}}>3000</div>,
+  "5000":<div style={{fontWeight: 'lighter', display: 'contents'}}>5000</div>
 };
 
 function showStage(stage){
