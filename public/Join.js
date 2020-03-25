@@ -189,7 +189,7 @@ var toRender = <div>
     </div>
   </div>
   <div className="stage1">
-    <h4>Hey</h4>
+    <Board />
   </div>
   <div id="popUps">
 
