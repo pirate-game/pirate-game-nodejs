@@ -133,7 +133,7 @@ function ordThing(i){
     case 9:
       return <div style={{fontWeight: 'lighter', display: 'contents'}}>&times; 2</div>;
       break;
-    case 10;
+    case 10:
       return "B";
       break;
     case 11:
