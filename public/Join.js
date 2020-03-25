@@ -3,6 +3,12 @@ var socket = io();
 
 var x;////////////////////
 
+function test(){
+  hideStage("stage0");
+  showStage("stage1");
+  x.fillRandom();
+};
+
 const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
@@ -293,3 +299,5 @@ var toRender = <div>
 </div>;
 
 ReactDOM.render(toRender, root);
+
+test();
