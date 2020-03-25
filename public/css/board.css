@@ -10,7 +10,10 @@ tr, td {
 
 table, th {border-collapse: collapse;}
 
-.square {background-color:white}
+.square {
+  background-color:white;
+  text-align:center;
+}
 .edge {border:0px solid transparent;}
 
 .square img {
