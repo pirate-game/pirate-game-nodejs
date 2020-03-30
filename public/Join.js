@@ -206,7 +206,7 @@ class Board extends React.Component {
           {["A","B","C","D","E","F","G"].map(row => (
             <td id={row+col} className="square">
               {this.state.board[row+col]}
-              {this.state.done.includes(row+col) ? <div className="cross" /> : null}
+              {this.state.done.includes(row+col) ? <div className="crossout" /> : null}
             </td>
           ))}
         </tr>
