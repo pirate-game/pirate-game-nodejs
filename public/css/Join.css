@@ -49,7 +49,7 @@ input {
 @media screen and (orientation:landscape){
   #board {font-size: calc((100vh - 225px)/14);}
   .square {
-    height: calc((100vh - 225px)/7);
-    width: calc((100vh - 225px)/7);
+    height: calc((100vh - 235px)/7);
+    width: calc((100vh - 235px)/7);
   }
 }
