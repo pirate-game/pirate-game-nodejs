@@ -256,15 +256,15 @@ function attemptPlace(which){
   if (squarePattern.test(proposedSquare)){
     if (theBoard.state.taken.includes(proposedSquare)){
       hidePopUps();
-      document.getElementById("squareTaken").display = "block";
+      document.getElementById("squareTaken").style.display = "block";
     } else {
       theBoard.updateBoard(proposedSquare, which);
-      document.getElementById("place"+which).display = "none";
-      document.getElementById(nextPlace[which]).display = "block";
+      document.getElementById("place"+which).style.display = "none";
+      document.getElementById(nextPlace[which]).style.display = "block";
     };
   } else {
     hidePopUps();
-    document.getElementById("invalidSquare").display = "block";
+    document.getElementById("invalidSquare").style.display = "block";
   };
 };
 
@@ -276,8 +276,8 @@ function fillRandomly(){
 };
 
 function fillItMyself(){
-  document.getElementById("fillInBoard").display = "none";
-  document.getElementById("placerob").display = "block";
+  document.getElementById("fillInBoard").style.display = "none";
+  document.getElementById("placerob").style.display = "block";
 };
 
 var toRender = <div>
