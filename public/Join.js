@@ -240,14 +240,14 @@ function squareClicked(square){
 function Place(props){
   return (
     <div id={"place"+props.which} className="stage1PopUp place">
-      <h3>Choose a square for The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol</h3>
-      <div style={{display:"inline-block", height:"70px", width:"70px"}} className="square">
+      <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose a Square For The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol</h3>
+      <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
       {things[props.which]}
       </div>
       <hr />
       <p>In what grid square would you like to place The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol?<br />You can click on the square to select it.</p>
-      <input type="text" id={"placeInput placeInput"+props.which} maxLength="2" />
-      <button className="choosePlace" onClick={() => attemptPlace(props.which)}>Okay!</button>
+      <input type="text" id={"placeInput"+props.which} maxLength="2" />
+      <button className="choosePlace" onClick={() => attemptPlace(props.which)} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
     </div>);
 };
       
