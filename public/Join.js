@@ -11,6 +11,7 @@ function test(){
 const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
+const squarePattern = /^[ABCDEFG][1234567]$/;
 
 const things = {
   "rob":<img src="imgs/rob.png" />,
@@ -160,7 +161,7 @@ class Board extends React.Component {
         board[["A","B","C","D","E","F","G"][i]+["1","2","3","4","5","6","7"][j]] = null;
       };
     };
-    this.state = {board:{}, done:[]};
+    this.state = {board:{}, done:[], taken:[], choosing:true};
     
     theBoard=this;
   }
@@ -183,7 +184,7 @@ class Board extends React.Component {
   updateBoard(square, thing){
     var temp = Object.assign({}, this.state.board);
     temp[square] = things[thing];
-    this.setState({board:temp});
+    this.setState({board:temp, taken:this.state.taken.concat([square])});
   }
   squareDone(square){
     this.setState({done:this.state.done.concat([square])});
@@ -204,7 +205,7 @@ class Board extends React.Component {
         <tr className="edge">
           <th className="edge">{col}</th>
           {["A","B","C","D","E","F","G"].map(row => (
-            <td id={row+col} className="square">
+            <td id={row+col} className="square" onClick={this.state.choosing ? ( () => squareClicked(row+col)) : null}>
               {this.state.board[row+col]}
               {this.state.done.includes(row+col) ? <div className="crossout" /> : null}
             </td>
@@ -213,6 +214,42 @@ class Board extends React.Component {
       ))}
       </table>;
   }
+};
+
+function squareClicked(square){
+  var placeInputs = document.getElementsByClassName("placeInput");
+  for (var i = 0; i < placeInputs.length; i++){
+    placeInputs[i].value = square;
+  };
+};
+
+function Place(props){
+  return (
+    <div id={"place"+props.which} className="stage1PopUp place">
+      <h3>Choose a square for The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol</h3>
+      <div style={{display:"inline-block", height:"70px", width:"70px"}} className="square">
+      {things[props.which]}
+      </div>
+      <hr />
+      <p>In what grid square would you like to place The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol?<br />You can click on the square to select it.</p>
+      <input type="text" id={"placeInput placeInput"+props.which} maxLength="2" />
+      <button className="choosePlace" onClick={() => attemptPlace(props.which)}>Okay!</button>
+    </div>);
+};
+      
+function attemptPlace(which){
+  var proposedSquare = document.getElementById("placeInput"+which).value;
+  if (squarePattern.test(proposedSquare)){
+    if (theBoard.state.taken.includes(proposedSquare)){
+      hidePopUps();
+      document.getElementById("squareTaken").display = "block";
+    } else {
+      theBoard.updateBoard(proposedSquare, which);
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidSquare").display = "block";
+  };
 };
 
 function fillRandomly(){
@@ -246,13 +283,26 @@ var toRender = <div>
   <div className="stage1 stage2">
     <Board />
     <div className="stage1">
-      <div className="stage1PopUp">
+      <div id="fillInBoard" className="stage1PopUp" style={{display:"block"}}>
         <h3>Fill in the Board</h3>
         <hr />
         <p>Would you like to fill in your Board yourself, or have it done for you, randomly?</p>
         <button className="close" id="leftBtn" onClick={fillItMyself}>Fill&nbsp;it<br />Myself</button>
         <button className="close" id="rightBtn" onClick={fillRandomly}>Randomly</button>
       </div>
+      <Place which="rob" />
+      <Place which="kill" />
+      <Place which="present" />
+      <Place which="parrot" />
+      <Place which="swap" />
+      <Place which="choose" />
+      <Place which="shield" />
+      <Place which="mirror" />
+      <Place which="bomb" />
+      <Place which="double" />
+      <Place which="bank" />
+      <Place which="5000" />
+      /*Rest o' moneys*/
     </div>
   </div>
   <div id="popUps">
@@ -314,6 +364,20 @@ var toRender = <div>
         <hr />
         <p>Oh, No! You were too slow to respond and they&apos;ve carried on without you.</p>
         <button className="close" onClick={() => {window.location='index.html';}}>Okay!</button>
+    </div></div>
+    
+    <div id="invalidSquare" className="popUp"><div>
+        <h3>Invalid Square</h3>
+        <hr />
+        <p>Squares must be a letter from [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;] followed by a digit from [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;]</p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
+    </div></div>
+    
+    <div id="squareTaken" className="popUp"><div>
+        <h3>Square Taken</h3>
+        <hr />
+        <p>Oops! There&apos;s something in that square already, choose another.</p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
   </div>
 </div>;
