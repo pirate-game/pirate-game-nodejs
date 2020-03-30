@@ -31,6 +31,20 @@ const things = {
   "5000":<div style={{fontWeight: 'lighter', display: 'contents'}}>5000</div>
 };
 
+const nextPlace = {
+  "rob":"placekill",
+  "kill":"placepresent",
+  "present":"placeparrot",
+  "parrot":"placeswap",
+  "swap":"placechoose",
+  "choose":"placeshield",
+  "shield":"placemirror",
+  "mirror":"placebomb",
+  "bomb":"placedouble",
+  "double":"placebank",
+  "bank":"place5000",
+};
+
 function showStage(stage){
   var stageElements = document.getElementsByClassName(stage);
   for (var i = 0; i < stageElements.length; i++){
@@ -245,6 +259,8 @@ function attemptPlace(which){
       document.getElementById("squareTaken").display = "block";
     } else {
       theBoard.updateBoard(proposedSquare, which);
+      document.getElementById("place"+which).display = "none";
+      document.getElementById(nextPlace[which]).display = "block";
     };
   } else {
     hidePopUps();
@@ -261,7 +277,7 @@ function fillRandomly(){
 
 function fillItMyself(){
   document.getElementById("fillInBoard").display = "none";
-  //document.getElementById("").display = "block";
+  document.getElementById("placerob").display = "block";
 };
 
 var toRender = <div>
@@ -302,7 +318,6 @@ var toRender = <div>
       <Place which="double" />
       <Place which="bank" />
       <Place which="5000" />
-      /*Rest o' moneys*/
     </div>
   </div>
   <div id="popUps">
