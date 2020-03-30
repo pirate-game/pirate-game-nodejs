@@ -252,6 +252,7 @@ function Place(props){
 };
       
 function attemptPlace(which){
+  squareClicked("");
   var proposedSquare = document.getElementById("placeInput"+which).value;
   if (squarePattern.test(proposedSquare)){
     if (theBoard.state.taken.includes(proposedSquare)){
