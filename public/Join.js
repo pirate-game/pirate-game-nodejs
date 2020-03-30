@@ -219,7 +219,7 @@ class Board extends React.Component {
         <tr className="edge">
           <th className="edge">{col}</th>
           {["A","B","C","D","E","F","G"].map(row => (
-            <td id={row+col} className="square" onClick={this.state.choosing ? ( () => squareClicked(row+col)) : null}>
+            <td id={row+col} className="square" onClick={this.state.choosing ? () => squareClicked(row+col) : null}>
               {this.state.board[row+col]}
               {this.state.done.includes(row+col) ? <div className="crossout" /> : null}
             </td>
@@ -246,7 +246,7 @@ function Place(props){
       </div>
       <hr />
       <p>In what grid square would you like to place The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol?<br />You can click on the square to select it.</p>
-      <input type="text" id={"placeInput"+props.which} maxLength="2" />
+      <input type="text" className="placeInput" id={"placeInput"+props.which} maxLength="2" />
       <button className="choosePlace close" onClick={() => attemptPlace(props.which)} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
     </div>);
 };
@@ -384,7 +384,7 @@ var toRender = <div>
     <div id="invalidSquare" className="popUp"><div>
         <h3>Invalid Square</h3>
         <hr />
-        <p>Squares must be a letter from [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;] followed by a digit from [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;]</p>
+        <p>Squares must be a letter from [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;] followed by a digit from [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;].</p>
         <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
     
