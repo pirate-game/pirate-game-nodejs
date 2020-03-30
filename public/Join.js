@@ -6,7 +6,6 @@ var x;////////////////////
 function test(){
   hideStage("stage0");
   showStage("stage1");
-  x.fillRandom();
 };
 
 const namePattern = /^[\w\'\-\". ]*$/;
@@ -300,4 +299,4 @@ var toRender = <div>
 
 ReactDOM.render(toRender, root);
 
-test();
+//test();
