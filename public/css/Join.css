@@ -39,10 +39,10 @@ input {
   text-align: center;
 }
 
-#board {font-size: calc((100vw - 90px)/14);}
+#board {font-size: calc(50vh/14);}
 .square {
-  height: calc((100vw - 90px)/7);
-  width: calc((100vw - 90px)/7);
+  height: calc(40vh/7);
+  width: calc(40vh/7);
 }
 
 
