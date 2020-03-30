@@ -54,7 +54,7 @@ input {
   }
 }
 
-.stage2PopUp {
+.stage1PopUp {
     background: white;
     border: 1px solid #888;
     position: fixed;
