@@ -30,7 +30,7 @@
   z-index: 1;
 }
 
-.popUp .close {
+.close {
   margin: 0 auto;
   display: block;
   text-align: center;
