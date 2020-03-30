@@ -246,7 +246,7 @@ var toRender = <div>
   <div className="stage1 stage2">
     <Board />
     <div className="stage1">
-      <div id="fillInBoard">
+      <div className="stage1PopUp">
         <h3>Fill in the Board</h3>
         <hr />
         <p>Would you like to fill in your Board yourself, or have it done for you, randomly?</p>
