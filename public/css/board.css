@@ -13,7 +13,6 @@ table, th {border-collapse: collapse;}
 .square {
   background-color:white;
   text-align:center;
-  font-size: smaller;
   position: relative;
 }
 .edge {border:0px solid transparent;}
