@@ -45,6 +45,6 @@
   border-radius: 6px;
   border-width: 0;
 }
-.popUp .close:hover {
+.close:hover {
   background-color: cornflowerblue;
 }
