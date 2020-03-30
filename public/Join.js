@@ -1,7 +1,7 @@
 var root = document.getElementById('root');
 var socket = io();
 
-var x;////////////////////
+var theBoard;
 
 function test(){
   hideStage("stage0");
@@ -162,7 +162,7 @@ class Board extends React.Component {
     };
     this.state = {board:{}, done:[]};
     
-    x=this;/////////////////////////////
+    theBoard=this;
   }
   fillRandom(){
     var possibleSquares = ["A1","A2","A3","A4","A5","A6","A7",
@@ -215,6 +215,18 @@ class Board extends React.Component {
   }
 };
 
+function fillRandomly(){
+  theBoard.fillRandom();
+  socket.emit('board_ready');
+  hideStage("stage1");
+  showStage("stage2");
+};
+
+function fillItMyself(){
+  document.getElementById("fillInBoard").display = "none";
+  //document.getElementById("").display = "block";
+};
+
 var toRender = <div>
   <div className="stage0">
     <div>
@@ -233,6 +245,15 @@ var toRender = <div>
   </div>
   <div className="stage1 stage2">
     <Board />
+    <div className="stage1">
+      <div id="fillInBoard">
+        <h3>Fill in the Board</h3>
+        <hr />
+        <p>Would you like to fill in your Board yourself, or have it done for you, randomly?</p>
+        <button className="close" onClick={fillItMyself}>Fill&nbsp;it<br />Myself</button>
+        <button className="close" onClick={fillRandomly}>Randomly</button>
+      </div>
+    </div>
   </div>
   <div id="popUps">
 
