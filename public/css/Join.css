@@ -64,6 +64,21 @@ input {
     right: 10px;
     top: 190px;
     padding: 10px;
-    width: calc(100vw - 450px);
+    width: calc(100vw - (100vh - 135px));
   }
+}
+
+.stage1PopUp .close {
+  display: inline-block;
+  height: 70px;
+}
+
+#leftBtn{
+  position: relative;
+  left: calc(50% - 100px);
+}
+
+#rightBtn{
+  position: absolute;
+  left: calc(50% + 20px);
 }
