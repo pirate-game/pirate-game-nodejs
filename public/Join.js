@@ -252,8 +252,8 @@ function Place(props){
 };
       
 function attemptPlace(which){
-  squareClicked("");
   var proposedSquare = document.getElementById("placeInput"+which).value;
+  squareClicked("");
   if (squarePattern.test(proposedSquare)){
     if (theBoard.state.taken.includes(proposedSquare)){
       hidePopUps();
