@@ -250,8 +250,8 @@ var toRender = <div>
         <h3>Fill in the Board</h3>
         <hr />
         <p>Would you like to fill in your Board yourself, or have it done for you, randomly?</p>
-        <button className="close" onClick={fillItMyself}>Fill&nbsp;it<br />Myself</button>
-        <button className="close" onClick={fillRandomly}>Randomly</button>
+        <button className="close" id="leftBtn" onClick={fillItMyself}>Fill&nbsp;it<br />Myself</button>
+        <button className="close" id="rightBtn" onClick={fillRandomly}>Randomly</button>
       </div>
     </div>
   </div>
