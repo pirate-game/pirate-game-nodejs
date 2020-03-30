@@ -27,7 +27,7 @@ table, th {border-collapse: collapse;}
   cursor: cell;
 }
 
-.cross {
+.crossout {
   position: absolute;
   left: 0;
   top: 0;
