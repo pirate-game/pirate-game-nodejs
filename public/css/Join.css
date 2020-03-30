@@ -48,6 +48,9 @@ input {
   background: white;
   border: 1px solid #888;
   position: fixed;
+  padding: 10px;
+  top: calc(40vh + 280px);
+  width: calc(100% - 40px);
 }
 
 
@@ -63,7 +66,6 @@ input {
     position: fixed;
     right: 10px;
     top: 190px;
-    padding: 10px;
     width: calc(100vw - (100vh - 135px));
   }
 }
