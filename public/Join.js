@@ -202,8 +202,30 @@ class Board extends React.Component {
     this.setState({board:temp, taken:this.state.taken.concat([square])});
     clickMod10 = 0;
   }
+  updateBoardM(squares, thing){
+    var temp = Object.assign({}, this.state.board);
+    for (var i = 0; i < squares.length; i++){
+      temp[squares[i]] = things[thing];
+    };
+    this.setState({board:temp, taken:this.state.taken.concat([square])});
+    clickMod10 = 0;
+  }
   squareDone(square){
     this.setState({done:this.state.done.concat([square])});
+  }
+  place200(){
+    var possibleSquares = ["A1","A2","A3","A4","A5","A6","A7",
+                           "B1","B2","B3","B4","B5","B6","B7",
+                           "C1","C2","C3","C4","C5","C6","C7",
+                           "D1","D2","D3","D4","D5","D6","D7",
+                           "E1","E2","E3","E4","E5","E6","E7",
+                           "F1","F2","F3","F4","F5","F6","F7",
+                           "G1","G2","G3","G4","G5","G6","G7"];
+    var temp = {};
+    for (var i = 0; i < 49; i++){
+      temp[possibleSquares[i]] = things["200"];
+    };
+    this.setState({board:Object.assign(temp, this.state.board)});
   }
   render(){
     return <table id="board">
@@ -327,8 +349,7 @@ function attemptPlace3000(){
         hidePopUps();
         document.getElementById("squareTaken").style.display = "block";
       } else {
-        theBoard.updateBoard(proposedSquares[1], "3000");
-        theBoard.updateBoard(proposedSquares[0], "3000");
+        theBoard.updateBoardM(proposedSquares, "3000");
         document.getElementById("place3000").style.display = "none";
         document.getElementById("place1000").style.display = "block";
       };
@@ -352,9 +373,7 @@ function attemptPlace1000(){
         hidePopUps();
         document.getElementById("squareTaken").style.display = "block";
       } else {
-        for (var i = 0; i < 10; i++){
-          theBoard.updateBoard(proposedSquares[i], "1000");
-        };
+        theBoard.updateBoardM(proposedSquares, "1000");
         document.getElementById("place1000").style.display = "none";
         document.getElementById("place200").style.display = "block";
       };
@@ -369,16 +388,7 @@ function attemptPlace1000(){
 };
 
 function place200(){
-  var squares = ["A1","A2","A3","A4","A5","A6","A7",
-                 "B1","B2","B3","B4","B5","B6","B7",
-                 "C1","C2","C3","C4","C5","C6","C7",
-                 "D1","D2","D3","D4","D5","D6","D7",
-                 "E1","E2","E3","E4","E5","E6","E7",
-                 "F1","F2","F3","F4","F5","F6","F7",
-                 "G1","G2","G3","G4","G5","G6","G7"];
-  for (var i = 0; i < 49; i++){
-    if (!theBoard.state.taken.includes(squares[i])){theBoard.updateBoard(squares[i], "200");};
-  };
+  theBoard.place200();
   hideStage("stage1");
   showStage("stage2");
 };
