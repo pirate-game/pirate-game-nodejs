@@ -101,3 +101,8 @@ input {
   position: absolute;
   left: 55%;
 }
+
+.placeInput1000 {
+    border: none;
+    width: 100%;
+}
