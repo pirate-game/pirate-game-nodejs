@@ -23,12 +23,12 @@ const things = {
   "shield":<img src="imgs/shield.svg" />,
   "mirror":<img src="imgs/mirror.png" />,
   "bomb":<img src="imgs/bomb.svg" />,
-  "double":<div style={{fontWeight: 'lighter', display: 'contents'}}>&times; 2</div>,
-  "bank":"B",
-  "200":<div style={{fontWeight: 'lighter', display: 'contents'}}>200</div>,
-  "1000":<div style={{fontWeight: 'lighter', display: 'contents'}}>1000</div>,
-  "3000":<div style={{fontWeight: 'lighter', display: 'contents'}}>3000</div>,
-  "5000":<div style={{fontWeight: 'lighter', display: 'contents'}}>5000</div>
+  "double":<img src="imgs/double.svg" />,
+  "bank":<img src="imgs/bank.svg" />,
+  "200":<img src="imgs/sym200.svg" />,
+  "1000":<img src="imgs/sym1000.svg" />,
+  "3000":<img src="imgs/sym3000.svg" />,
+  "5000":<img src="imgs/sym5000.svg" />
 };
 
 const nextPlace = {
