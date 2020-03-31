@@ -487,7 +487,7 @@ var toRender = <div>
             <td><input type="text" className="placeInput1000" id="placeInput1000N7" maxLength="2" /></td>
             <td><input type="text" className="placeInput1000" id="placeInput1000N8" maxLength="2" /></td>
             <td><input type="text" className="placeInput1000" id="placeInput1000N9" maxLength="2" /></td>
-          </tr
+          </tr>
         </table>
         <button className="choosePlace close" onClick={attemptPlace1000} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>
