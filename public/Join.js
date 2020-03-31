@@ -233,7 +233,6 @@ class Board extends React.Component {
 };
 
 function squareClicked(square){
-  clickMod10 = (clickMod10+1) % 10;
   var placeInputs = document.getElementsByClassName("placeInput");
   for (var i = 0; i < placeInputs.length; i++){
     placeInputs[i].value = square;
@@ -253,6 +252,7 @@ function squareClicked(square){
     };
     document.getElementById("placeInput1000N"+clickMod10.toString()).value = square;
   };
+  clickMod10 = (clickMod10+1) % 10;
 };
 
 function Place(props){
@@ -317,7 +317,7 @@ function attemptPlace5000(){
   };
 };
 
-function attemptPlace3000(){
+/*function attemptPlace3000(){
   var proposedSquares = [document.getElementById("placeInput3000First").value, document.getElementById("placeInput3000Second").value];
   squareClicked("");
   if (squarePattern.test(proposedSquares[0]) && squarePattern.test(proposedSquares[1])){
@@ -339,8 +339,32 @@ function attemptPlace3000(){
     hidePopUps();
     document.getElementById("invalidSquare").style.display = "block";
   };
-};
+};*/
 
+function attemptPlace3000(){
+  var proposedSquares = [document.getElementById("placeInput3000First").value, document.getElementById("placeInput3000Second").value];
+  squareClicked("");
+  if (squarePattern.test(proposedSquares[0]) && squarePattern.test(proposedSquares[1])){
+    if (proposedSquares[0]==proposedSquares[1]){
+      if (theBoard.state.taken.includes(proposedSquares[0]) || theBoard.state.taken.includes(proposedSquares[1])){
+        hidePopUps();
+        document.getElementById("squaresMatch").style.display = "block";
+      } else {
+        theBoard.updateBoard(proposedSquares[0], "3000");
+        theBoard.updateBoard(proposedSquares[1], "3000");
+        document.getElementById("place3000").style.display = "none";
+        document.getElementById("place1000").style.display = "block";
+      };
+    } else {
+      hidePopUps();
+      document.getElementById("squareTaken").style.display = "block";
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidSquare").style.display = "block";
+  };
+};
+/*attemptPlace1000 is likewise flawed*/
 function attemptPlace1000(){
   var proposedSquares = document.getElementsByClassName("placeInput1000").map(e => e.value);
   squareClicked("");
@@ -449,16 +473,22 @@ var toRender = <div>
         </div>
         <hr />
         <p>In what grid squares would you like to place The &apos;1000&apos; Symbols?<br />You can click on squares to select them.</p>
-        <input type="text" className="placeInput1000" id="placeInput1000N0" maxLength="2" />
-        <input type="text" className="placeInput1000" id="placeInput1000N1" maxLength="2" />
-        <input type="text" className="placeInput1000" id="placeInput1000N2" maxLength="2" />  
-        <input type="text" className="placeInput1000" id="placeInput1000N3" maxLength="2" />
-        <input type="text" className="placeInput1000" id="placeInput1000N4" maxLength="2" />  
-        <input type="text" className="placeInput1000" id="placeInput1000N5" maxLength="2" />
-        <input type="text" className="placeInput1000" id="placeInput1000N6" maxLength="2" />
-        <input type="text" className="placeInput1000" id="placeInput1000N7" maxLength="2" />  
-        <input type="text" className="placeInput1000" id="placeInput1000N8" maxLength="2" />
-        <input type="text" className="placeInput1000" id="placeInput1000N9" maxLength="2" />  
+        <table id="placeInput1000Table">
+          <tr>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N0" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N1" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N2" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N3" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N4" maxLength="2" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N5" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N6" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N7" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N8" maxLength="2" /></td>
+            <td><input type="text" className="placeInput1000" id="placeInput1000N9" maxLength="2" /></td>
+          </tr
+        </table>
         <button className="choosePlace close" onClick={attemptPlace1000} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>
 
