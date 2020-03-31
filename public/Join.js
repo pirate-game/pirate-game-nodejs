@@ -207,7 +207,7 @@ class Board extends React.Component {
     for (var i = 0; i < squares.length; i++){
       temp[squares[i]] = things[thing];
     };
-    this.setState({board:temp, taken:this.state.taken.concat([square])});
+    this.setState({board:temp, taken:this.state.taken.concat(squares)});
     clickMod10 = 0;
   }
   squareDone(square){
