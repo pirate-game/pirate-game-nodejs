@@ -327,8 +327,8 @@ function attemptPlace3000(){
         hidePopUps();
         document.getElementById("squareTaken").style.display = "block";
       } else {
+        theBoard.updateBoard(proposedSquares[1], "3000");
         theBoard.updateBoard(proposedSquares[0], "3000");
-        theBoard.updateBoard(proposedSquares[1], "3000");//Only does the last one. WHY!?
         document.getElementById("place3000").style.display = "none";
         document.getElementById("place1000").style.display = "block";
       };
