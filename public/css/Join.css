@@ -86,7 +86,7 @@ input {
   left: calc(50% + 20px);
 }
 
-placeInput3000{
+.placeInput3000{
   display: inline-block;
   width: 40%;
 }
