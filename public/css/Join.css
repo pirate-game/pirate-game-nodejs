@@ -85,3 +85,18 @@ input {
   position: absolute;
   left: calc(50% + 20px);
 }
+
+placeInput3000{
+  display: inline-block;
+  width: 40%;
+}
+
+#placeInput3000First{
+  position: relative;
+  left: 5%;
+}
+
+#placeInput3000Second{
+  position: absolute;
+  left: 55%;
+}
