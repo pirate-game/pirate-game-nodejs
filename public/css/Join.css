@@ -51,7 +51,7 @@ input {
   border: 1px solid #888;
   position: fixed;
   padding: 10px;
-  top: calc(40vh + 280px);
+  top: calc(40vh + 300px);
   width: calc(100% - 40px);
 }
 
@@ -73,7 +73,7 @@ input {
 }
 
 @media screen and (orientation:portrait){
-  .stage1PopUp {
+  .popUp, .stage1PopUp {
     font-size: xx-large;
   }
 }
