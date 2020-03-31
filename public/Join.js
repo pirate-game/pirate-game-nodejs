@@ -388,6 +388,7 @@ function attemptPlace1000(){
 
 function place200(){
   theBoard.place200();
+  socket.emit('board_ready');
   hideStage("stage1");
   showStage("stage2");
 };
