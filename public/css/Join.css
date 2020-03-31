@@ -37,6 +37,7 @@ input {
   display: block;
   margin: auto;
   text-align: center;
+  border: 1px solid black;
 }
 
 #board {font-size: calc(50vh/14);}
