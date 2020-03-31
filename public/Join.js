@@ -2,6 +2,7 @@ var root = document.getElementById('root');
 var socket = io();
 
 var theBoard;
+var clickMod10 = 0;
 
 function test(){
   hideStage("stage0");
@@ -151,18 +152,18 @@ function ordThing(i){
       return <img src="imgs/bomb.svg" />;
       break;
     case 9:
-      return <div style={{fontWeight: 'lighter', display: 'contents'}}>&times; 2</div>;
+      return <img src="imgs/double.svg" />;
       break;
     case 10:
-      return "B";
+      return <img src="imgs/bank.svg" />;
       break;
     case 11:
-      return <div style={{fontWeight: 'lighter', display: 'contents'}}>5000</div>;
+      return <img src="imgs/sym5000.svg" />;
       break;
     default:
-      if (i < 14){return <div style={{fontWeight: 'lighter', display: 'contents'}}>3000</div>;}
-      else if (i < 24){return <div style={{fontWeight: 'lighter', display: 'contents'}}>1000</div>}
-      else {return <div style={{fontWeight: 'lighter', display: 'contents'}}>200</div>};
+      if (i < 14){return <img src="imgs/sym3000.svg" />;}
+      else if (i < 24){return <img src="imgs/sym1000.svg" />;}
+      else {return <img src="imgs/sym200.svg" />;};
   };
 };
 
@@ -199,6 +200,7 @@ class Board extends React.Component {
     var temp = Object.assign({}, this.state.board);
     temp[square] = things[thing];
     this.setState({board:temp, taken:this.state.taken.concat([square])});
+    clickMod10 = 0;
   }
   squareDone(square){
     this.setState({done:this.state.done.concat([square])});
@@ -231,9 +233,25 @@ class Board extends React.Component {
 };
 
 function squareClicked(square){
+  clickMod10 = (clickMod10+1) % 10;
   var placeInputs = document.getElementsByClassName("placeInput");
   for (var i = 0; i < placeInputs.length; i++){
     placeInputs[i].value = square;
+  };
+  if (square == ""){
+    document.getElementById("placeInput3000First").value = "";
+    document.getElementById("placeInput3000Second").value = "";
+    var placeInput1000s = document.getElementsByClassName("placeInput1000");
+    for (var j = 0; j < placeInput1000s.length; j++){
+      placeInput1000s[j].value = "";
+    };
+  } else {
+    if (clickMod10 == 0){
+      document.getElementById("placeInput3000First").value = square;
+    } else {
+      document.getElementById("placeInput3000Second").value = square;
+    };
+    document.getElementById("placeInput1000N"+clickMod10.toString()).value = square;
   };
 };
 
@@ -281,6 +299,88 @@ function fillItMyself(){
   document.getElementById("placerob").style.display = "block";
 };
 
+function attemptPlace5000(){
+  var proposedSquare = document.getElementById("placeInput5000").value;
+  squareClicked("");
+  if (squarePattern.test(proposedSquare)){
+    if (theBoard.state.taken.includes(proposedSquare)){
+      hidePopUps();
+      document.getElementById("squareTaken").style.display = "block";
+    } else {
+      theBoard.updateBoard(proposedSquare, "5000");
+      document.getElementById("place5000").style.display = "none";
+      document.getElementById("place3000").style.display = "block";
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidSquare").style.display = "block";
+  };
+};
+
+function attemptPlace3000(){
+  var proposedSquares = [document.getElementById("placeInput3000First").value, document.getElementById("placeInput3000Second").value];
+  squareClicked("");
+  if (squarePattern.test(proposedSquares[0]) && squarePattern.test(proposedSquares[1])){
+    if (theBoard.state.taken.includes(proposedSquares[0]) || theBoard.state.taken.includes(proposedSquares[1])){
+      if (proposedSquares[0]==proposedSquares[1]){
+        hidePopUps();
+        document.getElementById("squaresMatch").style.display = "block";
+      } else {
+        hidePopUps();
+        document.getElementById("squareTaken").style.display = "block";
+      };
+    } else {
+      theBoard.updateBoard(proposedSquares[0], "3000");
+      theBoard.updateBoard(proposedSquares[1], "3000");
+      document.getElementById("place3000").style.display = "none";
+      document.getElementById("place1000").style.display = "block";
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidSquare").style.display = "block";
+  };
+};
+
+function attemptPlace1000(){
+  var proposedSquares = document.getElementsByClassName("placeInput1000").map(e => e.value);
+  squareClicked("");
+  if (proposedSquares.map(e => squarePattern.test(e)).sort[0]){
+    if (proposedSquares.map(e => theBoard.state.taken.includes(e)).sort().reverse()[0]){
+      if (new Set(proposedSquares).size !== proposedSquares.length){
+        hidePopUps();
+        document.getElementById("squaresMatch").style.display = "block";
+      } else {
+        hidePopUps();
+        document.getElementById("squareTaken").style.display = "block";
+      };
+    } else {
+      for (var i = 0; i < 10; i++){
+        theBoard.updateBoard(proposedSquares[i], "1000");
+      };
+      document.getElementById("place1000").style.display = "none";
+      document.getElementById("place200").style.display = "block";
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidSquare").style.display = "block";
+  };
+};
+
+function place200(){
+  var squares = ["A1","A2","A3","A4","A5","A6","A7",
+                 "B1","B2","B3","B4","B5","B6","B7",
+                 "C1","C2","C3","C4","C5","C6","C7",
+                 "D1","D2","D3","D4","D5","D6","D7",
+                 "E1","E2","E3","E4","E5","E6","E7",
+                 "F1","F2","F3","F4","F5","F6","F7",
+                 "G1","G2","G3","G4","G5","G6","G7"];
+  for (var i = 0; i < 49; i++){
+    if (!theBoard.state.taken.includes(squares[i])){theBoard.updateBoard(squares[i], "200");};
+  };
+  hideStage("stage1");
+  showStage("stage2");
+};
+
 var toRender = <div>
   <div className="stage0">
     <div>
@@ -318,9 +418,63 @@ var toRender = <div>
       <Place which="bomb" />
       <Place which="double" />
       <Place which="bank" />
-      <Place which="5000" />
+          
+      <div id="place5000" className="stage1PopUp place">
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose a Square For The &apos;5000&apos; Symbol</h3>
+        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+          <img src="imgs/sym5000.svg" />
+        </div>
+        <hr />
+        <p>In what grid square would you like to place The &apos;5000&apos; Symbol?<br />You can click on the square to select it.</p>
+        <input type="text" className="placeInput" id="placeInput5000" maxLength="2" />
+        <button className="choosePlace close" onClick={attemptPlace5000} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>
+
+      <div id="place3000" className="stage1PopUp place">
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose Squares For Both of The &apos;3000&apos; Symbols</h3>
+        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+          <img src="imgs/sym3000.svg" />
+        </div>
+        <hr />
+        <p>In what grid squares would you like to place The &apos;3000&apos; Symbols?<br />You can click on squares to select them.</p>
+        <input type="text" className="placeInput3000" id="placeInput3000First" maxLength="2" />
+        <input type="text" className="placeInput3000" id="placeInput3000Second" maxLength="2" />
+        <button className="choosePlace close" onClick={attemptPlace3000} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>
+
+      <div id="place1000" className="stage1PopUp place">
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose Squares For All of The &apos;1000&apos; Symbols</h3>
+        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+          <img src="imgs/sym1000.svg" />
+        </div>
+        <hr />
+        <p>In what grid squares would you like to place The &apos;1000&apos; Symbols?<br />You can click on squares to select them.</p>
+        <input type="text" className="placeInput1000" id="placeInput1000N0" maxLength="2" />
+        <input type="text" className="placeInput1000" id="placeInput1000N1" maxLength="2" />
+        <input type="text" className="placeInput1000" id="placeInput1000N2" maxLength="2" />  
+        <input type="text" className="placeInput1000" id="placeInput1000N3" maxLength="2" />
+        <input type="text" className="placeInput1000" id="placeInput1000N4" maxLength="2" />  
+        <input type="text" className="placeInput1000" id="placeInput1000N5" maxLength="2" />
+        <input type="text" className="placeInput1000" id="placeInput1000N6" maxLength="2" />
+        <input type="text" className="placeInput1000" id="placeInput1000N7" maxLength="2" />  
+        <input type="text" className="placeInput1000" id="placeInput1000N8" maxLength="2" />
+        <input type="text" className="placeInput1000" id="placeInput1000N9" maxLength="2" />  
+        <button className="choosePlace close" onClick={attemptPlace1000} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>
+
+      <div id="place200" className="stage1PopUp place">
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Placing The &apos;200&apos; Symbols</h3>
+        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+          <img src="imgs/sym200.svg" />
+        </div>
+        <hr />
+        <p>The other symbols are all The &apos;200&apos; Symbol and will be placed automatically.</p>
+        <button className="choosePlace close" onClick={place200} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>
+
     </div>
   </div>
+
   <div id="popUps">
 
     <div id="invalidName" className="popUp"><div>
@@ -393,6 +547,13 @@ var toRender = <div>
         <h3>Square Taken</h3>
         <hr />
         <p>Oops! There&apos;s something in that square already, choose another.</p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
+    </div></div>
+    
+    <div id="squaresMatch" className="popUp"><div>
+        <h3>Squares Match</h3>
+        <hr />
+        <p>Oops! You&apos;ve chosen the same square multiple times! Choose again.</p>
         <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
   </div>
