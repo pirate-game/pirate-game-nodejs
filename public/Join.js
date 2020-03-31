@@ -364,25 +364,26 @@ function attemptPlace3000(){
     document.getElementById("invalidSquare").style.display = "block";
   };
 };
-/*attemptPlace1000 is likewise flawed*/
+
 function attemptPlace1000(){
-  var proposedSquares = document.getElementsByClassName("placeInput1000").map(e => e.value);
+  var proposedSquares_ = document.getElementsByClassName("placeInput1000");
+  var proposedSquares = [0,1,2,3,4,5,6,7,8,9].map(e => proposedSquares_[e].value)
   squareClicked("");
   if (proposedSquares.map(e => squarePattern.test(e)).sort[0]){
-    if (proposedSquares.map(e => theBoard.state.taken.includes(e)).sort().reverse()[0]){
-      if (new Set(proposedSquares).size !== proposedSquares.length){
+    if (new Set(proposedSquares).size !== proposedSquares.length){
+      if (proposedSquares.map(e => theBoard.state.taken.includes(e)).sort().reverse()[0]){
         hidePopUps();
         document.getElementById("squaresMatch").style.display = "block";
       } else {
-        hidePopUps();
-        document.getElementById("squareTaken").style.display = "block";
+        for (var i = 0; i < 10; i++){
+          theBoard.updateBoard(proposedSquares[i], "1000");
+        };
+        document.getElementById("place1000").style.display = "none";
+        document.getElementById("place200").style.display = "block";
       };
     } else {
-      for (var i = 0; i < 10; i++){
-        theBoard.updateBoard(proposedSquares[i], "1000");
-      };
-      document.getElementById("place1000").style.display = "none";
-      document.getElementById("place200").style.display = "block";
+      hidePopUps();
+      document.getElementById("squareTaken").style.display = "block";
     };
   } else {
     hidePopUps();
