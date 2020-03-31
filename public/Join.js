@@ -324,7 +324,7 @@ function attemptPlace3000(){
     if (proposedSquares[0]!=proposedSquares[1]){
       if (theBoard.state.taken.includes(proposedSquares[0]) || theBoard.state.taken.includes(proposedSquares[1])){
         hidePopUps();
-        document.getElementById("squaresMatch").style.display = "block";
+        document.getElementById("squareTaken").style.display = "block";
       } else {
         theBoard.updateBoard(proposedSquares[0], "3000");
         theBoard.updateBoard(proposedSquares[1], "3000");
@@ -333,7 +333,7 @@ function attemptPlace3000(){
       };
     } else {
       hidePopUps();
-      document.getElementById("squareTaken").style.display = "block";
+      document.getElementById("squaresMatch").style.display = "block";
     };
   } else {
     hidePopUps();
@@ -349,7 +349,7 @@ function attemptPlace1000(){
     if (new Set(proposedSquares).size === proposedSquares.length){
       if (proposedSquares.map(e => theBoard.state.taken.includes(e)).sort().reverse()[0]){
         hidePopUps();
-        document.getElementById("squaresMatch").style.display = "block";
+        document.getElementById("squareTaken").style.display = "block";
       } else {
         for (var i = 0; i < 10; i++){
           theBoard.updateBoard(proposedSquares[i], "1000");
@@ -359,7 +359,7 @@ function attemptPlace1000(){
       };
     } else {
       hidePopUps();
-      document.getElementById("squareTaken").style.display = "block";
+      document.getElementById("squaresMatch").style.display = "block";
     };
   } else {
     hidePopUps();
