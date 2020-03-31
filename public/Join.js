@@ -246,7 +246,7 @@ function squareClicked(square){
       placeInput1000s[j].value = "";
     };
   } else {
-    if (clickMod10 == 0){
+    if (clickMod10%2 == 0){
       document.getElementById("placeInput3000First").value = square;
     } else {
       document.getElementById("placeInput3000Second").value = square;
