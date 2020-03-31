@@ -317,35 +317,11 @@ function attemptPlace5000(){
   };
 };
 
-/*function attemptPlace3000(){
-  var proposedSquares = [document.getElementById("placeInput3000First").value, document.getElementById("placeInput3000Second").value];
-  squareClicked("");
-  if (squarePattern.test(proposedSquares[0]) && squarePattern.test(proposedSquares[1])){
-    if (theBoard.state.taken.includes(proposedSquares[0]) || theBoard.state.taken.includes(proposedSquares[1])){
-      if (proposedSquares[0]==proposedSquares[1]){
-        hidePopUps();
-        document.getElementById("squaresMatch").style.display = "block";
-      } else {
-        hidePopUps();
-        document.getElementById("squareTaken").style.display = "block";
-      };
-    } else {
-      theBoard.updateBoard(proposedSquares[0], "3000");
-      theBoard.updateBoard(proposedSquares[1], "3000");
-      document.getElementById("place3000").style.display = "none";
-      document.getElementById("place1000").style.display = "block";
-    };
-  } else {
-    hidePopUps();
-    document.getElementById("invalidSquare").style.display = "block";
-  };
-};*/
-
 function attemptPlace3000(){
   var proposedSquares = [document.getElementById("placeInput3000First").value, document.getElementById("placeInput3000Second").value];
   squareClicked("");
   if (squarePattern.test(proposedSquares[0]) && squarePattern.test(proposedSquares[1])){
-    if (proposedSquares[0]==proposedSquares[1]){
+    if (proposedSquares[0]!=proposedSquares[1]){
       if (theBoard.state.taken.includes(proposedSquares[0]) || theBoard.state.taken.includes(proposedSquares[1])){
         hidePopUps();
         document.getElementById("squaresMatch").style.display = "block";
@@ -370,7 +346,7 @@ function attemptPlace1000(){
   var proposedSquares = [0,1,2,3,4,5,6,7,8,9].map(e => proposedSquares_[e].value)
   squareClicked("");
   if (proposedSquares.map(e => squarePattern.test(e)).sort[0]){
-    if (new Set(proposedSquares).size !== proposedSquares.length){
+    if (new Set(proposedSquares).size === proposedSquares.length){
       if (proposedSquares.map(e => theBoard.state.taken.includes(e)).sort().reverse()[0]){
         hidePopUps();
         document.getElementById("squaresMatch").style.display = "block";
