@@ -244,6 +244,7 @@ function squareClicked(square){
     for (var j = 0; j < placeInput1000s.length; j++){
       placeInput1000s[j].value = "";
     };
+    clickMod10 = 0;
   } else {
     if (clickMod10%2 == 0){
       document.getElementById("placeInput3000First").value = square;
@@ -251,8 +252,8 @@ function squareClicked(square){
       document.getElementById("placeInput3000Second").value = square;
     };
     document.getElementById("placeInput1000N"+clickMod10.toString()).value = square;
+    clickMod10 = (clickMod10+1) % 10;
   };
-  clickMod10 = (clickMod10+1) % 10;
 };
 
 function Place(props){
