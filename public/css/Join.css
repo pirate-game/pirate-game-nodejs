@@ -72,6 +72,12 @@ input {
   }
 }
 
+@media screen and (orientation:portrait){
+  .stage1PopUp {
+    font-size: xx-large;
+  }
+}
+
 .stage1PopUp .close {
   display: inline-block;
   height: 70px;
@@ -106,5 +112,3 @@ input {
     border: none;
     width: 100%;
 }
-
-/*text size on mobile is too small*/
