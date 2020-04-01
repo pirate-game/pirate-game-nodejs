@@ -37,7 +37,7 @@
   font-family: 'Calibri', Fallback, sans-serif;
   background-color: #CC6600;
   color: white;
-  font-size: 20px;
+  font-size: inherit;
   font-weight: bold;
   padding: 9px 12px;
   text-decoration: none;
