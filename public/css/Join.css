@@ -40,11 +40,6 @@ input {
   border: 1px solid black;
 }
 
-#board {font-size: calc(50vh/14);}
-.square {
-  height: calc(40vh/7);
-  width: calc(40vh/7);
-}
 .stage1PopUp {
   display: none;
   background: white;
@@ -61,11 +56,6 @@ input {
 }
 
 @media screen and (orientation:landscape){
-  #board {font-size: calc((100vh - 235px)/14);}
-  .square {
-    height: calc((100vh - 235px)/7);
-    width: calc((100vh - 235px)/7);
-  }
   .stage1PopUp {
     background: white;
     border: 1px solid #888;
