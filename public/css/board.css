@@ -1,6 +1,7 @@
 #board {
   font-weight: bold;
   position: absolute;
+  font-size: calc(50vh/14);
 }
 
 tr, td {
@@ -14,7 +15,9 @@ table, th {border-collapse: collapse;}
   background-color:white;
   text-align:center;
   position: relative;
-  font-size: 0.7em;
+  //font-size: 0.7em;
+  height: calc(40vh/7);
+  width: calc(40vh/7);
 }
 .edge {border:0px solid transparent;}
 
@@ -45,4 +48,12 @@ table, th {border-collapse: collapse;}
     black,
     transparent calc(50% + 2px)
   );
+}
+
+@media screen and (orientation:landscape){
+  #board {font-size: calc((100vh - 235px)/14);}
+  .square {
+    height: calc((100vh - 235px)/7);
+    width: calc((100vh - 235px)/7);
+  }
 }
