@@ -282,7 +282,7 @@ function Place(props){
   return (
     <div id={"place"+props.which} className="stage1PopUp place">
       <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose a Square For The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol</h3>
-      <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+      <div style={{display:"inline-block",position:"absolute",right:"10px",top:"15px"}} className="square">
       {things[props.which]}
       </div>
       <hr />
