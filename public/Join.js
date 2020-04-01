@@ -288,7 +288,7 @@ function Place(props){
       <hr />
       <p>In what grid square would you like to place The &apos;{props.which[0].toUpperCase()+props.which.substr(1)}&apos; Symbol?<br />You can click on the square to select it.</p>
       <input type="text" className="placeInput" id={"placeInput"+props.which} maxLength="2" />
-      <button className="choosePlace close" onClick={() => attemptPlace(props.which)} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      <button className="choosePlace close" onClick={() => attemptPlace(props.which)} style={{height:"unset",display:"block",marginTop:"10px",fontSize:"inherit"}}>Okay!</button>
     </div>);
 };
       
