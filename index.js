@@ -77,10 +77,11 @@ function crewmemberToGame(someCrewmember){
 };
 
 io.on('connection', function(socket){
+  
   socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
-    var game = {leader: socket, game_key: key, crew: [], available: true};
+    var game = {leader: socket, game_key: key, crew: [], available: true, watching:[]};
     games.push(game);
   }); 
     
@@ -135,6 +136,10 @@ io.on('connection', function(socket){
       for (var i = 0; i < theCrew.length; i++){
         theCrew[i].pirate.emit('start_game');
       };
+      var thoseWatching = games[pos].watching;
+      for (var j = 0; j < thoseWatching.length; j++){
+        thoseWatching[j].emit('start_game');
+      };
     };
   });
   
@@ -158,6 +163,15 @@ io.on('connection', function(socket){
       if (thisName != ""){
         games[thisGame].leader.emit('board_ready', thisName);
       };
+    };
+  });
+  
+  socket.on('attempt_watch', function(key){
+    var pos = keyToGame(key);
+    if (pos == -1){
+      socket.emit('no_such_game');
+    } else {
+      games[pos].watching.push(socket);
     };
   });
   
