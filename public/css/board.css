@@ -2,7 +2,6 @@
   font-weight: bold;
   position: absolute;
   font-size: calc(50vh/14);
-  font-size: calc((50 * var(--vh, 1vh))/14);
 }
 
 tr, td {
@@ -18,8 +17,6 @@ table, th {border-collapse: collapse;}
   position: relative;
   height: calc(40vh/7);
   width: calc(40vh/7);
-  height: calc((40 * var(--vh, 1vh))/7);
-  width: calc((40 * var(--vh, 1vh))/7);
 }
 .edge {border:0px solid transparent;}
 
@@ -54,13 +51,10 @@ table, th {border-collapse: collapse;}
 
 @media screen and (orientation:landscape){
   #board {
-    font-size: calc(((100 * var(--vh, 1vh)) - 235px)/14);
-    font-size: calc(((100 * var(--vh, 1vh)) - 235px)/14);
+    font-size: calc((100vh - 235px)/14);
   }
   .square {
-    height: calc(((100 * var(--vh, 1vh)) - 235px)/7);
-    width: calc(((100 * var(--vh, 1vh)) - 235px)/7);
-    height: calc(((100 * var(--vh, 1vh)) - 235px)/7);
-    width: calc(((100 * var(--vh, 1vh)) - 235px)/7);
+    height: calc((100vh - 235px)/7);
+    width: calc((100vh - 235px)/7);
   }
 }
