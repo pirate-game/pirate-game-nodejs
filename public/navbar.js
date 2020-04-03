@@ -1,5 +1,4 @@
 const navbar = <div>
-      			<link rel="stylesheet" type="text/css" href="css/navbar.css" />
 	    		<ul>
 				<li><a id="logo" href="index.html"><img border="0" src="logo.png" /></a></li>
 				<li><a href="Start.html">Start&nbsp;a<br />Game</a></li>
