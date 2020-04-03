@@ -47,6 +47,7 @@ input {
   position: fixed;
   padding: 10px;
   top: calc(40vh + 300px);
+  top: calc((40 * var(--vh,1vh)) + 300px);
   width: calc(100% - 40px);
 }
 
@@ -63,6 +64,7 @@ input {
     right: 10px;
     top: 190px;
     width: calc(98vw - (100vh - 135px));
+    width: calc(98vw - ((100 * var(--vh,1vh)) - 135px));
   }
   .stage1PopUp .square {
     height: 62px;
