@@ -101,4 +101,6 @@
   bottom: 10px;
 }
 
-.stage1col ul {height: calc(100vh - 290px);}
+.stage1col ul {
+  height: calc(100vh - 290px);
+}
