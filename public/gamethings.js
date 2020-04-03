@@ -1,8 +1,6 @@
 function unloadFn(event){event.returnValue="";};
 window.addEventListener("beforeunload",unloadFn);
 
-socket.on('debugmsg', function(msg){console.log(msg)});
-
 function showStage(stage){
   var stageElements = document.getElementsByClassName(stage);
   for (var i = 0; i < stageElements.length; i++){
