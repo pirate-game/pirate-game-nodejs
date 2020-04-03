@@ -46,27 +46,6 @@ const nextPlace = {
   "bank":"place5000",
 };
 
-function showStage(stage){
-  var stageElements = document.getElementsByClassName(stage);
-  for (var i = 0; i < stageElements.length; i++){
-    stageElements[i].style.display = "block";
-  };
-};
-
-function hideStage(stage){
-  var stageElements = document.getElementsByClassName(stage);
-  for (var i = 0; i < stageElements.length; i++){
-    stageElements[i].style.display = "none";
-  };
-};
-
-function hidePopUps(){
-  var popUps = document.getElementsByClassName("popUp");
-  for (var i = 0; i < popUps.length; i++){
-    popUps[i].style.display = "none";
-  };
-};
-
 socket.on('no_such_game', function(){
   document.getElementById("gameKey").value = "";
   hidePopUps();
