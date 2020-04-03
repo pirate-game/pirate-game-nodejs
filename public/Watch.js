@@ -64,8 +64,6 @@ socket.on('start_game', function(){
 });
 
 var toRender = <div>
-  <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
-  <link rel="stylesheet" type="text/css" href="css/Watch.css" />
   <div className="stage0">
     <h2 style={{marginTop: 0}}>What game be ye watchin&apos;?</h2>
     <input type="text" id="gameKey" maxLength="6" />
