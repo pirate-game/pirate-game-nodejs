@@ -203,9 +203,7 @@ class Board extends React.Component {
 var toRender = <div>
     <div className="stage0">
       <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
-        <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
         <div style={{position: 'relative',top: '-10%'}}>
-          <link rel="stylesheet" type="text/css" href="css/Start.css" />
           <button id="crewAssembled" onClick={assembleCrew}>Crew Assembled!</button>
           <KeyBox />
         </div>
