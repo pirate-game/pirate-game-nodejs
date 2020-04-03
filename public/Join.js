@@ -60,25 +60,6 @@ function hideStage(stage){
   };
 };
 
-function hidePopUps(){
-  var popUps = document.getElementsByClassName("popUp");
-  for (var i = 0; i < popUps.length; i++){
-    popUps[i].style.display = "none";
-  };
-};
-
-socket.on('no_such_game', function(){
-  document.getElementById("gameKey").value = "";
-  hidePopUps();
-  document.getElementById("noSuchGame").style.display = "block";  
-});
-
-socket.on('name_taken', function(){
-  document.getElementById("pirateName").value = "";
-  hidePopUps();
-  document.getElementById("nameTaken").style.display = "block";  
-});
-
 socket.on('game_unavailable', function(){
   document.getElementById("gameKey").value = "";
   hidePopUps();
