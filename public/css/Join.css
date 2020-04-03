@@ -70,6 +70,9 @@ input {
     height: 62px;
     width: 62px;
   }
+  .stage1PopUp .close {
+    height: 70px;
+  }
 }
 
 @media screen and (orientation:portrait){
@@ -80,17 +83,17 @@ input {
 
 .stage1PopUp .close {
   display: inline-block;
-  height: 70px;
+  height: 100px;
 }
 
 #leftBtn{
   position: relative;
-  left: calc(50% - 100px);
+  left: calc(50% - 110px);
 }
 
 #rightBtn{
   position: absolute;
-  left: calc(50% + 20px);
+  left: calc(50% + 30px);
 }
 
 .placeInput3000{
