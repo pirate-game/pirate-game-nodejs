@@ -49,7 +49,7 @@ class CrewUl extends React.Component {
     <React.Fragment>
       <div id="firstCrewDiv" className="crewDiv">
         <ul>
-          {this.state.crew.map(crewMember => (
+          {this.state.crew.slice().reverse().map(crewMember => (
             <li style={{position:'relative'}}>
               <div className="cross" onClick={() => this.removePlayer(crewMember)}>&times;</div>
               <div className="nameLiDiv">{crewMember}</div>
@@ -69,7 +69,7 @@ class CrewUl extends React.Component {
         </div>
         <div id="popUpCrewDiv" className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
           <ul>
-            {this.state.crew.map(crewMember => (
+            {this.state.crew.slice().reverse().map(crewMember => (
               <li style={{position:'relative'}}>
                 <div className="cross" onClick={() => this.removePlayer(crewMember)}>&times;</div>
                 <div className="nameLiDiv">{crewMember}</div>
@@ -139,7 +139,7 @@ class Stage1 extends React.Component {
           <h2>Waiting for:</h2>
           <div className="crewDiv">
             <ul>
-              {this.state.waitingFor.map(crewMember => (
+              {this.state.waitingFor.slice().reverse().map(crewMember => (
                 <li style={{position:'relative'}}>
                   <div className="nameLiDiv">{crewMember}</div>
                 </li>
@@ -151,7 +151,7 @@ class Stage1 extends React.Component {
           <h2>Ready:</h2>
           <div className="crewDiv">
             <ul>
-              {this.state.ready.map(crewMember => (
+              {this.state.ready.slice().reverse().map(crewMember => (
                 <li style={{position:'relative'}}>
                   <div className="nameLiDiv">{crewMember}</div>
                 </li>
