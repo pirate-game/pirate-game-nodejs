@@ -56,6 +56,11 @@ input {
   width: 120px;
 }
 
+.stage1PopUp .close {
+  display: inline-block;
+  height: 100px;
+}
+
 @media screen and (orientation:landscape){
   .stage1PopUp {
     background: white;
@@ -79,11 +84,6 @@ input {
   .popUp, .stage1PopUp {
     font-size: xx-large;
   }
-}
-
-.stage1PopUp .close {
-  display: inline-block;
-  height: 100px;
 }
 
 #leftBtn{
