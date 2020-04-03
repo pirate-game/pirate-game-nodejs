@@ -433,7 +433,7 @@ var toRender = <div>
           
       <div id="place5000" className="stage1PopUp place">
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose a Square For The &apos;5000&apos; Symbol</h3>
-        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
           <img src="imgs/sym5000.svg" />
         </div>
         <hr />
@@ -444,7 +444,7 @@ var toRender = <div>
 
       <div id="place3000" className="stage1PopUp place">
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose Squares For Both of The &apos;3000&apos; Symbols</h3>
-        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
           <img src="imgs/sym3000.svg" />
         </div>
         <hr />
@@ -456,7 +456,7 @@ var toRender = <div>
 
       <div id="place1000" className="stage1PopUp place">
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose Squares For All of The &apos;1000&apos; Symbols</h3>
-        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
           <img src="imgs/sym1000.svg" />
         </div>
         <hr />
@@ -482,7 +482,7 @@ var toRender = <div>
 
       <div id="place200" className="stage1PopUp place">
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Placing The &apos;200&apos; Symbols</h3>
-        <div style={{display:"inline-block", height:"70px", width:"70px",position: "absolute",right: "10px",top: "7px"}} className="square">
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
           <img src="imgs/sym200.svg" />
         </div>
         <hr />
