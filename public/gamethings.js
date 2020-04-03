@@ -1,5 +1,5 @@
 function unloadFn(event){event.returnValue="";};
-window.addEventListener("beforeunload",unloadFn);];
+window.addEventListener("beforeunload",unloadFn);
 
 socket.on('debugmsg', function(msg){console.log(msg)});
 
