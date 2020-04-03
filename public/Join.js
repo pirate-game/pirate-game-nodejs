@@ -375,9 +375,7 @@ function place200(){
 var toRender = <div>
   <div className="stage0">
     <div>
-      <link rel="stylesheet" type="text/css" href="css/PopUp.css" />
       <div>
-        <link rel="stylesheet" type="text/css" href="css/Join.css" />
         <div className="inputsDiv">
           <h2 id="nameH2">What be your name?</h2>
           <input type="text" id="pirateName" maxLength="172" />
