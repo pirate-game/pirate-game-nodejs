@@ -30,14 +30,14 @@
   z-index: 1;
 }
 
-.popUp .close {
+.close {
   margin: 0 auto;
   display: block;
   text-align: center;
   font-family: 'Calibri', Fallback, sans-serif;
   background-color: #CC6600;
   color: white;
-  font-size: 20px;
+  font-size: inherit;
   font-weight: bold;
   padding: 9px 12px;
   text-decoration: none;
@@ -45,6 +45,6 @@
   border-radius: 6px;
   border-width: 0;
 }
-.popUp .close:hover {
+.close:hover {
   background-color: cornflowerblue;
 }

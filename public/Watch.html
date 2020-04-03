@@ -5,16 +5,18 @@
         	<title>The Pirate Game</title>
 		<link rel="stylesheet" type="text/css" href="css/MainPage.css" />
 		<link rel="icon" href="logo.png" type="image/x-icon" />
-    		<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+		<link rel="stylesheet" type="text/css" href="css/board.css" />
+		<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
 		<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="gamethings.js"></script>
     	</head>
     	<body>
-		<div id="nav"></div>
-		<script type="text/babel" src="navbar.js"></script>
+		<div id="titlebar"></div>
+		<script type="text/babel" src="titlebar.js"></script>
 		<br />
-		<div class="sometext" style="background-color:lightblue;">
-            		<p>Yarr, there be nothing here!</p>
-        	</div>
+		<div id="root"></div>
+		<script type="text/babel" src="Watch.js"></script>
     	</body>
 </html>

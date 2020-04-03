@@ -1,4 +1,4 @@
-.stage1, .stage2 {display: none;}
+.stage1, .stage2, .stage3 {display: none;}
 
 h2 {
   text-align: center;
@@ -37,4 +37,76 @@ input {
   display: block;
   margin: auto;
   text-align: center;
+  border: 1px solid black;
+}
+
+.stage1PopUp {
+  display: none;
+  background: white;
+  border: 1px solid #888;
+  position: fixed;
+  padding: 10px;
+  top: calc(40vh + 300px);
+  width: calc(100% - 40px);
+}
+
+.stage1PopUp .square {
+  height: 120px;
+  width: 120px;
+}
+
+@media screen and (orientation:landscape){
+  .stage1PopUp {
+    background: white;
+    border: 1px solid #888;
+    position: fixed;
+    right: 10px;
+    top: 190px;
+    width: calc(98vw - (100vh - 135px));
+  }
+  .stage1PopUp .square {
+    height: 62px;
+    width: 62px;
+  }
+}
+
+@media screen and (orientation:portrait){
+  .popUp, .stage1PopUp {
+    font-size: xx-large;
+  }
+}
+
+.stage1PopUp .close {
+  display: inline-block;
+  height: 70px;
+}
+
+#leftBtn{
+  position: relative;
+  left: calc(50% - 100px);
+}
+
+#rightBtn{
+  position: absolute;
+  left: calc(50% + 20px);
+}
+
+.placeInput3000{
+  display: inline-block;
+  width: 40%;
+}
+
+#placeInput3000First{
+  position: relative;
+  left: 5%;
+}
+
+#placeInput3000Second{
+  position: absolute;
+  left: 55%;
+}
+
+.placeInput1000 {
+    border: none;
+    width: 100%;
 }

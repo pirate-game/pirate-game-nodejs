@@ -4,6 +4,7 @@ var key = '';
 var globalCrew = [];
 
 var x;//////////////
+var theBoard;
 
 socket.on('debugmsg', function(msg){console.log(msg)});
 
@@ -186,6 +187,42 @@ class Stage1 extends React.Component {
   }
 };
 
+class Board extends React.Component {
+  constructor(){
+    super();
+    this.state = {done:[]};
+    
+    theBoard=this;
+  }
+  squareDone(square){
+    this.setState({done:this.state.done.concat([square])});
+  }
+  render(){
+    return <table id="board">
+      <tr className="edge">
+        <th className="edge"></th>
+        <th className="edge">A</th>
+        <th className="edge">B</th>
+        <th className="edge">C</th>
+        <th className="edge">D</th>
+        <th className="edge">E</th>
+        <th className="edge">F</th>
+        <th className="edge">G</th>
+      </tr>
+      {["1","2","3","4","5","6","7"].map(col => (
+        <tr className="edge">
+          <th className="edge">{col}</th>
+          {["A","B","C","D","E","F","G"].map(row => (
+            <td id={row+col} className="square" style={{backgroundColor:(this.state.done.includes(row+col)?"#CC6600":"white")}}></td>
+          ))}
+        </tr>
+      ))}
+      </table>;
+  }
+};
+
+
+
 var toRender = <div>
     <div className="stage0">
       <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
@@ -200,6 +237,9 @@ var toRender = <div>
       </div> 
     </div>
     <div id="stage1" className="stage1"></div>
+    <div id="stage2" className="stage2">
+      <Board />
+    </div>
     <div id="popUps">
       <div id="waiting" className="popUp"><div>
           <h3>Waiting</h3>
