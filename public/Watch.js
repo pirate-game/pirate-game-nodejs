@@ -92,7 +92,7 @@ class ChooseNextSquare extends React.Component{
     theChooseNextSquare = this;
   }
   addPlayer(player){
-    this.setState({players:this.state.players.concat[player]});
+    this.setState({players:this.state.players.concat([player])});
   }
   removePlayers(players){
     this.setState({players:this.state.players.filter(player=>!players.includes(player))});
