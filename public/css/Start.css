@@ -32,6 +32,13 @@
   background-color: cornflowerblue;
 }
 
+#nextSquare {
+  position: relative;
+  height: unset;
+  top: calc(40vh + 145px);
+  padding: 0 10px;
+}
+
 .crewDiv {
   min-height: 70px;
   max-height: -webkit-fill-available;
@@ -104,3 +111,7 @@
 .stage1col ul {
   height: calc(100vh - 290px);
 }
+
+@media screen and (orientation:landscape){
+  #nextSquare {top: 35px;}
+}    
