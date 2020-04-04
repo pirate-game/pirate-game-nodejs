@@ -19,6 +19,7 @@
   overflow: auto;
   border: solid black 3px;
   min-height: 50px;
+  max-height: calc((100vh - 440px));
   background-color: white;
   width: calc(98vw - (100vh - 135px));
 }
