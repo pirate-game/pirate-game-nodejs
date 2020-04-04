@@ -121,6 +121,10 @@ socket.on('too_slow', function(who){
   theChooseNextSquare.removePlayers(who)
 });
 
+socket.on('choose', function(player){
+  theChooseNextSquare.removePlayers([player])
+});
+
 var toRender = <div>
   <div className="stage0">
     <h2 style={{marginTop: 0}}>What game be ye watchin&apos;?</h2>
