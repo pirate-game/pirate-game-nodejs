@@ -370,6 +370,34 @@ function place200(){
   socket.emit('board_ready');
   hideStage("stage1");
   showStage("stage2");
+  document.getElementById("waitingForOthers").style.display = "block";
+};
+
+socket.on('start_game', function(){
+  hidePopUps();
+  document.getElementById("waitingForSquare").style.display = "block";
+});
+
+socket.on('current_square', function(square){
+  hidePopUps();
+  /*stuff*/
+});
+
+function attemptChooseSquare(){
+  var proposedSquare = document.getElementById("chooseSquareInput").value;
+  if (squarePattern.test(proposedSquare)){
+    if (theBoard.state.taken.includes(proposedSquare)){
+      hidePopUps();
+      document.getElementById("squareTaken").style.display = "block";
+    } else {
+      hidePopUps();
+      document.getElementById("waitingForChoice").style.display = "block";
+      socket.emit('chose', proposedSquare);
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidSquare").style.display = "block";
+  };
 };
 
 var toRender = <div>
@@ -468,6 +496,18 @@ var toRender = <div>
       </div>
 
     </div>
+    <div className="stage2">
+      <div id="chooseSquare" className="stage1PopUp">
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose the Next Square</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          <img src="imgs/c.png" />
+        </div>
+        <hr />
+        <p>Choose a square.<br />You can click on the square to select it.</p>
+        <input type="text" className="placeInput" id="chooseSquareInput" maxLength="2" />
+        <button className="choosePlace close" onClick={attemptChooseSquare} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>
+    </div>
   </div>
 
   <div id="popUps">
@@ -551,6 +591,25 @@ var toRender = <div>
         <p>Oops! You&apos;ve chosen the same square multiple times! Choose again.</p>
         <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
+     
+    <div id="waitingForOthers" className="popUp"><div>
+      <h3>Waiting for the Other Crew to Fill Their Boards</h3>
+      <hr />
+      <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+    
+    <div id="waitingForSquare" className="popUp"><div>
+      <h3>Waiting for the Current Square</h3>
+      <hr />
+      <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+    
+    <div id="waitingForChoice" className="popUp"><div>
+      <h3>Waiting for the Chosen Square</h3>
+      <hr />
+      <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+      
   </div>
 </div>;
 
