@@ -278,7 +278,7 @@ socket.on('chose', function(square){
   theCurrentSquare.setState({currentSquare: square});
   theBoard.squareDone(square);
   socket.emit('current_square', square);
-};
+});
 
 var toRender = <div>
     <div className="stage0">
