@@ -12,7 +12,9 @@
   overflow: auto;
   border: solid black 3px;
   min-height: 50px;
+  max-height: calc(59vh - 510px);
   background-color: white;
+  width: calc(100vw - 20px);
 }
 
 .chooseNextSquare div ul {
