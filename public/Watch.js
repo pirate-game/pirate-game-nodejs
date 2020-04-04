@@ -98,15 +98,17 @@ class ChooseNextSquare extends React.Component{
     this.setState({players:this.state.players.filter(player=>!players.includes(player))});
   }
   render(){
-    return <div className="chooseNextSquare">
+    return <div>
       <h2>Choose Next Square:</h2>
-      <ul>
-        {this.state.players.map(player => (
-          <li style={{position:'relative'}}>
-            <div>{player}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="chooseNextSquare">
+        <ul>
+          {this.state.players.map(player => (
+            <li style={{position:'relative'}}>
+              <div>{player}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
 };
 
