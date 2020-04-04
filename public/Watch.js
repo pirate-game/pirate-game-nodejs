@@ -78,7 +78,7 @@ class CurrentSquare extends React.Component{
   }
 };
 
-socket.on('current_square' function(square){
+socket.on('current_square', function(square){
   theCurrentSquare.setState({currentSquare: square});
   theBoard.squareDone(square);
 });
