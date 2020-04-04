@@ -15,7 +15,7 @@
   font-size: 30px;
 }
 
-.chooseNextSquare div {
+.chooseNextSquare > div {
   overflow: auto;
   border: solid black 3px;
   min-height: 50px;
