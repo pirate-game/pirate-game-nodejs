@@ -152,7 +152,11 @@ io.on('connection', function(socket){
           player.emit('too_slow');
           games[pos].crew = games[pos].crew.filter((x)=>(x!=player));
         };
-      }; 
+      };
+      var thoseWatching = games[pos].watching;
+      for (var j = 0; j < thoseWatching.length; j++){
+        thoseWatching[j].emit('too_slow', who);
+      };
     };
   });
   
