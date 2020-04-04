@@ -167,13 +167,13 @@ class Board extends React.Component {
                            "E1","E2","E3","E4","E5","E6","E7",
                            "F1","F2","F3","F4","F5","F6","F7",
                            "G1","G2","G3","G4","G5","G6","G7"];
-    var randBoard = {choosing: false};
+    var randBoard = {};
     for (var i = 0; i < 49; i++){
       var current = possibleSquares[Math.floor(Math.random()*possibleSquares.length)];
       possibleSquares = possibleSquares.filter((e)=>(e!=current));
       randBoard[current] = ordThing(i);
     };
-    this.setState({board:randBoard});
+    this.setState({board:randBoard, choosing:false});
   }
   updateBoard(square, thing){
     var temp = Object.assign({}, this.state.board);
@@ -294,6 +294,7 @@ function fillRandomly(){
   socket.emit('board_ready');
   hideStage("stage1");
   showStage("stage2");
+  document.getElementById("waitingForOthers").style.display = "block";
 };
 
 function fillItMyself(){
