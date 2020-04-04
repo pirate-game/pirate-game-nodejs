@@ -62,11 +62,8 @@ input {
 
 @media screen and (orientation:landscape){
   .stage1PopUp {
-    background: white;
-    border: 1px solid #888;
-    position: fixed;
     right: 10px;
-    top: 190px;
+    top: calc(130px + 10vh);
     width: calc(98vw - (100vh - 135px));
   }
   .stage1PopUp .square {
