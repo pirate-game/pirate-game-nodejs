@@ -167,7 +167,7 @@ class Board extends React.Component {
                            "E1","E2","E3","E4","E5","E6","E7",
                            "F1","F2","F3","F4","F5","F6","F7",
                            "G1","G2","G3","G4","G5","G6","G7"];
-    var randBoard = {};
+    var randBoard = {choosing: false};
     for (var i = 0; i < 49; i++){
       var current = possibleSquares[Math.floor(Math.random()*possibleSquares.length)];
       possibleSquares = possibleSquares.filter((e)=>(e!=current));
@@ -200,7 +200,7 @@ class Board extends React.Component {
                            "E1","E2","E3","E4","E5","E6","E7",
                            "F1","F2","F3","F4","F5","F6","F7",
                            "G1","G2","G3","G4","G5","G6","G7"];
-    var temp = {};
+    var temp = {choosing: false};
     for (var i = 0; i < 49; i++){
       temp[possibleSquares[i]] = things["200"];
     };
@@ -297,6 +297,7 @@ function fillRandomly(){
 };
 
 function fillItMyself(){
+  squareClicked("");
   document.getElementById("fillInBoard").style.display = "none";
   document.getElementById("placerob").style.display = "block";
 };
