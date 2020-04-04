@@ -175,6 +175,20 @@ io.on('connection', function(socket){
     };
   });
   
+  socket.on('current_square', function(square){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var theCrew = games[pos].crew;
+      for (var i = 0; i < theCrew.length; i++){
+        theCrew[i].pirate.emit('current_square', square);
+      };
+      var thoseWatching = games[pos].watching;
+      for (var j = 0; j < thoseWatching.length; j++){
+        thoseWatching[j].emit('current_square', square);
+      };
+    };
+  });
+  
 });
 
 //End of Game Section
