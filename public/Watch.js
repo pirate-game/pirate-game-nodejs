@@ -3,6 +3,7 @@ var socket = io();
 
 var theBoard;
 var theCurrentSquare;
+var theChooseNextSquare;
 
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 
@@ -81,6 +82,40 @@ class CurrentSquare extends React.Component{
 socket.on('current_square', function(square){
   theCurrentSquare.setState({currentSquare: square});
   theBoard.squareDone(square);
+});
+
+class ChooseNextSquare extends React.Component{
+  constructor(){
+    super();
+    this.state = {players: []};
+    
+    theChooseNextSquare = this;
+  }
+  addPlayer(player){
+    this.setState({players:this.state.players.concat[player]});
+  }
+  removePlayers(players){
+    this.setState({players:this.state.players.filter(player=>!players.includes(player))});
+  }
+  render(){
+    return <div className="chooseNextSquare">
+      <h2>Choose Next Square:</h2>
+      <ul>
+        {this.state.players.map(player => (
+          <li style={{position:'relative'}}>
+            <div>{player}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+};
+
+socket.on('choose_next_square', function(player){
+  theChooseNextSquare.addPlayer(player)
+});
+
+socket.on('too_slow', function(who){
+  theChooseNextSquare.removePlayers(who)
 });
 
 var toRender = <div>
