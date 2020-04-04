@@ -13,7 +13,7 @@
 }
 
 @media screen and (orientation:landscape){
-  .stage1PopUp {
+  .currentSquare {
     right: 10px;
     top: calc(130px + 10vh);
     width: calc(98vw - (100vh - 135px));
