@@ -130,6 +130,7 @@ var toRender = <div>
   <div className="stage2">
     <Board />
     <CurrentSquare />
+    <ChooseNextSquare />
   </div>
   <div id="popUps">
     <div id="waiting" className="popUp"><div>
