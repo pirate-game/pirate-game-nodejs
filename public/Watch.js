@@ -109,7 +109,8 @@ class ChooseNextSquare extends React.Component{
           ))}
         </ul>
       </div>
-    </div>
+    </div>;
+  }
 };
 
 socket.on('choose_next_square', function(player){
