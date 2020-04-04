@@ -373,11 +373,6 @@ function place200(){
   document.getElementById("waitingForOthers").style.display = "block";
 };
 
-socket.on('start_game', function(){
-  hidePopUps();
-  document.getElementById("waitingForSquare").style.display = "block";
-});
-
 socket.on('current_square', function(square){
   hidePopUps();
   /*stuff*/
