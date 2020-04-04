@@ -1,5 +1,4 @@
 .currentSquare {
-  display: none;
   background: lightblue;
   position: fixed;
   padding: 10px;
