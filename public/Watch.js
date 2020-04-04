@@ -2,6 +2,7 @@ var root = document.getElementById('root');
 var socket = io();
 
 var theBoard;
+var theCurrentSquare;
 
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 
@@ -63,6 +64,25 @@ socket.on('start_game', function(){
   showStage("stage2");
 });
 
+class CurrentSquare extends React.Component{
+  constructor(){
+    super();
+    this.state = {currentSquare:""};
+    
+    theCurrentSquare = this;
+  }
+  render(){
+    return <div className="currentSquare">
+      <h2>Current Square: {this.state.currentSquare}</h2>
+    </div>;
+  }
+};
+
+socket.on('current_square' function(square){
+  theCurrentSquare.setState({currentSquare: square});
+  theBoard.squareDone(square);
+});
+
 var toRender = <div>
   <div className="stage0">
     <h2 style={{marginTop: 0}}>What game be ye watchin&apos;?</h2>
@@ -71,6 +91,7 @@ var toRender = <div>
   </div>
   <div className="stage2">
     <Board />
+    <CurrentSquare />
   </div>
   <div id="popUps">
     <div id="waiting" className="popUp"><div>
