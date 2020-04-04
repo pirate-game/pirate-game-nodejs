@@ -113,5 +113,5 @@
 }
 
 @media screen and (orientation:landscape){
-  #nextSquare {top: 35px;}
+  #nextSquare {top: calc(10vh - 25px);}
 }    
