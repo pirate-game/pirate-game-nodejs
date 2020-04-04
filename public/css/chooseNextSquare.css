@@ -1,21 +1,20 @@
-.chooseNextSquare {
+.chooseNextSquare div {
   overflow: auto;
   border: solid black 3px;
 }
 
-.chooseNextSquare ul {
+.chooseNextSquare div ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.chooseNextSquare ul li {
+.chooseNextSquare div ul li {
   padding: 5px 10px;
 }
 
-.chooseNextSquare ul li:nth-child(odd) { background: #eee; }
+.chooseNextSquare div ul li:nth-child(odd) { background: #eee; }
 
-.chooseNextSquare ul li div {
+.chooseNextSquare div ul li div {
   width: 100%;
   overflow-wrap: break-word;
-}
