@@ -5,6 +5,8 @@ var globalCrew = [];
 
 var x;//////////////
 var theBoard;
+var theCurrentSquare;
+var theChooseNextSquare;
 
 class KeyBox extends React.Component {
   constructor() {
@@ -198,7 +200,51 @@ class Board extends React.Component {
   }
 };
 
+class CurrentSquare extends React.Component{
+  constructor(){
+    super();
+    this.state = {currentSquare:"??"};
+    
+    theCurrentSquare = this;
+  }
+  render(){
+    return <div className="currentSquare">
+      <h2>Current Square: {this.state.currentSquare}</h2>
+    </div>;
+  }
+};
 
+class ChooseNextSquare extends React.Component{
+  constructor(){
+    super();
+    this.state = {players: []};
+    
+    theChooseNextSquare = this;
+  }
+  addPlayer(player){
+    this.setState({players:this.state.players.concat([player])});
+  }
+  removePlayers(players){
+    this.setState({players:this.state.players.filter(player=>!players.includes(player))});
+  }
+  render(){
+    return <div className="chooseNextSquare">
+      <h2>Choose&nbsp;Next&nbsp;Square:</h2>
+      <div>
+        <ul>
+          {this.state.players.map(player => (
+            <li style={{position:'relative'}}>
+              <div>{player}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>;
+  }
+};
+
+function nextSquare(){
+};
 
 var toRender = <div>
     <div className="stage0">
@@ -214,6 +260,9 @@ var toRender = <div>
     <div id="stage1" className="stage1"></div>
     <div id="stage2" className="stage2">
       <Board />
+      <CurrentSquare />
+      <ChooseNextSquare />
+      <button id="nextSquare" onclick={nextSquare}>Next&nbsp;Square</button>
     </div>
     <div id="popUps">
       <div id="waiting" className="popUp"><div>
