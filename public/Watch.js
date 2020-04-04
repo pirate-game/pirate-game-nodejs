@@ -68,7 +68,7 @@ socket.on('start_game', function(){
 class CurrentSquare extends React.Component{
   constructor(){
     super();
-    this.state = {currentSquare:""};
+    this.state = {currentSquare:"??"};
     
     theCurrentSquare = this;
   }
@@ -99,7 +99,7 @@ class ChooseNextSquare extends React.Component{
   }
   render(){
     return <div className="chooseNextSquare">
-      <h2>Choose Next Square:</h2>
+      <h2>Choose&nbsp;Next&nbsp;Square:</h2>
       <div>
         <ul>
           {this.state.players.map(player => (
