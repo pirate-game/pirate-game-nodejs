@@ -1,3 +1,7 @@
+.chooseNextSquare {
+  position: fixed;
+}
+
 .chooseNextSquare div {
   overflow: auto;
   border: solid black 3px;
