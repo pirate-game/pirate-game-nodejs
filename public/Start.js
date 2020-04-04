@@ -126,6 +126,7 @@ class Stage1 extends React.Component {
       socket.emit('too_slow', this.state.waitingFor);
       hideStage("stage1");
       showStage("stage2");
+      nextSquare();
     } else {
       document.getElementById("tooFewReady").style.display = "block";
     };
@@ -243,7 +244,40 @@ class ChooseNextSquare extends React.Component{
   }
 };
 
+var remainingSquares = ["A1","A2","A3","A4","A5","A6","A7",
+               "B1","B2","B3","B4","B5","B6","B7",
+               "C1","C2","C3","C4","C5","C6","C7",
+               "D1","D2","D3","D4","D5","D6","D7",
+               "E1","E2","E3","E4","E5","E6","E7",
+               "F1","F2","F3","F4","F5","F6","F7",
+               "G1","G2","G3","G4","G5","G6","G7"];
+
 function nextSquare(){
+  if (theChooseNextSquare.players.length === 0){
+    var current = remainingSquares[Math.floor(Math.random() * remainingSquares.length)];
+    remainingSquares = remainingSquares.filter(e=>e!=current);
+    theCurrentSquare.setState({currentSquare: current});
+    theBoard.squareDone(current);
+    socket.emit('current_square', current);
+  } else {
+    var toChoose = theChooseNextSquare.state.players[0];
+    socket.emit('choose', toChoose);
+    hidePopUps();
+    document.getElementById("waitForChoose").style.display = "block";
+  };
+};
+
+socket.on('player_gone', function(player){
+  hidePopUps();
+  document.getElementById("playerGone").style.display = "block";
+});
+
+socket.on('chose', function(square){
+  hidePopUps();
+  remainingSquares = remainingSquares.filter(e=>e!=square);
+  theCurrentSquare.setState({currentSquare: square});
+  theBoard.squareDone(square);
+  socket.emit('current_square', square);
 };
 
 var toRender = <div>
@@ -265,23 +299,40 @@ var toRender = <div>
       <button id="nextSquare" onclick={nextSquare}><h2>Next&nbsp;Square</h2></button>
     </div>
     <div id="popUps">
+      
       <div id="waiting" className="popUp"><div>
           <h3>Waiting</h3>
           <hr />
           <p>This won&apos;t take too long, I hope!</p>
       </div></div>
+        
       <div id="tooFew" className="popUp"><div>
           <h3>Too Few Crewmembers</h3>
           <hr />
           <p>Yarr, ye be needin&apos; at least 2 players.</p>
           <button className="close" onClick={hidePopUps}>Okay!</button>
       </div></div>
+        
       <div id="tooFewReady" className="popUp"><div>
           <h3>Too Few Crewmembers Ready</h3>
           <hr />
           <p>Yarr, ye be needin&apos; at least 2 ready players before ye can drop people for bein&apos; slow.</p>
           <button className="close" onClick={hidePopUps}>Okay!</button>
       </div></div>
+        
+      <div id="waitForChoose" className="popUp"><div>
+          <h3>Waiting For Next Square to be Chosen</h3>
+          <hr />
+          <p>This won&apos;t take too long, I hope!</p>
+      </div></div>
+        
+      <div id="playerGone" className="popUp"><div>
+          <h3>Player Gone</h3>
+          <hr />
+          <p>They not be &apos;ere any more. :(</p>
+          <button className="close" onClick={nextSquare}>Next&nbsp;Square</button>
+      </div></div>
+                                               
   </div>
 </div>;
 
