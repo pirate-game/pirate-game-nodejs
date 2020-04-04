@@ -10,7 +10,7 @@
 #keyBox {float: right;}
 #fillBoards {float: left;}
 
-#crewAssembled, #doneBtn {
+#crewAssembled, #doneBtn, #nextSquare {
   float: right;
   display: block;
   text-align: center;
@@ -28,7 +28,7 @@
   margin: 0 5px 15px;
 }
 
-#crewAssembled:hover, #doneBtn:hover {
+#crewAssembled:hover, #doneBtn:hover, #nextSquare:hover {
   background-color: cornflowerblue;
 }
 
