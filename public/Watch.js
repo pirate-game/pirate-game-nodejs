@@ -98,9 +98,9 @@ class ChooseNextSquare extends React.Component{
     this.setState({players:this.state.players.filter(player=>!players.includes(player))});
   }
   render(){
-    return <div>
+    return <div className="chooseNextSquare">
       <h2>Choose Next Square:</h2>
-      <div className="chooseNextSquare">
+      <div>
         <ul>
           {this.state.players.map(player => (
             <li style={{position:'relative'}}>
