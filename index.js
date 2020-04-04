@@ -81,7 +81,7 @@ io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
-    var game = {leader: socket, game_key: key, crew: [], available: true, watching:[]};
+    var game = {leader: socket, game_key: key, crew: [], available: true, watchable:false, watching:[]};
     games.push(game);
   }); 
     
@@ -132,6 +132,7 @@ io.on('connection', function(socket){
   socket.on('start_game', function(){
     var pos = leaderToGame(socket);
     if (pos != -1){
+      games[pos].watchable = true;
       var theCrew = games[pos].crew;
       for (var i = 0; i < theCrew.length; i++){
         theCrew[i].pirate.emit('start_game');
@@ -176,6 +177,9 @@ io.on('connection', function(socket){
       socket.emit('no_such_game');
     } else {
       games[pos].watching.push(socket);
+      if (games[pos].watchable){
+        socket.emit('start_game');
+      };
     };
   });
   
