@@ -189,6 +189,16 @@ io.on('connection', function(socket){
     };
   });
   
+  socket.on('choose_next_square', function(player){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var thoseWatching = games[pos].watching;
+      for (var i = 0; i < thoseWatching.length; i++){
+        thoseWatching[i].emit('choose_next_square', player);
+      };
+    };
+  });
+  
 });
 
 //End of Game Section
