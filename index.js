@@ -207,6 +207,29 @@ io.on('connection', function(socket){
     };
   });
   
+  socket.on('choose', function(toChoose){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var thoseWatching = games[pos].watching;
+      for (var i = 0; i < thoseWatching.length; i++){
+        thoseWatching[i].emit('choose', player);
+      };
+      var playerToChoose = gameAndNameToPlayer(games[pos], toChoose);
+      if (playerToChoose != {}){
+        playerToChoose.emit('choose');
+      } else {
+        socket.emit('player_gone', toChoose);
+      };  
+    };
+  });
+  
+  socket.on('chose', function(square){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      games[pos].leader.emit('chose', square);
+    };
+  });
+  
 });
 
 //End of Game Section
