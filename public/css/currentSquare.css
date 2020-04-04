@@ -1,0 +1,21 @@
+.currentSquare {
+  display: none;
+  background: lightblue;
+  position: fixed;
+  padding: 10px;
+  top: calc(40vh + 300px);
+  width: calc(100% - 40px);
+}
+
+.currentSquare h2 {
+  font-size: 40px;
+  text-align: left;
+}
+
+@media screen and (orientation:landscape){
+  .stage1PopUp {
+    right: 10px;
+    top: calc(130px + 10vh);
+    width: calc(98vw - (100vh - 135px));
+  }
+}
