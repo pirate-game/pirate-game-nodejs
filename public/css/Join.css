@@ -129,7 +129,10 @@ input {
 }
 
 .thingsBox > div > h4 {
-  position: absolute;
+  font-size: 45px;
+  text-align: center;
+  position: relative;
+  top: calc(50% - 80px);
 }
 
 @media screen and (orientation:landscape){
