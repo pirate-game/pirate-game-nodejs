@@ -2,6 +2,7 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 var globalCrew = [];
+var toChoose;
 
 var x;//////////////
 var theBoard;
@@ -269,11 +270,17 @@ function nextSquare(){
     theBoard.squareDone(current);
     socket.emit('current_square', current);
   } else {
-    var toChoose = theChooseNextSquare.state.players[0];
+    toChoose = theChooseNextSquare.state.players[0];
     socket.emit('choose', toChoose);
     hidePopUps();
     document.getElementById("waitForChoose").style.display = "block";
   };
+};
+
+function tooSlowToChoose(){
+  globalCrew = globalCrew.filter(e=>e!=toChoose);
+  socket.emit('too_slow', [toChoose]);
+  nextSquare();
 };
 
 socket.on('player_gone', function(player){
@@ -312,10 +319,6 @@ class Stage3 extends React.Component {
       </div>
     </div>;
   }
-};
-
-function test2(results){
-  ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
 };
 
 var toRender = <div>
@@ -363,6 +366,7 @@ var toRender = <div>
           <h3>Waiting For Next Square to be Chosen</h3>
           <hr />
           <p>This won&apos;t take too long, I hope!</p>
+          <button className="close" onClick={tooSlowToChoose}>Too Slow</button>
       </div></div>
         
       <div id="playerGone" className="popUp"><div>
