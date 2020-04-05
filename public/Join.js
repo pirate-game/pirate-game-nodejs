@@ -61,7 +61,7 @@ const things = {
 
 function thingsInverse(thing){
   for (var i = 0; i < thingsArray.length; i++){
-    if (things[thingsArray[i]] == thing){
+    if (things[thingsArray[i]].props.src == thing.props.src){
       return thingsArray[i];
     };
   };
@@ -451,7 +451,7 @@ function doThing(someThing){
           theThingsBox.setState({cash: null, bank: theThingsBox.state.cash});
           break;
         default:
-          if (numPattern.test(someThing)){
+          if (numPattern.test(thingsInverse(someThing))){
             theThingsBox.setState({cash: parseInt(someThing) + theThingsBox.state.cash});
           };
           break;
