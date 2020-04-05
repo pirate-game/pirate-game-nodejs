@@ -196,12 +196,13 @@ input {
 
 .leaderboardList {
   position: relative;
-  top: 120px;
+  top: 60px;
   max-height: calc(100vh - 300px);
   min-height: 70px;
   background: white;
   overflow: auto;
   border: solid black 3px;
+  width: calc(100% - 5px);
 }
 
 .leaderboardList ul {
