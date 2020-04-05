@@ -106,7 +106,6 @@ input {
   height: calc(100% - 25px);
   position: relative;
   top: 25px;
-  border: 1px solid black;
 }
 
 .thingsBox > div > h3 {
