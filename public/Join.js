@@ -39,6 +39,8 @@ function range(someInt){
   return out;
 };
 
+const thingsArray = ["rob","kill","present","parrot","swap","choose","shield","mirror","bomb","double","bank","200","1000","3000","5000"];
+
 const things = {
   "rob":<img src="imgs/rob.png" />,
   "kill":<img src="imgs/kill.svg" />,
@@ -55,6 +57,15 @@ const things = {
   "1000":<img src="imgs/sym1000.svg" />,
   "3000":<img src="imgs/sym3000.svg" />,
   "5000":<img src="imgs/sym5000.svg" />
+};
+
+function thingsInverse(thing){
+  for (var i = 0; i < thingsArray.length: i++){
+    if (things[thingsArray[i]] == thing){
+      return thingsArray[i];
+    };
+  };
+  return "";
 };
 
 const nextPlace = {
@@ -410,33 +421,33 @@ socket.on('current_square', function(square){
 function doThing(someThing){
   console.log(someThing);
   switch(someThing){
-    case "rob":
+    case things["rob"]:
       break;
-    case "kill":
+    case things["kill"]:
       break;
-    case "present":
+    case things["present"]:
       break;
-    case "parrot":
+    case things["parrot"]:
       break;
-    case "swap":
+    case things["swap"]:
       break;
-    case "c":
+    case things["c"]:
       break;
     default:
       switch(someThing){
-        case "shield":
+        case things["shield"]:
           theThingsBox.setState({shield: "yes"});
           break;
-        case "mirror":
+        case things["mirror"]:
           theThingsBox.setState({mirror: "yes"});
           break;
-        case "bomb":
+        case things["bomb"]:
           theThingsBox.setState({cash: null});
           break;
-        case "double":
+        case things["double"]:
           theThingsBox.setState({cash: 2 * theThingsBox.state.cash});
           break;
-        case "bank":
+        case things["bank"]:
           theThingsBox.setState({cash: null, bank: theThingsBox.state.cash});
           break;
         default:
@@ -445,7 +456,7 @@ function doThing(someThing){
           };
           break;
       };
-      ReactDOM.render(<YouGot what={someThing}/>, document.getElementById("squareWas"));
+      ReactDOM.render(<YouGot what={thingsInverse(someThing)}/>, document.getElementById("squareWas"));
       document.getElementById("squareWas").style.display = "block";
       break;
   };  
