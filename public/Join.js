@@ -3,6 +3,7 @@ var socket = io();
 
 var theBoard;
 var theThingsBox;
+var theStage3;
 var myName;
 var clickMod10 = 0;
 
@@ -459,9 +460,11 @@ class ThingsBox extends React.Component {
 class Stage3 extends React.Component {
   constructor(){
     super();
+    
+    theStage3 = this;
   }
   render(){
-    var pos;
+    var pos = 0;
     for (var i = 0; i < this.props.leaderboard.length; i++){
       if (this.props.leaderboard[i] == myName){
         pos = i;
