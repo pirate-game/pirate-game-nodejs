@@ -407,25 +407,25 @@ class ThingsBox extends React.Component {
   }
   render(){
     return <div className="thingsBox">
-      <div style={{top:"10px", left="10px"}}>
+      <div style={{top:"10px", left:"10px"}}>
         <h3>Shield:</h3>
         <div className="square">
           {this.state.shield ? things["shield"] : null}
         </div>
       </div>
-      <div style={{top:"10px", right="10px"}}>
+      <div style={{top:"10px", right:"10px"}}>
         <h3>Mirror:</h3>
         <div className="square">
           {this.state.mirror ? things["mirror"] : null}
         </div>
       </div>
-      <div style={{bottom:"10px", left="10px"}}>
+      <div style={{bottom:"10px", left:"10px"}}>
         <h3>CASH:</h3>
         <div className="square">
           {this.state.cash}
         </div>
       </div>
-      <div style={{bottom:"10px", right="10px"}}>
+      <div style={{bottom:"10px", right:"10px"}}>
         <h3>Bank:</h3>
         <div className="square">
           {this.state.bank}
