@@ -230,3 +230,8 @@ input {
   overflow-wrap: break-word;
   font-size: 30px;
 }
+
+.leaderboard h3 {
+    font-size: 30px;
+    position: absolute;
+}
