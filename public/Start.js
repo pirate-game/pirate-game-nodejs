@@ -382,7 +382,7 @@ var toRender = <div>
       <Board />
       <CurrentSquare />
       <ChooseNextSquare />
-      <button id="nextSquare" onclick={nextSquare}><h2>Next&nbsp;Square</h2></button>
+      <button id="nextSquare" onClick={nextSquare}><h2>Next&nbsp;Square</h2></button>
       <div id="nextSquareConfirm" />
     </div>
     <div id="stage3" className="stage3"></div>
