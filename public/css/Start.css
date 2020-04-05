@@ -118,8 +118,8 @@
 
 .leaderboardList {
   position: relative;
-  top: 60px;
-  max-height: calc(100vh - 330px);
+  top: 30px;
+  max-height: calc(100vh - 270px);
   min-height: 70px;
   background: white;
   overflow: auto;
