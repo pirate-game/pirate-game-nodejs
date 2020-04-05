@@ -338,7 +338,7 @@ socket.on('chose', function(square){
 
 socket.on('request_state', function(){
   socket.emit('state', [theBoard.state, theCurrentSquare.state, theChooseNextSquare.state]);
-};
+});
 
 class Stage3 extends React.Component {
   constructor(){
