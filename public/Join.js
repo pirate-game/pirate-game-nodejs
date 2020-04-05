@@ -452,7 +452,7 @@ function doThing(someThing){
           break;
         default:
           if (numPattern.test(thingsInverse(someThing))){
-            theThingsBox.setState({cash: parseInt(someThing) + theThingsBox.state.cash});
+            theThingsBox.setState({cash: parseInt(thingsInverse(someThing)) + theThingsBox.state.cash});
           };
           break;
       };
