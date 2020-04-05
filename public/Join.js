@@ -60,7 +60,7 @@ const things = {
 };
 
 function thingsInverse(thing){
-  for (var i = 0; i < thingsArray.length: i++){
+  for (var i = 0; i < thingsArray.length; i++){
     if (things[thingsArray[i]] == thing){
       return thingsArray[i];
     };
