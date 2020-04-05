@@ -59,6 +59,7 @@ input {
   overflow: auto;
   background-color: rgb(220,220,196);
   background-color: rgba(0,0,0,0.4);
+  height: calc(90vh - 165px);
 }
 
 .stage2PopUp > div{
