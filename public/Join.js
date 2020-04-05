@@ -471,9 +471,9 @@ class Stage3 extends React.Component {
         break;
       };
     };
-    return <div>
-      <h3>The Winner was {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
-      <h3>You came {ordinal(pos+1)} with {this.props.leaderboard[pos].score}</h3>
+    return <div className="leaderboard">
+      <h3 style={{top: "120px"}}>The Winner was {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
+      <h3 style={{top: "150px"}}>You came {ordinal(pos+1)} with {this.props.leaderboard[pos].score}</h3>
       <h3>Leaderboard:</h3>
       <div className="leaderboardList">
         <ul>
