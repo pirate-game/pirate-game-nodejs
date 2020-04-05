@@ -474,7 +474,7 @@ class Stage3 extends React.Component {
     return <div>
       <h3>The Winner was {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
       <h3>You came {ordinal(pos+1)} with {this.props.leaderboard[pos].score}</h3>
-      <h2>Leaderboard:</h2>
+      <h3>Leaderboard:</h3>
       <div className="leaderboardList">
         <ul>
           {range(this.props.leaderboard.length).map(place => (
