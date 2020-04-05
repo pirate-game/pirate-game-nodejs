@@ -179,6 +179,17 @@ io.on('connection', function(socket){
       games[pos].watching.push(socket);
       if (games[pos].watchable){
         socket.emit('start_game');
+        games[pos].leader.emit('request_state');
+      };
+    };
+  });
+  
+  socket.on('state', function(state){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var thoseWatching = games[pos].watching;
+      for (var i = 0; i < thoseWatching.length; i++){
+        thoseWatching[i].emit('state', state);
       };
     };
   });
