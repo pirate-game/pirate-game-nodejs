@@ -366,6 +366,10 @@ class Stage3 extends React.Component {
   }
 };
 
+socket.on('ready', function(name){
+  unreadyCrew = unreadyCrew.filter(e=>e!=name);
+});
+
 var toRender = <div>
     <div className="stage0">
       <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
