@@ -37,3 +37,70 @@ input {
   text-align: center;
   border: 1px solid black;
 }
+
+.leaderboardList {
+  position: relative;
+  top: 30px;
+  max-height: calc(100vh - 270px);
+  min-height: 70px;
+  background: white;
+  overflow: auto;
+  border: solid black 3px;
+  width: calc(100% - 5px);
+}
+
+.leaderboardList ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaderboardList ul li {
+  padding: 5px 10px;
+}
+
+.leaderboardList ul li:nth-child(odd) { background: #eee; }
+
+.leaderboardRight {
+  display: inline-block;
+  float: right;
+  font-size: 30px;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: -10px;
+}
+
+.leaderboardLeft {
+  width: calc(100% - 30px);
+  overflow-wrap: break-word;
+  font-size: 30px;
+}
+
+.leaderboard h3 {
+    font-size: 30px;
+    position: absolute;
+}
+
+.backHome {
+  float: right;
+  display: block;
+  text-align: center;
+  font-family: 'Calibri', Fallback, sans-serif;
+  background-color: #CC6600;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  border-radius: 6px;
+  border-width: 0;
+  height: 50px;
+  margin: 0 5px 15px;
+}
+
+.backHome:hover {
+   background-color: cornflowerblue;
+}

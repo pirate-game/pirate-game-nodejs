@@ -81,7 +81,7 @@ io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
-    var game = {leader: socket, game_key: key, crew: [], available: true, watching:[]};
+    var game = {leader: socket, game_key: key, crew: [], available: true, watchable:false, watching:[]};
     games.push(game);
   }); 
     
@@ -132,6 +132,7 @@ io.on('connection', function(socket){
   socket.on('start_game', function(){
     var pos = leaderToGame(socket);
     if (pos != -1){
+      games[pos].watchable = true;
       var theCrew = games[pos].crew;
       for (var i = 0; i < theCrew.length; i++){
         theCrew[i].pirate.emit('start_game');
@@ -152,7 +153,11 @@ io.on('connection', function(socket){
           player.emit('too_slow');
           games[pos].crew = games[pos].crew.filter((x)=>(x!=player));
         };
-      }; 
+      };
+      var thoseWatching = games[pos].watching;
+      for (var j = 0; j < thoseWatching.length; j++){
+        thoseWatching[j].emit('too_slow', who);
+      };
     };
   });
   
@@ -172,6 +177,56 @@ io.on('connection', function(socket){
       socket.emit('no_such_game');
     } else {
       games[pos].watching.push(socket);
+      if (games[pos].watchable){
+        socket.emit('start_game');
+      };
+    };
+  });
+  
+  socket.on('current_square', function(square){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var theCrew = games[pos].crew;
+      for (var i = 0; i < theCrew.length; i++){
+        theCrew[i].pirate.emit('current_square', square);
+      };
+      var thoseWatching = games[pos].watching;
+      for (var j = 0; j < thoseWatching.length; j++){
+        thoseWatching[j].emit('current_square', square);
+      };
+    };
+  });
+  
+  socket.on('choose_next_square', function(player){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var thoseWatching = games[pos].watching;
+      for (var i = 0; i < thoseWatching.length; i++){
+        thoseWatching[i].emit('choose_next_square', player);
+      };
+    };
+  });
+  
+  socket.on('choose', function(toChoose){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var thoseWatching = games[pos].watching;
+      for (var i = 0; i < thoseWatching.length; i++){
+        thoseWatching[i].emit('choose', player);
+      };
+      var playerToChoose = gameAndNameToPlayer(games[pos], toChoose);
+      if (playerToChoose != {}){
+        playerToChoose.emit('choose');
+      } else {
+        socket.emit('player_gone', toChoose);
+      };  
+    };
+  });
+  
+  socket.on('chose', function(square){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      games[pos].leader.emit('chose', square);
     };
   });
   

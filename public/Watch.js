@@ -2,8 +2,19 @@ var root = document.getElementById('root');
 var socket = io();
 
 var theBoard;
+var theCurrentSquare;
+var theChooseNextSquare;
+var theStage3;
 
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
+
+function range(someInt){
+  var out = [];
+  for (var i = 0; i < someInt; i++){
+    out.push(i);
+  };
+  return out;
+};
 
 class Board extends React.Component {
   constructor(){
@@ -63,6 +74,96 @@ socket.on('start_game', function(){
   showStage("stage2");
 });
 
+class CurrentSquare extends React.Component{
+  constructor(){
+    super();
+    this.state = {currentSquare:"??"};
+    
+    theCurrentSquare = this;
+  }
+  render(){
+    return <div className="currentSquare">
+      <h2>Current Square: {this.state.currentSquare}</h2>
+    </div>;
+  }
+};
+
+socket.on('current_square', function(square){
+  theCurrentSquare.setState({currentSquare: square});
+  theBoard.squareDone(square);
+});
+
+class ChooseNextSquare extends React.Component{
+  constructor(){
+    super();
+    this.state = {players: []};
+    
+    theChooseNextSquare = this;
+  }
+  addPlayer(player){
+    this.setState({players:this.state.players.concat([player])});
+  }
+  removePlayers(players){
+    this.setState({players:this.state.players.filter(player=>!players.includes(player))});
+  }
+  render(){
+    return <div className="chooseNextSquare">
+      <h2>Choose&nbsp;Next&nbsp;Square:</h2>
+      <div>
+        <ul>
+          {this.state.players.map(player => (
+            <li style={{position:'relative'}}>
+              <div>{player}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>;
+  }
+};
+
+socket.on('choose_next_square', function(player){
+  theChooseNextSquare.addPlayer(player)
+});
+
+socket.on('too_slow', function(who){
+  theChooseNextSquare.removePlayers(who)
+});
+
+socket.on('choose', function(player){
+  theChooseNextSquare.removePlayers([player])
+});
+
+
+class Stage3 extends React.Component {
+  constructor(){
+    super();
+    
+    theStage3 = this;
+  }
+  render(){
+    return <div className="leaderboard">
+      <button className="backHome" onClick={() => {window.location='index.html';}}>Back to the Homepage</button>
+      <h3 style={{top: "120px"}}>The Winner was {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
+      <h3 style={{top: "170px"}}>Leaderboard:</h3>
+      <div className="leaderboardList">
+        <ul>
+          {range(this.props.leaderboard.length).map(place => (
+            <li style={{position:'relative',padding:'0 10px'}}>
+              <div className="leaderboardRight">{this.props.leaderboard[place].score}</div>
+              <div className="leaderboardLeft">{place+1}. {this.props.leaderboard[place].name}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>;
+  }
+};
+
+socket.on('game_over', function(results){
+  ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+});
+
 var toRender = <div>
   <div className="stage0">
     <h2 style={{marginTop: 0}}>What game be ye watchin&apos;?</h2>
@@ -71,7 +172,10 @@ var toRender = <div>
   </div>
   <div className="stage2">
     <Board />
+    <CurrentSquare />
+    <ChooseNextSquare />
   </div>
+  <div id="stage3" className="stage3" />
   <div id="popUps">
     <div id="waiting" className="popUp"><div>
         <h3>Waiting</h3>

@@ -2,17 +2,41 @@ var root = document.getElementById('root');
 var socket = io();
 
 var theBoard;
+var theThingsBox;
+var theStage3;
+var myName;
 var clickMod10 = 0;
 
 function test(){
   hideStage("stage0");
-  showStage("stage1");
+  showStage("stage3");
 };
 
 const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 const squarePattern = /^[ABCDEFG][1234567]$/;
+
+function ordinal(someInt){
+  var suffixes = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"];
+  switch(someInt % 100){
+    case 11:
+    case 12:
+    case 13:
+        return someInt.toString() + "th";
+        break;
+    default:
+        return someInt.toString() + suffixes[someInt % 10];
+  };
+};
+
+function range(someInt){
+  var out = [];
+  for (var i = 0; i < someInt; i++){
+    out.push(i);
+  };
+  return out;
+};
 
 const things = {
   "rob":<img src="imgs/rob.png" />,
@@ -91,6 +115,7 @@ function attemptJoin(){
       hidePopUps();
       document.getElementById("waiting").style.display = "block";
       socket.emit('attempt_join', name, key);
+      myName = name;
     } else {
       hidePopUps();
       document.getElementById("invalidKey").style.display = "block";
@@ -173,7 +198,7 @@ class Board extends React.Component {
       possibleSquares = possibleSquares.filter((e)=>(e!=current));
       randBoard[current] = ordThing(i);
     };
-    this.setState({board:randBoard});
+    this.setState({board:randBoard, choosing:false});
   }
   updateBoard(square, thing){
     var temp = Object.assign({}, this.state.board);
@@ -200,7 +225,7 @@ class Board extends React.Component {
                            "E1","E2","E3","E4","E5","E6","E7",
                            "F1","F2","F3","F4","F5","F6","F7",
                            "G1","G2","G3","G4","G5","G6","G7"];
-    var temp = {};
+    var temp = {choosing: false};
     for (var i = 0; i < 49; i++){
       temp[possibleSquares[i]] = things["200"];
     };
@@ -294,9 +319,11 @@ function fillRandomly(){
   socket.emit('board_ready');
   hideStage("stage1");
   showStage("stage2");
+  document.getElementById("waitingForOthers").style.display = "block";
 };
 
 function fillItMyself(){
+  squareClicked("");
   document.getElementById("fillInBoard").style.display = "none";
   document.getElementById("placerob").style.display = "block";
 };
@@ -370,8 +397,103 @@ function place200(){
   socket.emit('board_ready');
   hideStage("stage1");
   showStage("stage2");
+  document.getElementById("waitingForOthers").style.display = "block";
 };
 
+socket.on('current_square', function(square){
+  hidePopUps();
+  /*stuff*/
+});
+
+function attemptChooseSquare(){
+  var proposedSquare = document.getElementById("chooseSquareInput").value;
+  if (squarePattern.test(proposedSquare)){
+    if (theBoard.state.taken.includes(proposedSquare)){
+      hidePopUps();
+      document.getElementById("squareTaken").style.display = "block";
+    } else {
+      hidePopUps();
+      document.getElementById("waitingForChoice").style.display = "block";
+      socket.emit('chose', proposedSquare);
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidSquare").style.display = "block";
+  };
+};
+
+class ThingsBox extends React.Component {
+  constructor(){
+    super();
+    this.state = {shield: "no", mirror: "no", cash: null, bank: null};
+    
+    theThingsBox = this;
+  }
+  render(){
+    return <div className="thingsBox">
+      <div style={{top:"5px", left:"5px"}}>
+        <h3>Shield:</h3>
+        <div>
+          {this.state.shield == "no" ? null : things["shield"]}
+          {this.state.shield == "gone" ? <div className="crossout" /> : null}  
+        </div>
+      </div>
+      <div style={{top:"5px", right:"5px"}}>
+        <h3>Mirror:</h3>
+        <div>
+          {this.state.mirror == "no" ? null : things["mirror"]}
+          {this.state.mirror == "gone" ? <div className="crossout" /> : null}
+        </div>
+      </div>
+      <div style={{bottom:"5px", left:"5px"}}>
+        <h3>CASH:</h3>
+        <h4>{this.state.cash}</h4>
+      </div>
+      <div style={{bottom:"5px", right:"5px"}}>
+        <h3>Bank:</h3>
+        <h4>{this.state.bank}</h4>
+      </div>
+    </div>;
+  }
+};
+
+class Stage3 extends React.Component {
+  constructor(){
+    super();
+    
+    theStage3 = this;
+  }
+  render(){
+    var pos = 0;
+    for (var i = 0; i < this.props.leaderboard.length; i++){
+      if (this.props.leaderboard[i].name == myName){
+        pos = i;
+        break;
+      };
+    };
+    return <div className="leaderboard">
+      <button className="backHome" onClick={() => {window.location='index.html';}}>Back to the Homepage</button>
+      <h3 style={{top: "120px"}}>The Winner was {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
+      <h3 style={{top: "150px"}}>You came {ordinal(pos+1)} with {this.props.leaderboard[pos].score}</h3>
+      <h3 style={{top: "200px"}}>Leaderboard:</h3>
+      <div className="leaderboardList">
+        <ul>
+          {range(this.props.leaderboard.length).map(place => (
+            <li style={{position:'relative',padding:'0 10px'}}>
+              <div className="leaderboardRight">{this.props.leaderboard[place].score}</div>
+              <div className="leaderboardLeft">{place+1}. {this.props.leaderboard[place].name}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>;
+  }
+};
+
+socket.on('game_over', function(results){
+  ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+});
+  
 var toRender = <div>
   <div className="stage0">
     <div>
@@ -468,7 +590,27 @@ var toRender = <div>
       </div>
 
     </div>
+
+    <div className="stage2">
+      
+      <ThingsBox />
+      
+      <div id="chooseSquare" className="stage2PopUp"><div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose the Next Square</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          <img src="imgs/c.png" />
+        </div>
+        <hr />
+        <p>Choose a square.<br />You can click on the square to select it.</p>
+        <input type="text" className="placeInput" id="chooseSquareInput" maxLength="2" />
+        <button className="choosePlace close" onClick={attemptChooseSquare} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div></div>
+
+    </div>
+
   </div>
+
+  <div id="stage3" className="stage3"></div>
 
   <div id="popUps">
 
@@ -551,6 +693,25 @@ var toRender = <div>
         <p>Oops! You&apos;ve chosen the same square multiple times! Choose again.</p>
         <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
+     
+    <div id="waitingForOthers" className="popUp"><div>
+      <h3>Waiting for the Other Crew to Fill Their Boards</h3>
+      <hr />
+      <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+    
+    <div id="waitingForSquare" className="popUp"><div>
+      <h3>Waiting for the Current Square</h3>
+      <hr />
+      <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+    
+    <div id="waitingForChoice" className="popUp"><div>
+      <h3>Waiting for the Chosen Square</h3>
+      <hr />
+      <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+      
   </div>
 </div>;
 
