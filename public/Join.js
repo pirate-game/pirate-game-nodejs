@@ -3,17 +3,39 @@ var socket = io();
 
 var theBoard;
 var theThingsBox;
+var myName;
 var clickMod10 = 0;
 
 function test(){
   hideStage("stage0");
-  showStage("stage1");
+  showStage("stage3");
 };
 
 const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 const squarePattern = /^[ABCDEFG][1234567]$/;
+
+function ordinal(someInt){
+  var suffixes = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"];
+  switch(someInt % 100){
+    case 11:
+    case 12:
+    case 13:
+        return someInt.toString() + "th";
+        break;
+    default:
+        return someInt.toString() + suffixes[someInt % 10];
+  };
+};
+
+function range(someInt){
+  var out = [];
+  for (var i = 0; i < someInt; i++){
+    out.push(i);
+  };
+  return out;
+};
 
 const things = {
   "rob":<img src="imgs/rob.png" />,
@@ -92,6 +114,7 @@ function attemptJoin(){
       hidePopUps();
       document.getElementById("waiting").style.display = "block";
       socket.emit('attempt_join', name, key);
+      myName = name;
     } else {
       hidePopUps();
       document.getElementById("invalidKey").style.display = "block";
@@ -431,7 +454,41 @@ class ThingsBox extends React.Component {
       </div>
     </div>;
   }
-}
+};
+
+class Stage3 extends React.Component {
+  constructor(){
+    super();
+  }
+  render(){
+    var pos;
+    for (var i = 0; i < this.props.leaderboard.length; i++){
+      if (this.props.leaderboard[i] == myName){
+        pos = i;
+        break;
+      };
+    };
+    return <div>
+      <h3>Winner: {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
+      <h3>You came: {ordinal(pos+1)} with {this.props.leaderboard[pos].score}</h3>
+      <h2>Leaderboard:</h2>
+      <div className="leaderboardList">
+        <ul>
+          {range(this.props.leaderboard.length).map(place => (
+            <li style={{position:'relative'}}>
+              <div className="leaderboardRight">{this.props.leaderboard[place].score}</div>
+              <div className="leaderboardLeft">{place+1}. {this.props.leaderboard[place].name}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>;
+  }
+};
+
+socket.on('game_over', function(results){
+  ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+});
 
 var toRender = <div>
   <div className="stage0">
@@ -548,6 +605,8 @@ var toRender = <div>
     </div>
 
   </div>
+
+  <div id="stage3" className="stage3"></div>
 
   <div id="popUps">
 
