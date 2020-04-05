@@ -65,7 +65,7 @@ input {
 }
 
 .stage2PopUp, .thingsBox {
-  height: calc(90vh - 165px);
+  height: calc(60vh - 340px);
 }
 
 .stage2PopUp > div {
@@ -87,6 +87,15 @@ input {
   height: 100px;
 }
 
+.thingsBox > div {
+    position: absolute;
+    border: 2px solid black;
+    border-radius: 0;
+    height: calc(50% - 40px);
+    width: calc(50% - 40px);
+    padding: 10px;
+}
+
 @media screen and (orientation:landscape){
   .stage1PopUp, .stage2PopUp, .thingsBox {
     right: 10px;
@@ -99,6 +108,10 @@ input {
   }
   .stage1PopUp .close, .stage2PopUp .close, .thingsBox .close {
     height: 70px;
+  }
+  
+  .stage2PopUp, .thingsBox {
+    height: calc(90vh - 165px);
   }
 }
 
