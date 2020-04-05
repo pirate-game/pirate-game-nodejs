@@ -195,9 +195,11 @@ input {
 }
 
 .leaderboardList {
+  position: relative;
+  top: 120px;
+  max-height: calc(100vh - 300px);
   min-height: 70px;
-  max-height: -webkit-fill-available;
-  background: #fff;
+  background: white;
   overflow: auto;
   border: solid black 3px;
 }
