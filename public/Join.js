@@ -466,7 +466,7 @@ class Stage3 extends React.Component {
   render(){
     var pos = 0;
     for (var i = 0; i < this.props.leaderboard.length; i++){
-      if (this.props.leaderboard[i] == myName){
+      if (this.props.leaderboard[i].name == myName){
         pos = i;
         break;
       };
