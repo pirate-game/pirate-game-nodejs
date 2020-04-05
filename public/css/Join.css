@@ -117,7 +117,7 @@ input {
     top: calc(130px + 10vh);
     width: calc(98vw - (100vh - 135px));
   }
-  .stage1PopUp .square, .stage2PopUp .square, .thingsBox .square {
+  .stage1PopUp .square, .stage2PopUp .square {
     height: 62px;
     width: 62px;
   }
