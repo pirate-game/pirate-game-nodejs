@@ -40,43 +40,63 @@ input {
   border: 1px solid black;
 }
 
-.stage1PopUp {
+.stage1PopUp, .stage2PopUp {
   display: none;
-  background: white;
-  border: 1px solid #888;
   position: fixed;
-  padding: 10px;
   top: calc(40vh + 300px);
   width: calc(100% - 40px);
 }
 
-.stage1PopUp .square {
+.stage1PopUp {
+  background: white;
+  border: 1px solid #888;
+  padding: 10px;
+}
+
+.stage2PopUp {
+  z-index: 1;
+  padding-top: 10px;
+  overflow: auto;
+  background-color: rgb(220,220,196);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.stage2PopUp > div{
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+  width: 80%;
+  z-index: 1;
+}
+
+.stage1PopUp .square, .stage2PopUp .square {
   height: 120px;
   width: 120px;
 }
 
-.stage1PopUp .close {
+.stage1PopUp .close, .stage2PopUp .close {
   display: inline-block;
   height: 100px;
 }
 
 @media screen and (orientation:landscape){
-  .stage1PopUp {
+  .stage1PopUp, .stage2PopUp {
     right: 10px;
     top: calc(130px + 10vh);
     width: calc(98vw - (100vh - 135px));
   }
-  .stage1PopUp .square {
+  .stage1PopUp .square, .stage2PopUp .square {
     height: 62px;
     width: 62px;
   }
-  .stage1PopUp .close {
+  .stage1PopUp .close, .stage2PopUp .close {
     height: 70px;
   }
 }
 
 @media screen and (orientation:portrait){
-  .popUp, .stage1PopUp {
+  .popUp, .stage1PopUp, .stage2PopUp {
     font-size: xx-large;
   }
 }
