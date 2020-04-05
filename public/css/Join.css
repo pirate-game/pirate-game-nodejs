@@ -97,6 +97,11 @@ input {
     height: calc(50% - 33px);
     width: calc(50% - 33px);
     padding: 10px;
+    text-align: center;
+}
+
+.thingsBox > div > div {
+  display: inline-block;
 }
 
 .thingsBox > div > h3 {
