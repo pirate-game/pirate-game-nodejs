@@ -410,13 +410,15 @@ class ThingsBox extends React.Component {
       <div style={{top:"5px", left:"5px"}}>
         <h3>Shield:</h3>
         <div>
-          {this.state.shield ? things["shield"] : null}
+          {this.state.shield == "no" ? null : things["shield"]}
+          {this.state.shield == "gone" ? <div className="crossout" /> : null}  
         </div>
       </div>
       <div style={{top:"5px", right:"5px"}}>
         <h3>Mirror:</h3>
         <div>
-          {this.state.mirror ? things["mirror"] : null}
+          {this.state.mirror == "no" ? null : things["mirror"]}
+          {this.state.mirror == "gone" ? <div className="crossout" /> : null}
         </div>
       </div>
       <div style={{bottom:"5px", left:"5px"}}>
