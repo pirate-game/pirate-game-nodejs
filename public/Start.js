@@ -314,6 +314,7 @@ function nextSquareMid(){
     hidePopUps();
     document.getElementById("waitForChoose").style.display = "block";
   };
+  unreadyCrew = globalCrew;
 };
 
 function tooSlowToChoose(){
@@ -334,6 +335,10 @@ socket.on('chose', function(square){
   theBoard.squareDone(square);
   socket.emit('current_square', square);
 });
+
+socket.on('request_state', function(){
+  socket.emit('state', [theBoard.state, theCurrentSquare.state, theChooseNextSquare.state]);
+};
 
 class Stage3 extends React.Component {
   constructor(){
