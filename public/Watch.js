@@ -8,6 +8,14 @@ var theStage3;
 
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 
+function range(someInt){
+  var out = [];
+  for (var i = 0; i < someInt; i++){
+    out.push(i);
+  };
+  return out;
+};
+
 class Board extends React.Component {
   constructor(){
     super();
@@ -127,7 +135,7 @@ socket.on('choose', function(player){
 });
 
 
-var root = document.getElementById('root');
+/*var root = document.getElementById('root');
 var socket = io();
 var key = '';
 var globalCrew = [];
@@ -416,7 +424,7 @@ socket.on('chose', function(square){
   theCurrentSquare.setState({currentSquare: square});
   theBoard.squareDone(square);
   socket.emit('current_square', square);
-});
+});*/
 
 class Stage3 extends React.Component {
   constructor(){
