@@ -193,3 +193,40 @@ input {
     border: none;
     width: 100%;
 }
+
+.leaderboardList {
+  min-height: 70px;
+  max-height: -webkit-fill-available;
+  background: #fff;
+  overflow: auto;
+  border: solid black 3px;
+}
+
+.leaderboardList ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaderboardList ul li {
+  padding: 5px 10px;
+}
+
+.leaderboardList ul li:nth-child(odd) { background: #eee; }
+
+.leaderboardRight {
+  display: inline-block;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: -15px;
+}
+
+.leaderboardLeft {
+  width: calc(100% - 30px);
+  overflow-wrap: break-word;
+}
