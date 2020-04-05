@@ -50,7 +50,7 @@ input {
   display: none;
 }
 
-.stage1PopUp {
+.stage1PopUp, .thingsBox {
   background: white;
   border: 1px solid #888;
   padding: 10px;
@@ -68,7 +68,7 @@ input {
   height: calc(90vh - 165px);
 }
 
-.stage2PopUp > div{
+.stage2PopUp > div {
   background-color: white;
   margin: auto;
   padding: 20px;
@@ -88,22 +88,22 @@ input {
 }
 
 @media screen and (orientation:landscape){
-  .stage1PopUp, .stage2PopUp {
+  .stage1PopUp, .stage2PopUp, .thingsBox {
     right: 10px;
     top: calc(130px + 10vh);
     width: calc(98vw - (100vh - 135px));
   }
-  .stage1PopUp .square, .stage2PopUp .square {
+  .stage1PopUp .square, .stage2PopUp .square, .thingsBox .square {
     height: 62px;
     width: 62px;
   }
-  .stage1PopUp .close, .stage2PopUp .close {
+  .stage1PopUp .close, .stage2PopUp .close, .thingsBox .close {
     height: 70px;
   }
 }
 
 @media screen and (orientation:portrait){
-  .popUp, .stage1PopUp, .stage2PopUp {
+  .popUp, .stage1PopUp, .stage2PopUp, .thingsBox {
     font-size: xx-large;
   }
 }
