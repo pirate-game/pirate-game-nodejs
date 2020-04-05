@@ -9,6 +9,14 @@ var theCurrentSquare;
 var theChooseNextSquare;
 var theStage3;
 
+function range(someInt){
+  var out = [];
+  for (var i = 0; i < someInt; i++){
+    out.push(i);
+  };
+  return out;
+};
+
 class KeyBox extends React.Component {
   constructor() {
     super();
