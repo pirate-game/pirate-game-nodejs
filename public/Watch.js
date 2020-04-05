@@ -134,6 +134,12 @@ socket.on('choose', function(player){
   theChooseNextSquare.removePlayers([player])
 });
 
+socket.on('state', function(gameState){
+  theBoard.setState(gameState[0]);
+  theCurrentSquare.setState(gameState[1]);
+  theChooseNextSquare.setState(gameState[2]);
+});
+
 
 class Stage3 extends React.Component {
   constructor(){
