@@ -16,6 +16,7 @@ const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 const squarePattern = /^[ABCDEFG][1234567]$/;
+const numPattern = /^[0-9]*$/;
 
 function ordinal(someInt){
   var suffixes = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"];
@@ -402,8 +403,70 @@ function place200(){
 
 socket.on('current_square', function(square){
   hidePopUps();
-  /*stuff*/
+  theBoard.squareDone(square);
+  doThing(theBoard.state.board[square]);
 });
+
+function doThing(someThing){
+  console.log(someThing);
+  switch(someThing){
+    case "rob":
+      break;
+    case "kill":
+      break;
+    case "present":
+      break;
+    case "parrot":
+      break;
+    case "swap":
+      break;
+    case "c":
+      break;
+    default:
+      switch(someThing){
+        case "shield":
+          theThingsBox.setState({shield: "yes"});
+          break;
+        case "mirror":
+          theThingsBox.setState({mirror: "yes"});
+          break;
+        case "bomb":
+          theThingsBox.setState({cash: null});
+          break;
+        case "double":
+          theThingsBox.setState({cash: 2 * theThingsBox.state.cash});
+          break;
+        case "bank":
+          theThingsBox.setState({cash: null, bank: theThingsBox.state.cash});
+          break;
+        default:
+          if (numPattern.test(someThing)){
+            theThingsBox.setState({cash: parseInt(someThing) + theThingsBox.state.cash});
+          };
+          break;
+      };
+      ReactDOM.render(<YouGot what={someThing}/>, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+  };  
+};
+                      
+function YouGot(props){
+  return <div>
+    <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{props.what[0].toUpperCase()+props.what.substr(1)}&apos;</h3>
+    <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+      {things[props.what]}
+    </div>
+    <hr />
+    <p>This doesn&apos;t require you to do anything.</p>
+    <button className="choosePlace close" onClick={readyNow} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+  </div>;
+};
+
+function readyNow(){
+ document.getElementById("squareWas").style.display = "none";
+ socket.emit('ready');
+};
 
 function attemptChooseSquare(){
   var proposedSquare = document.getElementById("chooseSquareInput").value;
@@ -605,6 +668,8 @@ var toRender = <div>
         <input type="text" className="placeInput" id="chooseSquareInput" maxLength="2" />
         <button className="choosePlace close" onClick={attemptChooseSquare} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div></div>
+          
+      <div id="squareWas" className="stage2PopUp" />
 
     </div>
 
