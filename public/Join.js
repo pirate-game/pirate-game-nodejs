@@ -472,6 +472,7 @@ class Stage3 extends React.Component {
       };
     };
     return <div className="leaderboard">
+      <button className="backHome" onClick={() => {window.location='index.html';}}>Back to the Homepage</button>
       <h3 style={{top: "120px"}}>The Winner was {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
       <h3 style={{top: "150px"}}>You came {ordinal(pos+1)} with {this.props.leaderboard[pos].score}</h3>
       <h3 style={{top: "200px"}}>Leaderboard:</h3>
@@ -492,7 +493,7 @@ class Stage3 extends React.Component {
 socket.on('game_over', function(results){
   ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
 });
-
+  
 var toRender = <div>
   <div className="stage0">
     <div>
