@@ -111,6 +111,19 @@ input {
   font-size: 25px;
 }
 
+.thingsBox > div > div > img {
+  max-height: 95%;
+  max-width: 95%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: cell;
+}
+
+.thingsBox > div > h4 {
+  position: absolute;
+}
+
 @media screen and (orientation:landscape){
   .stage1PopUp, .stage2PopUp, .thingsBox {
     right: 10px;
