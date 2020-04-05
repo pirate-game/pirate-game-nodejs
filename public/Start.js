@@ -2,6 +2,7 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 var globalCrew = [];
+var unreadyCrew = [];
 var toChoose;
 
 var x;//////////////
@@ -133,6 +134,7 @@ class Stage1 extends React.Component {
     hidePopUps();
     if (this.state.ready.length >= 2){
       globalCrew = this.state.ready;
+      unreadyCrew = globalCrew;
       socket.emit('too_slow', this.state.waitingFor);
       hideStage("stage1");
       showStage("stage2");
@@ -262,8 +264,46 @@ var remainingSquares = ["A1","A2","A3","A4","A5","A6","A7",
                "F1","F2","F3","F4","F5","F6","F7",
                "G1","G2","G3","G4","G5","G6","G7"];
 
+function NextSquareConfirm(){
+  return (<React.Fragment>
+    <div className="popUp"><div>
+      <h3>Confirm Next Square</h3>
+      <hr />
+      <div>
+        <p style={{display: 'inline-block', width: 'calc(100% - 190px)'}}>The crewmembers below are not ready and will be dropped from the game.</p>
+        <div style={{display: 'inline-block'}}>
+          <button onClick={nextSquareMid}>Okay!</button>
+          <button onClick={hidePopUps}>Wait!</button>
+        </div>
+      </div>
+      <div className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
+        <ul>
+          {unreadyCrew.map(crewMember => (
+            <li style={{position:'relative'}}>
+              <div className="nameLiDiv">{crewMember}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div></div>
+  </React.Fragment>);
+};
+
 function nextSquare(){
-  if (theChooseNextSquare.players.length === 0){
+  hidePopUps();
+  if (globalCrew.length - unreadyCrew.length >= 2){
+    if (unreadyCrew.length == 0){
+      nextSquareMid();
+    } else {
+      ReactDOM.render(<NextSquareConfirm />, document.getElementById("nextSquareConfirm"));
+    };
+  } else {
+    document.getElementById("tooFewReady").style.display = "block";
+  };
+};
+
+function nextSquareMid(){
+  if (theChooseNextSquare.state.players.length === 0){
     var current = remainingSquares[Math.floor(Math.random() * remainingSquares.length)];
     remainingSquares = remainingSquares.filter(e=>e!=current);
     theCurrentSquare.setState({currentSquare: current});
@@ -338,6 +378,7 @@ var toRender = <div>
       <CurrentSquare />
       <ChooseNextSquare />
       <button id="nextSquare" onclick={nextSquare}><h2>Next&nbsp;Square</h2></button>
+      <div id="nextSquareConfirm" />
     </div>
     <div id="stage3" className="stage3"></div>
     <div id="popUps">
