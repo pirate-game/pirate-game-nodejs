@@ -456,13 +456,14 @@ function doThing(someThing){
           };
           break;
       };
-      ReactDOM.render(<YouGot what={thingsInverse(someThing)}/>, document.getElementById("squareWas"));
+      ReactDOM.render(<YouGot what={thingsInverse(someThing)} />, document.getElementById("squareWas"));
       document.getElementById("squareWas").style.display = "block";
       break;
   };  
 };
                       
 function YouGot(props){
+  console.log(props);
   return <div>
     <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{props.what[0].toUpperCase()+props.what.substr(1)}&apos;</h3>
     <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
