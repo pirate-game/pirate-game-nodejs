@@ -134,7 +134,6 @@ class Stage1 extends React.Component {
     hidePopUps();
     if (this.state.ready.length >= 2){
       globalCrew = this.state.ready;
-      unreadyCrew = globalCrew;
       socket.emit('too_slow', this.state.waitingFor);
       hideStage("stage1");
       showStage("stage2");
