@@ -2,6 +2,7 @@ var root = document.getElementById('root');
 var socket = io();
 
 var theBoard;
+var theThingsBox;
 var clickMod10 = 0;
 
 function test(){
@@ -397,6 +398,43 @@ function attemptChooseSquare(){
   };
 };
 
+class ThingsBox extends React.Component {
+  constructor(){
+    super();
+    this.state = {shield: false, mirror: false, cash: null, bank: null};
+    
+    theThingsBox = this;
+  }
+  render(){
+    return <div className="thingsBox">
+      <div>
+        <h3>Shield:</h3>
+        <div className="square">
+          {this.state.shield ? things["shield"] : null}
+        </div>
+      </div>
+      <div>
+        <h3>Mirror:</h3>
+        <div className="square">
+          {this.state.mirror ? things["mirror"] : null}
+        </div>
+      </div>
+      <div>
+        <h3>CASH:</h3>
+        <div className="square">
+          {this.state.cash}
+        </div>
+      </div>
+      <div>
+        <h3>Bank:</h3>
+        <div className="square">
+          {this.state.bank}
+        </div>
+      </div>
+    </div>;
+  }
+}
+
 var toRender = <div>
   <div className="stage0">
     <div>
@@ -493,8 +531,12 @@ var toRender = <div>
       </div>
 
     </div>
+
     <div className="stage2">
-      <div id="chooseSquare" className="stage1PopUp">
+      
+      <ThingsBox />
+      
+      <div id="chooseSquare" className="stage2PopUp"><div>
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Choose the Next Square</h3>
         <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
           <img src="imgs/c.png" />
@@ -503,8 +545,10 @@ var toRender = <div>
         <p>Choose a square.<br />You can click on the square to select it.</p>
         <input type="text" className="placeInput" id="chooseSquareInput" maxLength="2" />
         <button className="choosePlace close" onClick={attemptChooseSquare} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
-      </div>
+      </div></div>
+
     </div>
+
   </div>
 
   <div id="popUps">
