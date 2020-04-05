@@ -71,6 +71,7 @@ input {
 }
 
 .stage2PopUp > div {
+  position: relative;
   background-color: white;
   margin: auto;
   padding: 20px;
