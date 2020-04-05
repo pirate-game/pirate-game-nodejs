@@ -401,7 +401,7 @@ function attemptChooseSquare(){
 class ThingsBox extends React.Component {
   constructor(){
     super();
-    this.state = {shield: false, mirror: false, cash: null, bank: null};
+    this.state = {shield: "no", mirror: "no", cash: null, bank: null};
     
     theThingsBox = this;
   }
