@@ -41,10 +41,13 @@ input {
 }
 
 .stage1PopUp, .stage2PopUp, .thingsBox {
-  display: none;
   position: fixed;
   top: calc(40vh + 300px);
   width: calc(100% - 40px);
+}
+
+.stage1PopUp, .stage2PopUp {
+  display: none;
 }
 
 .stage1PopUp {
