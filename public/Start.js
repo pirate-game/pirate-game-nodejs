@@ -7,6 +7,7 @@ var x;//////////////
 var theBoard;
 var theCurrentSquare;
 var theChooseNextSquare;
+var theStage3;
 
 class KeyBox extends React.Component {
   constructor() {
@@ -280,6 +281,35 @@ socket.on('chose', function(square){
   socket.emit('current_square', square);
 });
 
+class Stage3 extends React.Component {
+  constructor(){
+    super();
+    
+    theStage3 = this;
+  }
+  render(){
+    return <div className="leaderboard">
+      <button className="backHome" onClick={() => {window.location='index.html';}}>Back to the Homepage</button>
+      <h3 style={{top: "120px"}}>The Winner was {this.props.leaderboard[0].name} with {this.props.leaderboard[0].score}</h3>
+      <h3 style={{top: "170px"}}>Leaderboard:</h3>
+      <div className="leaderboardList">
+        <ul>
+          {range(this.props.leaderboard.length).map(place => (
+            <li style={{position:'relative',padding:'0 10px'}}>
+              <div className="leaderboardRight">{this.props.leaderboard[place].score}</div>
+              <div className="leaderboardLeft">{place+1}. {this.props.leaderboard[place].name}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>;
+  }
+};
+
+function test2(results){
+  ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+};
+
 var toRender = <div>
     <div className="stage0">
       <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
@@ -298,6 +328,7 @@ var toRender = <div>
       <ChooseNextSquare />
       <button id="nextSquare" onclick={nextSquare}><h2>Next&nbsp;Square</h2></button>
     </div>
+    <div id="stage3" className="stage3"></div>
     <div id="popUps">
       
       <div id="waiting" className="popUp"><div>
