@@ -420,34 +420,34 @@ socket.on('current_square', function(square){
 
 function doThing(someThing){
   console.log(someThing);
-  switch(someThing){
-    case things["rob"]:
+  switch(someThing.props.src){
+    case things["rob"].props.src:
       break;
-    case things["kill"]:
+    case things["kill"].props.src:
       break;
-    case things["present"]:
+    case things["present"].props.src:
       break;
-    case things["parrot"]:
+    case things["parrot"].props.src:
       break;
-    case things["swap"]:
+    case things["swap"].props.src:
       break;
-    case things["c"]:
+    case things["c"].props.src:
       break;
     default:
-      switch(someThing){
-        case things["shield"]:
+      switch(someThing.props.src){
+        case things["shield"].props.src:
           theThingsBox.setState({shield: "yes"});
           break;
-        case things["mirror"]:
+        case things["mirror"].props.src:
           theThingsBox.setState({mirror: "yes"});
           break;
-        case things["bomb"]:
+        case things["bomb"].props.src:
           theThingsBox.setState({cash: null});
           break;
-        case things["double"]:
+        case things["double"].props.src:
           theThingsBox.setState({cash: 2 * theThingsBox.state.cash});
           break;
-        case things["bank"]:
+        case things["bank"].props.src:
           theThingsBox.setState({cash: null, bank: theThingsBox.state.cash});
           break;
         default:
