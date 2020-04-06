@@ -192,7 +192,7 @@ class Board extends React.Component {
         board[["A","B","C","D","E","F","G"][i]+["1","2","3","4","5","6","7"][j]] = null;
       };
     };
-    this.state = {board:{}, done:[], taken:[], choosing:true};
+    this.state = {board:{}, done:[], taken:[]};
     
     theBoard=this;
   }
@@ -210,7 +210,7 @@ class Board extends React.Component {
       possibleSquares = possibleSquares.filter((e)=>(e!=current));
       randBoard[current] = ordThing(i);
     };
-    this.setState({board:randBoard, choosing:false});
+    this.setState({board:randBoard});
   }
   updateBoard(square, thing){
     var temp = Object.assign({}, this.state.board);
@@ -237,7 +237,7 @@ class Board extends React.Component {
                            "E1","E2","E3","E4","E5","E6","E7",
                            "F1","F2","F3","F4","F5","F6","F7",
                            "G1","G2","G3","G4","G5","G6","G7"];
-    var temp = {choosing: false};
+    var temp = {};
     for (var i = 0; i < 49; i++){
       temp[possibleSquares[i]] = things["200"];
     };
@@ -259,7 +259,7 @@ class Board extends React.Component {
         <tr className="edge">
           <th className="edge">{col}</th>
           {["A","B","C","D","E","F","G"].map(row => (
-            <td id={row+col} className="square" onClick={this.state.choosing ? () => squareClicked(row+col) : null}>
+            <td id={row+col} className="square" onClick={() => squareClicked(row+col)}>
               {this.state.board[row+col]}
               {this.state.done.includes(row+col) ? <div className="crossout" /> : null}
             </td>
@@ -275,6 +275,7 @@ function squareClicked(square){
   for (var i = 0; i < placeInputs.length; i++){
     placeInputs[i].value = square;
   };
+  document.getElementById("chooseSquareInput").value = square;
   if (square == ""){
     document.getElementById("placeInput3000First").value = "";
     document.getElementById("placeInput3000Second").value = "";
@@ -514,6 +515,7 @@ function attemptChooseSquare(){
       document.getElementById("squareTaken").style.display = "block";
     } else {
       hidePopUps();
+      document.getElementById("chooseSquare").style.display = "none";
       document.getElementById("waitingForChoice").style.display = "block";
       socket.emit('chose', proposedSquare);
     };
