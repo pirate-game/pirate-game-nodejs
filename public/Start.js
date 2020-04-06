@@ -334,6 +334,7 @@ function nextSquareMid(){
     socket.emit('current_square', current);
   } else {
     toChoose = theChooseNextSquare.state.players[0];
+    theChooseNextSquare.removePlayers([toChoose]);
     socket.emit('choose', toChoose);
     hidePopUps();
     document.getElementById("waitForChoose").style.display = "block";
