@@ -12,6 +12,24 @@ var theChooseNextSquare;
 var theStage3;
 var theEventReport;
 
+const things = {
+  "rob":<img src="imgs/rob.png" />,
+  "kill":<img src="imgs/kill.svg" />,
+  "present":<img src="imgs/present.png" />,
+  "parrot":<img src="imgs/parrot.png" />,
+  "swap":<img src="imgs/swap.png" />,
+  "choose":<img src="imgs/c.png" />,
+  "shield":<img src="imgs/shield.svg" />,
+  "mirror":<img src="imgs/mirror.png" />,
+  "bomb":<img src="imgs/bomb.svg" />,
+  "double":<img src="imgs/double.svg" />,
+  "bank":<img src="imgs/bank.svg" />,
+  "200":<img src="imgs/sym200.svg" />,
+  "1000":<img src="imgs/sym1000.svg" />,
+  "3000":<img src="imgs/sym3000.svg" />,
+  "5000":<img src="imgs/sym5000.svg" />
+};
+
 function range(someInt){
   var out = [];
   for (var i = 0; i < someInt; i++){
