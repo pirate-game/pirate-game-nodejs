@@ -420,7 +420,6 @@ socket.on('current_square', function(square){
 });
 
 function doThing(someThing){
-  console.log(someThing);
   switch(someThing.props.src){
     case things["rob"].props.src:
       break;
@@ -490,7 +489,6 @@ function doThing(someThing){
 };
                       
 function YouGot(props){
-  console.log(props);
   return <div>
     <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{props.what[0].toUpperCase()+props.what.substr(1)}&apos;</h3>
     <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
@@ -510,9 +508,9 @@ function readyNow(){
 function attemptChooseSquare(){
   var proposedSquare = document.getElementById("chooseSquareInput").value;
   if (squarePattern.test(proposedSquare)){
-    if (theBoard.state.taken.includes(proposedSquare)){
+    if (theBoard.state.done.includes(proposedSquare)){
       hidePopUps();
-      document.getElementById("squareTaken").style.display = "block";
+      document.getElementById("squareDone").style.display = "block";
     } else {
       hidePopUps();
       document.getElementById("chooseSquare").style.display = "none";
@@ -820,6 +818,13 @@ var toRender = <div>
       <h3>Waiting for the Chosen Square</h3>
       <hr />
       <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+    
+    <div id="squareDone" className="popUp"><div>
+        <h3>Square Done</h3>
+        <hr />
+        <p>Oops! That square&apos;s been done already, choose another.</p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
       
   </div>
