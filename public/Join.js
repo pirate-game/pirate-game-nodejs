@@ -596,8 +596,14 @@ class Stage3 extends React.Component {
   }
 };
 
+socket.on('get_score', function(){
+  socket.emit('got_score', theThingsBox.state.cash + theThingsBox.state.bank);
+});
+
 socket.on('game_over', function(results){
   ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+  hideStage("stage2");
+  showStage("stage3");
 });
   
 var toRender = <div>
