@@ -266,11 +266,11 @@ io.on('connection', function(socket){
     if (thisGame != -1){
       var thisName = gameAndPlayerToName(games[thisGame], socket);
       if (thisName != ""){
-        games[thisGame].leader.emit('gobby_parrot', thisName, score);
+        games[thisGame].leader.emit('some_event', ["parrot", thisName, score]);
       };
       var thoseWatching = games[pos].watching;
       for (var i = 0; i < thoseWatching.length; i++){
-        thoseWatching[i].emit('gobby_parrot', thisName, score);
+        thoseWatching[i].emit('some_event', ["parrot", thisName, score]);
       };
     };
   });
