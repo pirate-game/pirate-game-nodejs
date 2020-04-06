@@ -187,6 +187,8 @@ class Stage3 extends React.Component {
 
 socket.on('game_over', function(results){
   ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+  hideStage("stage2");
+  showStage("stage3");
 });
   
 class EventReport extends React.Component {
