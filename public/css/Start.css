@@ -66,7 +66,7 @@
 
 .crewDiv ul li:nth-child(odd) { background: #eee; }
 
-#crewAssembledPopUp button {
+#crewAssembledPopUp button, #nextSquareConfirm button {
   text-align: center;
   font-family: 'Calibri', Fallback, sans-serif;
   background-color: #CC6600;
@@ -81,7 +81,7 @@
   margin: 6px;
 }
 
-#crewAssembledPopUp button:hover {
+#crewAssembledPopUp button:hover, #nextSquareConfirm button:hover {
   background-color: cornflowerblue;
 }
 
