@@ -414,9 +414,9 @@ class EventReport extends React.Component {
     this.setState({queue: this.state.queue.slice(1)});
   }
   render(){
-    return <div id="eventReport">
+    return <div id="eventReport"><div>
       {this.state.queue.map(eventReportThing)}
-    </div>;
+    </div></div>;
   }
 };
 
