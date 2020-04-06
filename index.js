@@ -251,6 +251,16 @@ io.on('connection', function(socket){
     };
   });
   
+  socket.on('got_choose', function(){
+    var thisGame = crewmemberToGame(socket);
+    if (thisGame != -1){
+      var thisName = gameAndPlayerToName(games[thisGame], socket);
+      if (thisName != ""){
+        games[thisGame].leader.emit('got_choose', thisName);
+      };
+    };
+  };
+  
 });
 
 //End of Game Section
