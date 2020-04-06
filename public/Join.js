@@ -116,7 +116,7 @@ socket.on('start_game', function(){
 socket.on('too_slow', function(){
   hidePopUps();
   document.getElementById("tooSlow").style.display = "block";
-  //document.removeEventListener("beforeunload",unloadFn);//Doesn't work
+  socket.close();
 });
 
 function attemptJoin(){
