@@ -304,6 +304,7 @@ function nextSquare(){
 };
 
 function nextSquareMid(){
+  socket.emit('too_slow', unreadyCrew);
   if (document.getElementById("nextSquareConfirm").childNodes.length != 0){
     document.getElementById("nextSquareConfirm").childNodes[0].style.display = "none";
   };
