@@ -296,6 +296,7 @@ function nextSquare(){
       nextSquareMid();
     } else {
       ReactDOM.render(<NextSquareConfirm />, document.getElementById("nextSquareConfirm"));
+      document.getElementById("nextSquareConfirm").childNodes[0].style.display = "block";
     };
   } else {
     document.getElementById("tooFewReady").style.display = "block";
@@ -303,6 +304,7 @@ function nextSquare(){
 };
 
 function nextSquareMid(){
+  document.getElementById("nextSquareConfirm").childNodes[0].style.display = "none";
   if (theChooseNextSquare.state.players.length === 0){
     var current = remainingSquares[Math.floor(Math.random() * remainingSquares.length)];
     remainingSquares = remainingSquares.filter(e=>e!=current);
