@@ -10,7 +10,7 @@
 #keyBox {float: right;}
 #fillBoards {float: left;}
 
-#crewAssembled, #doneBtn, #nextSquare {
+#crewAssembled, #doneBtn, #nextSquare, #showScores {
   float: right;
   display: block;
   text-align: center;
@@ -28,11 +28,11 @@
   margin: 0 5px 15px;
 }
 
-#crewAssembled:hover, #doneBtn:hover, #nextSquare:hover {
+#crewAssembled:hover, #doneBtn:hover, #nextSquare:hover, #showScores:hover {
   background-color: cornflowerblue;
 }
 
-#nextSquare {
+#nextSquare, #showScores {
   position: relative;
   height: unset;
   top: calc(40vh + 145px);
