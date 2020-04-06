@@ -300,7 +300,7 @@ io.on('connection', function(socket){
       for (var i = 0; i < theCrew.length; i++){
         theCrew[i].pirate.emit('game_over', leaderboard);
       };
-      var thoseWatching = games[thisGame].watching;
+      var thoseWatching = games[pos].watching;
       for (var j = 0; j < thoseWatching.length; j++){
         thoseWatching[i].emit('game_over', leaderboard);
       };
