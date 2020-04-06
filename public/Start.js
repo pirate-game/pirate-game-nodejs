@@ -308,7 +308,6 @@ function NextSquareConfirm(){
 };
 
 function nextSquare(){
-  console.log("nextSquare");
   hidePopUps();
   if (globalCrew.length - unreadyCrew.length >= 2){
     if (unreadyCrew.length == 0){
