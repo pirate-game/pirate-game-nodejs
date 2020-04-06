@@ -38,6 +38,20 @@ function range(someInt){
   return out;
 };
 
+function sortByScore(results){
+  var out = [];
+  var toTest = 0;
+  while (out.length != results.length){
+    for (var i = 0; i < results.length; i++){
+      if (results[i].score == toTest){
+        out.push(results[i]);
+      };
+    };
+    toTest += 100;
+  };
+  return out.reverse();
+};
+
 class KeyBox extends React.Component {
   constructor() {
     super();
@@ -341,6 +355,10 @@ function nextSquareMid(){
   };
   globalCrew = globalCrew.filter(e=>!unreadyCrew.includes(e));
   unreadyCrew = globalCrew;
+  if (theBoard.state.done.length == 49){
+    document.getElementById("nextSquare").style.display = "none";
+    document.getElementById("showScores").style.display = "block";
+  };
 };
 
 function tooSlowToChoose(){
@@ -372,8 +390,8 @@ socket.on('request_state', function(){
 });
 
 class Stage3 extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     
     theStage3 = this;
   }
@@ -483,6 +501,21 @@ function eventReportThing(someEvent){
       break;
   };
 };
+              
+function showScores(){
+  socket.emit('get_scores');
+  hideStage("stage2");
+  hidePopUps();
+  document.getElementById("waiting").style.display = "block";
+};
+      
+socket.on('got_scores', function(results){
+  var leaderboard = sortByScore(results);
+  ReactDOM.render(<Stage3 leaderboard={leaderboard} />, document.getElementById("stage3"));
+  hideStage("stage2");
+  showStage("stage3");
+  socket.emit('game_over', leaderboard);
+});
 
 var toRender = <div>
     <div className="stage0">
@@ -501,6 +534,7 @@ var toRender = <div>
       <CurrentSquare />
       <ChooseNextSquare />
       <button id="nextSquare" onClick={nextSquare}><h2>Next&nbsp;Square</h2></button>
+      <button id="showScores" onClick={showScores} style={display:"none"}><h2>Show&nbsp;Scores</h2></button>
       <div id="nextSquareConfirm" />
       <EventReport />
     </div>
