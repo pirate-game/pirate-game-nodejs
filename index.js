@@ -81,7 +81,7 @@ io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
-    var game = {leader: socket, game_key: key, crew: [], available: true, watchable:false, watching:[]};
+    var game = {leader: socket, game_key: key, crew: [], available: true, watchable:false, watching:[], scores:[]};
     games.push(game);
   }); 
     
@@ -271,6 +271,38 @@ io.on('connection', function(socket){
       var thoseWatching = games[thisGame].watching;
       for (var i = 0; i < thoseWatching.length; i++){
         thoseWatching[i].emit('some_event', ["parrot", thisName, score]);
+      };
+    };
+  });
+  
+  socket.on('get_scores', function(){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var theCrew = games[pos].crew;
+      for (var i = 0; i < theCrew.length; i++){
+        theCrew[i].pirate.emit('get_score');
+      };
+    };
+  });
+  
+  socket.on('got_score', function(someScore){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      games[pos].scores.push({name: gameAndPlayerToName(games[pos], socket), score: someScore});
+    };
+    games[pos].leader.emit('got_scores', games[pos].scores);
+  });
+  
+  socket.on('game_over', function(leaderboard){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var theCrew = games[pos].crew;
+      for (var i = 0; i < theCrew.length; i++){
+        theCrew[i].pirate.emit('game_over', leaderboard);
+      };
+      var thoseWatching = games[thisGame].watching;
+      for (var j = 0; j < thoseWatching.length; j++){
+        thoseWatching[i].emit('game_over', leaderboard);
       };
     };
   });
