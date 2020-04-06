@@ -343,6 +343,10 @@ socket.on('chose', function(square){
   socket.emit('current_square', square);
 });
 
+socket.on('got_choose', function(player){
+  theChooseNextSquare.addPlayer(player);
+});
+
 socket.on('request_state', function(){
   socket.emit('state', [theBoard.state, theCurrentSquare.state, theChooseNextSquare.state]);
 });
