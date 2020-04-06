@@ -25,6 +25,7 @@
 }
 
 #eventReport > div > div {
+  position: relative;
   background-color: white;
   margin: auto;
   padding: 20px;
@@ -51,4 +52,9 @@
 
 #eventReport > div > div button:hover {
   background-color: cornflowerblue;
+}
+
+#eventReport .square {
+    height: 70px;
+    width: 70px;
 }
