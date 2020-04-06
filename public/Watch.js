@@ -199,7 +199,7 @@ class EventReport extends React.Component {
     theEventReport = this;
   }
   addEvent(someEvent){
-    this.setState({queue: this.state.queue.concat([someEvent])});
+    this.setState({queue: [someEvent].concat(this.state.queue)});
   }
   pop(){
     this.setState({queue: this.state.queue.slice(1)});
