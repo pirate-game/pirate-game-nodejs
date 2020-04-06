@@ -534,7 +534,7 @@ var toRender = <div>
       <CurrentSquare />
       <ChooseNextSquare />
       <button id="nextSquare" onClick={nextSquare}><h2>Next&nbsp;Square</h2></button>
-      <button id="showScores" onClick={showScores} style={display:"none"}><h2>Show&nbsp;Scores</h2></button>
+      <button id="showScores" onClick={showScores} style={{display:"none"}}><h2>Show&nbsp;Scores</h2></button>
       <div id="nextSquareConfirm" />
       <EventReport />
     </div>
