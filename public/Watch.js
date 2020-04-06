@@ -191,7 +191,7 @@ class EventReport extends React.Component {
   }
 };
 
-socket.on('some_event', theEventReport.addEvent(someEvent));
+socket.on('some_event', function(someEvent){theEventReport.addEvent(someEvent);});
   
 function eventReportThing(someEvent){
   switch(someEvent[0]){
