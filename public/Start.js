@@ -356,7 +356,7 @@ function nextSquareMid(){
   globalCrew = globalCrew.filter(e=>!unreadyCrew.includes(e));
   unreadyCrew = globalCrew;
   if (theBoard.state.done.length == 49){
-    document.getElementById("nextSquare").style.display = "none";
+    document.getElementById("nextSquare").style.display = "none";/*Make These Work*/
     document.getElementById("showScores").style.display = "block";
   };
 };
