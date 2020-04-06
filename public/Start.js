@@ -514,6 +514,7 @@ socket.on('got_scores', function(results){
   ReactDOM.render(<Stage3 leaderboard={leaderboard} />, document.getElementById("stage3"));
   hideStage("stage2");
   showStage("stage3");
+  hidePopUps();
   socket.emit('game_over', leaderboard);
 });
 
