@@ -320,6 +320,7 @@ function nextSquareMid(){
     hidePopUps();
     document.getElementById("waitForChoose").style.display = "block";
   };
+  globalCrew = globalCrew.filter(e=>!unreadyCrew.includes(e));
   unreadyCrew = globalCrew;
 };
 
