@@ -428,10 +428,36 @@ function doThing(someThing){
     case things["present"].props.src:
       break;
     case things["parrot"].props.src:
+      socket.emit('gobby_parrot', theThingsBox.state.cash);
+      ReactDOM.render(
+        <div>
+          <h3 style={{display: "inline-block",verticalAlign: "top"}}>Gobby Parrot!</h3>
+          <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+            {things["parrot"]}
+          </div>
+          <hr />
+          <p>Now everyone knows &apos;ow much cash ye&apos;s be &apos;avin&apos;.</p>
+          <button className="choosePlace close" onClick={readyNow} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+        </div>,
+        document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
       break;
     case things["swap"].props.src:
       break;
     case things["choose"].props.src:
+      socket.emit('got_choose');
+      ReactDOM.render(
+        <div>
+          <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;Choose&apos;</h3>
+          <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+            {things["choose"]}
+          </div>
+          <hr />
+          <p>You&apos;ll be told what to do when it is your turn to choose.</p>
+          <button className="choosePlace close" onClick={readyNow} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+        </div>,
+        document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
       break;
     default:
       switch(someThing.props.src){
@@ -496,6 +522,11 @@ function attemptChooseSquare(){
     document.getElementById("invalidSquare").style.display = "block";
   };
 };
+
+socket.on('choose', function(){
+  hidePopUps();
+  document.getElementById("chooseSquare").style.display = "block";
+});
 
 class ThingsBox extends React.Component {
   constructor(){
