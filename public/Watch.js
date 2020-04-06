@@ -194,6 +194,8 @@ class EventReport extends React.Component {
     super();
     this.state = {queue: []};
     
+    this.pop = this.pop.bind(this);
+    
     theEventReport = this;
   }
   addEvent(someEvent){
