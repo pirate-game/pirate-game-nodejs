@@ -268,7 +268,7 @@ io.on('connection', function(socket){
       if (thisName != ""){
         games[thisGame].leader.emit('some_event', ["parrot", thisName, score]);
       };
-      var thoseWatching = games[pos].watching;
+      var thoseWatching = games[thisGame].watching;
       for (var i = 0; i < thoseWatching.length; i++){
         thoseWatching[i].emit('some_event', ["parrot", thisName, score]);
       };
