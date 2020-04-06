@@ -10,6 +10,7 @@ var theBoard;
 var theCurrentSquare;
 var theChooseNextSquare;
 var theStage3;
+var theEventReport;
 
 function range(someInt){
   var out = [];
@@ -381,6 +382,86 @@ socket.on('ready', function(name){
   unreadyCrew = unreadyCrew.filter(e=>e!=name);
 });
 
+class EventReport extends React.Component {
+  constructor(){
+    super();
+    this.state = {queue: []};
+    
+    theEventReport = this;
+  }
+  addEvent(someEvent){
+    this.setState({queue: this.state.queue.concat([someEvent])});
+  }
+  pop(){
+    this.setState({queue: this.state.queue.slice(1)});
+  }
+  render(){
+    return <React.Fragment>
+      {this.state.queue.map(eventReportThing)}
+    </React.Fragment>;
+  }
+};
+  
+function eventReportThing(someEvent){
+  switch(someEvent[0]){
+    case "rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has robbed {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has killed {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "present":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Present!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["present"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has given {someEvent[2]} a present!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "parrot":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Gobby Parrot!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["parrot"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has got {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "swap":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Swap!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["Swap"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has swapped score with {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+  };
+};
+
 var toRender = <div>
     <div className="stage0">
       <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
@@ -399,6 +480,7 @@ var toRender = <div>
       <ChooseNextSquare />
       <button id="nextSquare" onClick={nextSquare}><h2>Next&nbsp;Square</h2></button>
       <div id="nextSquareConfirm" />
+      <EventReport />
     </div>
     <div id="stage3" className="stage3"></div>
     <div id="popUps">
