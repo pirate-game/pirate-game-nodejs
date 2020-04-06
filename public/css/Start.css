@@ -113,7 +113,7 @@
 }
 
 @media screen and (orientation:landscape){
-  #nextSquare {top: calc(10vh - 25px);}
+  #nextSquare, #showScores {top: calc(10vh - 25px);}
 }    
 
 .leaderboardList {
