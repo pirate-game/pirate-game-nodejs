@@ -255,7 +255,7 @@ function eventReportThing(someEvent){
           {things["parrot"]}
         </div>
         <hr />
-        <p>{someEvent[1]} has got {someEvent[2]}!</p>
+        <p>{someEvent[1]} has got {someEvent[2] || 0}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
