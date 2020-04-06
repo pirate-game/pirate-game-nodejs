@@ -431,7 +431,7 @@ function doThing(someThing){
       break;
     case things["swap"].props.src:
       break;
-    case things["c"].props.src:
+    case things["choose"].props.src:
       break;
     default:
       switch(someThing.props.src){
