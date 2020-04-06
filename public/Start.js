@@ -401,6 +401,8 @@ class EventReport extends React.Component {
     </React.Fragment>;
   }
 };
+
+socket.on('some_event', theEventReport.addEvent(someEvent));
   
 function eventReportThing(someEvent){
   switch(someEvent[0]){
