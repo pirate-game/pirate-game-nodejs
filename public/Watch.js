@@ -204,7 +204,7 @@ class EventReport extends React.Component {
   }
   render(){
     return <div id="eventReport"><div>
-      {this.state.queue.map(eventReportThing)}
+      {this.state.queue.map(e=>(<div>{eventReportThing(e)}</div>))}
     </div></div>;
   }
 };
