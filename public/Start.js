@@ -304,7 +304,9 @@ function nextSquare(){
 };
 
 function nextSquareMid(){
-  document.getElementById("nextSquareConfirm").childNodes[0].style.display = "none";
+  if (document.getElementById("nextSquareConfirm").childNodes.length != 0){
+    document.getElementById("nextSquareConfirm").childNodes[0].style.display = "none";
+  };
   if (theChooseNextSquare.state.players.length === 0){
     var current = remainingSquares[Math.floor(Math.random() * remainingSquares.length)];
     remainingSquares = remainingSquares.filter(e=>e!=current);
