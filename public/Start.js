@@ -345,6 +345,7 @@ socket.on('chose', function(square){
 
 socket.on('got_choose', function(player){
   theChooseNextSquare.addPlayer(player);
+  socket.emit('choose_next_square', player);
 });
 
 socket.on('request_state', function(){
