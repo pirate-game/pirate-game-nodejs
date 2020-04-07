@@ -208,7 +208,7 @@ class EventReport extends React.Component {
   }
   render(){
     return <div id="eventReport">
-      {this.state.queue.map(e=>(<div>{eventReportThing(e)}</div>))}
+      {this.state.queue.slice().reverse().map(e=>(<div>{eventReportThing(e)}</div>))}
     </div>;
   }
 };
