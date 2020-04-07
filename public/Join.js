@@ -696,7 +696,7 @@ function mirror(what, name, amount){
 };
 
 socket.on('rob', function(name){
-  if (theThingsBox.shield == "yes" || theThingsBox.mirror == "yes"){
+  if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
     ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} />, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").style.display = "block";
   } else {
@@ -705,7 +705,7 @@ socket.on('rob', function(name){
 });
 
 socket.on('kill', function(name){
-  if (theThingsBox.shield == "yes" || theThingsBox.mirror == "yes"){
+  if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
     ReactDOM.render(<ShieldMirror what="kill" name={name} amount={0} />, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").style.display = "block";
   } else {
@@ -718,7 +718,7 @@ socket.on('present', function(){
 });
 
 socket.on('swap', function(name, amount){
-  if (theThingsBox.shield == "yes" || theThingsBox.mirror == "yes"){
+  if (theThingsBox.state.shield == "yes"){
     ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount}/>, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").style.display = "block";
   } else {
