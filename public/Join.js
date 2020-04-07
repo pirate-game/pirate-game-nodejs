@@ -4,6 +4,7 @@ var socket = io();
 var theBoard;
 var theThingsBox;
 var theStage3;
+var theChoosePlayer;
 var myName;
 var clickMod10 = 0;
 
@@ -487,6 +488,54 @@ function doThing(someThing){
       break;
   };  
 };
+
+class ChoosePlayer extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {crew:[]};
+    
+    theChoosePlayer = this;
+  }
+  render(){
+    return <div>
+      <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{props.what[0].toUpperCase()+props.what.substr(1)}&apos;</h3>
+      <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+        {things[props.what]}
+      </div>
+      <hr />
+      <p>Choose someone to {props.what=="present" ? "give a" : null} {props.what}. You can click on them to select them.</p>
+      <input type="text" id="choosePlayer" maxLength="172" />
+      <ul>
+        {this.state.crew.map(crewMember => (
+          <li style={{position:'relative'}} onClick={()=>{document.getElementById("choosePlayer").value=crewMember}}>
+            <div className="nameLiDiv">{crewMember}</div>
+          </li>
+        )}
+      </ul>
+      <button className="choosePlace close" onClick={() => chooseThemTo(props.what)} style={{height:"unset",display:"block",marginTop:"10px"}}>Them!</button>
+    </div>;
+  }
+};
+
+socket.on('crew', function(someCrew){
+  theChoosePlayer.setState({crew:someCrew});
+});
+
+function chooseThemTo(what){
+  var name = document.getElementById("choosePlayer").value;
+  if (namePattern.test(name) && !exclPattern.test(name)){
+    if (theChoosePlayer.state.crew.includes(name)){
+      socket.emit(what, name);
+      readyNow();
+    } else {
+      hidePopUps();
+      document.getElementById("noSuchPlayer").style.display = "block";
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidName2").style.display = "block";
+  };
+};
                       
 function YouGot(props){
   return <div>
@@ -562,6 +611,32 @@ class ThingsBox extends React.Component {
     </div>;
   }
 };
+
+socket.on('rob', function(name){
+  socket.emit('robbed', name, theThingsBox.state.cash);
+  theThingsBox.setState({cash: null});
+});
+
+socket.on('kill', function(){
+  theThingsBox.setState({cash: null});
+});
+
+socket.on('present', function(){
+  theThingsBox.setState({cash: theThingsBox.state.cash + 1000});
+});
+
+socket.on('swap', function(name, amount){
+  socket.emit('swapped', name, theThingsBox.state.cash);
+  theThingsBox.setState({cash: amount});
+});
+
+socket.on('swapped', function(amount){
+  theThingsBox.setState({cash: amount});
+};
+
+socket.on('robbed', function(amount){
+  theThingsBox.setState({cash: theThingsBox.state.cash + amount});
+});
 
 class Stage3 extends React.Component {
   constructor(){
@@ -735,6 +810,13 @@ var toRender = <div>
           <br />We be sorry if ye&apos;s name be &apos;aving accented characters in it etc.</p>
        <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
+    
+    <div id="invalidName2" className="popUp"><div>
+        <h3>Invalid Name</h3>
+        <hr />
+        <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.</p>
+       <button className="close" onClick={hidePopUps}>Okay!</button>
+    </div></div>
 
     <div id="invalidKey" className="popUp"><div>
         <h3>Invalid Key</h3>
@@ -830,6 +912,13 @@ var toRender = <div>
         <h3>Square Done</h3>
         <hr />
         <p>Oops! That square&apos;s been done already, choose another.</p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
+    </div></div>
+    
+    <div id="noSuchPlayer" className="popUp"><div>
+        <h3>No Such Player</h3>
+        <hr />
+        <p>Oops! That player doesn&apos;t exist, maybe check your spelling.</p>
         <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
       
