@@ -540,6 +540,7 @@ socket.on('crew', function(someCrew){
 
 function chooseThemTo(what){
   var name = document.getElementById("choosePlayer").value;
+  document.getElementById("choosePlayer").value = "";
   if (namePattern.test(name) && !exclPattern.test(name)){
     if (theChoosePlayer.state.crew.includes(name)){
       if (what == "swap"){
