@@ -645,7 +645,9 @@ function ShieldMirror(props){
 };
 
 function okay(what, name, amount){
-  document.getElementById("shieldMirror").style.display = "none";
+  if (document.getElementById("shieldMirror").childNodes.length != 0){
+    document.getElementById("shieldMirror").childNodes[0].style.display = "none";
+  };
   switch(what){
     case "rob":
       socket.emit('robbed', name, theThingsBox.state.cash);
@@ -662,7 +664,7 @@ function okay(what, name, amount){
 };
 
 function shield(what, name, amount){
-  document.getElementById("shieldMirror").style.display = "none";
+  document.getElementById("shieldMirror").childNodes[0].style.display = "none";
   theThingsBox.setState({shield: "gone"});
   switch(what){
     case "rob":
@@ -680,7 +682,7 @@ function shield(what, name, amount){
 };
 
 function mirror(what, name, amount){
-  document.getElementById("shieldMirror").style.display = "none";
+  document.getElementById("shieldMirror").childNodes[0].style.display = "none";
   theThingsBox.setState({shield: "gone"});
   switch(what){
     case "rob":
@@ -700,7 +702,7 @@ function mirror(what, name, amount){
 socket.on('rob', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
     ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} />, document.getElementById("shieldMirror"));
-    document.getElementById("shieldMirror").style.display = "block";
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
     okay("rob", name, 0);
   };
@@ -709,7 +711,7 @@ socket.on('rob', function(name){
 socket.on('kill', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
     ReactDOM.render(<ShieldMirror what="kill" name={name} amount={0} />, document.getElementById("shieldMirror"));
-    document.getElementById("shieldMirror").style.display = "block";
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
     okay("kill", name, 0);
   };
@@ -722,7 +724,7 @@ socket.on('present', function(){
 socket.on('swap', function(name, amount){
   if (theThingsBox.state.shield == "yes"){
     ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount}/>, document.getElementById("shieldMirror"));
-    document.getElementById("shieldMirror").style.display = "block";
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
     okay("swap", name, amount);
   };
