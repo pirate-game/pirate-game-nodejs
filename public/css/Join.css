@@ -200,7 +200,6 @@ input {
 
 .leaderboardList, .choosePlayerList {
   position: relative;
-  top: 60px;
   min-height: 70px;
   background: white;
   overflow: auto;
@@ -210,9 +209,12 @@ input {
 
 .leaderboardList {
   max-height: calc(100vh - 300px);
+  top: 60px;
 }
 
 .choosePlayerList {
+  max-height: calc(60vh - 860px);
+  margin: 5px 0;
   max-height: calc(60vh - 860px);
 }
 
