@@ -530,6 +530,7 @@ class ChoosePlayer extends React.Component {
 };
 
 socket.on('crew', function(someCrew){
+  console.log(someCrew);
   theChoosePlayer.setState({crew:someCrew});
 });
 
