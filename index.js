@@ -410,6 +410,51 @@ io.on('connection', function(socket){
     };
   });
   
+  socket.on('shielded_rob', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_rob', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_rob', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_kill', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_kill', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_kill', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_swap', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_swap', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_swap', name, victim]);
+        };
+      };
+    };
+  });
+  
 });
 
 //End of Game Section
