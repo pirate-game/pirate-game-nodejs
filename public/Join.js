@@ -654,6 +654,7 @@ function okay(what, name, amount){
       theThingsBox.setState({cash: null});
       break;
     case "kill":
+      socket.emit('killed', name);
       theThingsBox.setState({cash: null});
       break;
     case "swap":
@@ -672,6 +673,7 @@ function shield(what, name, amount){
       theThingsBox.setState({cash: null});
       break;
     case "kill":
+      socket.emit('killed', name);
       theThingsBox.setState({cash: null});
       break;
     case "swap":
@@ -690,6 +692,7 @@ function mirror(what, name, amount){
       theThingsBox.setState({cash: null});
       break;
     case "kill":
+      socket.emit('killed', name);
       theThingsBox.setState({cash: null});
       break;
     case "swap":
