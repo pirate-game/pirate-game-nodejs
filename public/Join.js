@@ -671,16 +671,13 @@ function shield(what, name, amount){
   theThingsBox.setState({shield: "gone"});
   switch(what){
     case "rob":
-      socket.emit('robbed', name, theThingsBox.state.cash);
-      theThingsBox.setState({cash: null});
+      socket.emit('shielded_rob', name);
       break;
     case "kill":
-      socket.emit('killed', name);
-      theThingsBox.setState({cash: null});
+      socket.emit('shielded_kill', name);
       break;
     case "swap":
-      socket.emit('swapped', name, theThingsBox.state.cash);
-      theThingsBox.setState({cash: amount});
+      socket.emit('shielded_swap', name);
       break;
   };
 };
@@ -690,16 +687,10 @@ function mirror(what, name, amount){
   theThingsBox.setState({shield: "gone"});
   switch(what){
     case "rob":
-      socket.emit('robbed', name, theThingsBox.state.cash);
-      theThingsBox.setState({cash: null});
+      socket.emit('mirrored_rob', name);
       break;
     case "kill":
-      socket.emit('killed', name);
-      theThingsBox.setState({cash: null});
-      break;
-    case "swap":
-      socket.emit('swapped', name, theThingsBox.state.cash);
-      theThingsBox.setState({cash: amount});
+      socket.emit('mirrored_kill', name);
       break;
   };
 };
@@ -728,7 +719,7 @@ socket.on('present', function(){
 
 socket.on('swap', function(name, amount){
   if (theThingsBox.state.shield == "yes"){
-    ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount}/>, document.getElementById("shieldMirror"));
+    ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount} />, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
     okay("swap", name, amount);
