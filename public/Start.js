@@ -432,11 +432,11 @@ class EventReport extends React.Component {
     this.setState({queue: [someEvent].concat(this.state.queue)});
   }
   pop(){
-    this.setState({queue: this.state.queue.slice(1)});
+    this.setState({queue: this.state.queue.slice(0, -1)});
   }
   render(){
     return <div id="eventReport">
-      {this.state.queue.slice().reverse().map(e=>(<div>{eventReportThing(e)}</div>))}
+      {this.state.queue.map(e=>(<div>{eventReportThing(e)}</div>))}
     </div>;
   }
 };
