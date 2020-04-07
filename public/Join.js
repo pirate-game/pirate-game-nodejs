@@ -506,12 +506,12 @@ class ChoosePlayer extends React.Component {
   }
   render(){
     return <div>
-      <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{props.what[0].toUpperCase()+props.what.substr(1)}&apos;</h3>
+      <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{this.props.what[0].toUpperCase()+this.props.what.substr(1)}&apos;</h3>
       <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
-        {things[props.what]}
+        {things[this.props.what]}
       </div>
       <hr />
-      <p>Choose someone to {props.what=="present" ? "give a" : null} {props.what}. You can click on them to select them.</p>
+      <p>Choose someone to {this.props.what=="present" ? "give a" : null} {this.props.what}. You can click on them to select them.</p>
       <input type="text" id="choosePlayer" maxLength="172" />
       <ul>
         {this.state.crew.map(crewMember => (
@@ -520,7 +520,7 @@ class ChoosePlayer extends React.Component {
           </li>
         ))}
       </ul>
-      <button className="choosePlace close" onClick={() => chooseThemTo(props.what)} style={{height:"unset",display:"block",marginTop:"10px"}}>Them!</button>
+      <button className="choosePlace close" onClick={() => chooseThemTo(this.props.what)} style={{height:"unset",display:"block",marginTop:"10px"}}>Them!</button>
     </div>;
   }
 };
