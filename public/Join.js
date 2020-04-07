@@ -510,7 +510,7 @@ class ChoosePlayer extends React.Component {
           <li style={{position:'relative'}} onClick={()=>{document.getElementById("choosePlayer").value=crewMember}}>
             <div className="nameLiDiv">{crewMember}</div>
           </li>
-        )}
+        ))}
       </ul>
       <button className="choosePlace close" onClick={() => chooseThemTo(props.what)} style={{height:"unset",display:"block",marginTop:"10px"}}>Them!</button>
     </div>;
@@ -632,7 +632,7 @@ socket.on('swap', function(name, amount){
 
 socket.on('swapped', function(amount){
   theThingsBox.setState({cash: amount});
-};
+});
 
 socket.on('robbed', function(amount){
   theThingsBox.setState({cash: theThingsBox.state.cash + amount});
