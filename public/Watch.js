@@ -265,13 +265,46 @@ function eventReportThing(someEvent){
       return (<div>
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Swap!</h3>
         <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
-          {things["Swap"]}
+          {things["swap"]}
         </div>
         <hr />
         <p>{someEvent[1]} has swapped score with {someEvent[2]}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
+    case "shielded_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being robbed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being killed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_swap":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["swap"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being swapped with by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;          
   };
 };
 
