@@ -631,13 +631,81 @@ class ThingsBox extends React.Component {
   }
 };
 
+function ShieldMirror(props){
+  return <div className="popUp"><div>
+        <h3>{props.name} is trying to {props.what} {props.what == "swap" ? "with" : null} you!</h3>
+        <hr />
+        <p>You can {theThingsBox.shield == "yes" ? "shield yourself or" : null} {theThingsBox.mirror == "yes" ? "mirror it or" : null} just accept it. Click on the symbol to use it.</p>
+        {theThingsBox.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, name, props.amount || 0)}>{things["shield"]}</div> : <div className="square">{theThingsBox.shield == "gone" ? {things["shield"]} <div className="crossout" /> : null}</div>}
+        {theThingsBox.mirror == "yes" ? <div className="square" onClick={()=>mirror(props.what, name, props.amount || 0)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.mirror == "gone" ? {things["mirror"]} <div className="crossout" /> : null}</div>}
+        <button className="close" onClick={()=>okay(props.what, name, props.amount || 0)}>Okay!</button>
+    </div></div>;
+};
+
+function okay(what, name, amount){
+  switch(what){
+    case "rob":
+      socket.emit('robbed', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: null});
+      break;
+    case "kill":
+      theThingsBox.setState({cash: null});
+      break;
+    case "swap":
+      socket.emit('swapped', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: amount});
+      break;
+  };
+};
+
+function shield(what, name, amount){
+  theThingsBox.setState({shield: "gone"});
+  switch(what){
+    case "rob":
+      socket.emit('robbed', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: null});
+      break;
+    case "kill":
+      theThingsBox.setState({cash: null});
+      break;
+    case "swap":
+      socket.emit('swapped', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: amount});
+      break;
+  };
+};
+
+function mirror(what, name, amount){
+  theThingsBox.setState({shield: "gone"});
+  switch(what){
+    case "rob":
+      socket.emit('robbed', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: null});
+      break;
+    case "kill":
+      theThingsBox.setState({cash: null});
+      break;
+    case "swap":
+      socket.emit('swapped', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: amount});
+      break;
+  };
+};
+
 socket.on('rob', function(name){
-  socket.emit('robbed', name, theThingsBox.state.cash);
-  theThingsBox.setState({cash: null});
+  if (theThingsBox.shield == "yes" && theThingsBox.mirror == "yes"){
+    ReactDOM.render(<ShieldMirror />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").style.display = "block";
+  } else {
+    okay("rob", name, 0);
+  };
 });
 
-socket.on('kill', function(){
-  theThingsBox.setState({cash: null});
+socket.on('kill', function(name){
+  if (theThingsBox.shield == "yes" && theThingsBox.mirror == "yes"){
+  } else {
+    okay("kill", name, 0);
+  };
 });
 
 socket.on('present', function(){
@@ -645,8 +713,10 @@ socket.on('present', function(){
 });
 
 socket.on('swap', function(name, amount){
-  socket.emit('swapped', name, theThingsBox.state.cash);
-  theThingsBox.setState({cash: amount});
+  if (theThingsBox.shield == "yes" && theThingsBox.mirror == "yes"){
+  } else {
+    okay("swap", name, amount);
+  };
 });
 
 socket.on('swapped', function(amount){
@@ -813,6 +883,8 @@ var toRender = <div>
       </div></div>
           
       <div id="squareWas" className="stage2PopUp" />
+        
+      <div id="shieldMirror" />
 
     </div>
 
