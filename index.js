@@ -310,7 +310,7 @@ io.on('connection', function(socket){
   socket.on('request_crew', function(){
     var pos = crewmemberToGame(socket);
     if (pos != -1){
-      socket.emit('crew', games[pos].crew);
+      socket.emit('crew', games[pos].crew.map(e=>e.pirateName));
     };
   });
   
