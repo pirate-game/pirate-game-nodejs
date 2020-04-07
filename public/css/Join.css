@@ -273,3 +273,12 @@ input {
 .backHome:hover {
    background-color: cornflowerblue;
 }
+
+#shieldMirror .square {
+  border: 2px solid black;
+  display: inline-block;
+  width: 40%;
+  height: 110px;
+  border-radius: 0;
+  margin: 0 5px 10px;
+}
