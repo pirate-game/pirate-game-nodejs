@@ -636,9 +636,9 @@ function ShieldMirror(props){
         <h3>{props.name} is trying to {props.what} {props.what == "swap" ? "with" : null} you!</h3>
         <hr />
         <p>You can {theThingsBox.shield == "yes" ? "shield yourself or" : null} {theThingsBox.mirror == "yes" ? "mirror it or" : null} just accept it. Click on the symbol to use it.</p>
-        {theThingsBox.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, name, props.amount || 0)}>{things["shield"]}</div> : <div className="square">{theThingsBox.shield == "gone" ? <React.Fragment> {things["shield"]} <div className="crossout" /> </React.Fragment> : null}</div>}
-        {theThingsBox.mirror == "yes" ? <div className="square" onClick={()=>mirror(props.what, name, props.amount || 0)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.mirror == "gone" ? <React.Fragment> {things["mirror"]} <div className="crossout" /> </React.Fragment> : null}</div>}
-        <button className="close" onClick={()=>okay(props.what, name, props.amount || 0)}>Okay!</button>
+        {theThingsBox.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, name, props.amount)}>{things["shield"]}</div> : <div className="square">{theThingsBox.shield == "gone" ? <React.Fragment> {things["shield"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+        {theThingsBox.mirror == "yes" ? <div className="square" onClick={()=>mirror(props.what, name, props.amount)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.mirror == "gone" ? <React.Fragment> {things["mirror"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+        <button className="close" onClick={()=>okay(props.what, props.name, props.amount)}>Okay!</button>
     </div></div>;
 };
 
@@ -694,7 +694,7 @@ function mirror(what, name, amount){
 
 socket.on('rob', function(name){
   if (theThingsBox.shield == "yes" || theThingsBox.mirror == "yes"){
-    ReactDOM.render(<ShieldMirror />, document.getElementById("shieldMirror"));
+    ReactDOM.render(<ShieldMirror what="rob" name={name} amount=0/>, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").style.display = "block";
   } else {
     okay("rob", name, 0);
@@ -703,6 +703,8 @@ socket.on('rob', function(name){
 
 socket.on('kill', function(name){
   if (theThingsBox.shield == "yes" || theThingsBox.mirror == "yes"){
+    ReactDOM.render(<ShieldMirror what="kill" name={name} amount=0/>, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").style.display = "block";
   } else {
     okay("kill", name, 0);
   };
@@ -714,6 +716,8 @@ socket.on('present', function(){
 
 socket.on('swap', function(name, amount){
   if (theThingsBox.shield == "yes" || theThingsBox.mirror == "yes"){
+    ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount}/>, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").style.display = "block";
   } else {
     okay("swap", name, amount);
   };
