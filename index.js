@@ -302,7 +302,7 @@ io.on('connection', function(socket){
       };
       var thoseWatching = games[pos].watching;
       for (var j = 0; j < thoseWatching.length; j++){
-        thoseWatching[i].emit('game_over', leaderboard);
+        thoseWatching[j].emit('game_over', leaderboard);
       };
     };
   });
@@ -321,12 +321,9 @@ io.on('connection', function(socket){
       if (victim != {}){
         var perpetrator = gameAndPlayerToName(games[pos], socket);
         victim.emit('rob', perpetrator);
-        var theCrew = games[pos].crew;
-        for (var i = 0; i < theCrew.length; i++){
-          theCrew[i].pirate.emit('some_event', ['rob', perpetrator, name]);
-        };
+        games[pos].leader.emit('some_event', ['rob', perpetrator, name]);
         var thoseWatching = games[pos].watching;
-        for (var j = 0; j < thoseWatching.length; j++){
+        for (var i = 0; i < thoseWatching.length; i++){
           thoseWatching[i].emit('some_event', ['rob', perpetrator, name]);
         };
       };
@@ -340,12 +337,9 @@ io.on('connection', function(socket){
       if (victim != {}){
         var perpetrator = gameAndPlayerToName(games[pos], socket);
         victim.emit('kill');
-        var theCrew = games[pos].crew;
-        for (var i = 0; i < theCrew.length; i++){
-          theCrew[i].pirate.emit('some_event', ['kill', perpetrator, name]);
-        };
+        games[pos].leader.emit('some_event', ['kill', perpetrator, name]);
         var thoseWatching = games[pos].watching;
-        for (var j = 0; j < thoseWatching.length; j++){
+        for (var i = 0; i < thoseWatching.length; i++){
           thoseWatching[i].emit('some_event', ['kill', perpetrator, name]);
         };
       };
@@ -359,12 +353,9 @@ io.on('connection', function(socket){
       if (victim != {}){
         var perpetrator = gameAndPlayerToName(games[pos], socket);
         victim.emit('present');
-        var theCrew = games[pos].crew;
-        for (var i = 0; i < theCrew.length; i++){
-          theCrew[i].pirate.emit('some_event', ['present', perpetrator, name]);
-        };
+        games[pos].leader.emit('some_event', ['present', perpetrator, name]);
         var thoseWatching = games[pos].watching;
-        for (var j = 0; j < thoseWatching.length; j++){
+        for (var i = 0; i < thoseWatching.length; i++){
           thoseWatching[i].emit('some_event', ['present', perpetrator, name]);
         };
       };
@@ -378,12 +369,9 @@ io.on('connection', function(socket){
       if (victim != {}){
         var perpetrator = gameAndPlayerToName(games[pos], socket);
         victim.emit('swap', perpetrator, amount);
-        var theCrew = games[pos].crew;
-        for (var i = 0; i < theCrew.length; i++){
-          theCrew[i].pirate.emit('some_event', ['swap', perpetrator, name]);
-        };
+        games[pos].leader.emit('some_event', ['swap', perpetrator, name]);
         var thoseWatching = games[pos].watching;
-        for (var j = 0; j < thoseWatching.length; j++){
+        for (var i = 0; i < thoseWatching.length; i++){
           thoseWatching[i].emit('some_event', ['swap', perpetrator, name]);
         };
       };
