@@ -423,10 +423,16 @@ socket.on('current_square', function(square){
 function doThing(someThing){
   switch(someThing.props.src){
     case things["rob"].props.src:
+      ReactDOM.render(<ChoosePlayer what={"rob"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
       break;
     case things["kill"].props.src:
+      ReactDOM.render(<ChoosePlayer what={"kill"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
       break;
     case things["present"].props.src:
+      ReactDOM.render(<ChoosePlayer what={"present"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
       break;
     case things["parrot"].props.src:
       socket.emit('gobby_parrot', theThingsBox.state.cash);
@@ -444,6 +450,8 @@ function doThing(someThing){
       document.getElementById("squareWas").style.display = "block";
       break;
     case things["swap"].props.src:
+      ReactDOM.render(<ChoosePlayer what={"swap"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
       break;
     case things["choose"].props.src:
       socket.emit('got_choose');
