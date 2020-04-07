@@ -540,7 +540,11 @@ function chooseThemTo(what){
   var name = document.getElementById("choosePlayer").value;
   if (namePattern.test(name) && !exclPattern.test(name)){
     if (theChoosePlayer.state.crew.includes(name)){
-      socket.emit(what, name);
+      if (what == "swap"){
+        socket.emit(what, name, theThingsBox.state.cash);
+      } else {
+        socket.emit(what, name);
+      };
       readyNow();
     } else {
       hidePopUps();
