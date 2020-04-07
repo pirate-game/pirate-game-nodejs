@@ -484,7 +484,9 @@ function doThing(someThing){
           theThingsBox.setState({cash: null});
           break;
         case things["double"].props.src:
-          theThingsBox.setState({cash: 2 * theThingsBox.state.cash});
+          if (theThingsBox.state.cash != null){
+            theThingsBox.setState({cash: 2 * theThingsBox.state.cash});
+          };
           break;
         case things["bank"].props.src:
           theThingsBox.setState({cash: null, bank: theThingsBox.state.cash});
@@ -731,7 +733,9 @@ socket.on('swapped', function(amount){
 });
 
 socket.on('robbed', function(amount){
-  theThingsBox.setState({cash: theThingsBox.state.cash + amount});
+  if (amount != null){
+    theThingsBox.setState({cash: theThingsBox.state.cash + amount});
+  };
 });
 
 class Stage3 extends React.Component {
