@@ -517,13 +517,15 @@ class ChoosePlayer extends React.Component {
       <hr />
       <p>Choose someone to {this.props.what=="present" ? "give a" : null} {this.props.what}. You can click on them to select them.</p>
       <input type="text" id="choosePlayer" maxLength="172" />
-      <ul>
-        {this.state.crew.map(crewMember => (
-          <li style={{position:'relative'}} onClick={()=>{document.getElementById("choosePlayer").value=crewMember}}>
-            <div className="nameLiDiv">{crewMember}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="choosePlayerList">
+        <ul>
+          {this.state.crew.map(crewMember => (
+            <li style={{position:'relative'}} onClick={()=>{document.getElementById("choosePlayer").value=crewMember}}>
+              <div className="nameLiDiv">{crewMember}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
       <button className="choosePlace close" onClick={() => chooseThemTo(this.props.what)} style={{height:"unset",display:"block",marginTop:"10px"}}>Them!</button>
     </div>;
   }
