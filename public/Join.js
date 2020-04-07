@@ -519,7 +519,7 @@ class ChoosePlayer extends React.Component {
       <input type="text" id="choosePlayer" maxLength="172" />
       <div className="choosePlayerList">
         <ul>
-          {this.state.crew.map(crewMember => (
+          {this.state.crew.map(crewMember => crewMember == myName ? null : (
             <li style={{position:'relative'}} onClick={()=>{document.getElementById("choosePlayer").value=crewMember}}>
               <div className="nameLiDiv">{crewMember}</div>
             </li>
