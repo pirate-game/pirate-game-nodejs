@@ -636,8 +636,8 @@ function ShieldMirror(props){
         <h3>{props.name} is trying to {props.what} {props.what == "swap" ? "with" : null} you!</h3>
         <hr />
         <p>You can {theThingsBox.shield == "yes" ? "shield yourself or" : null} {theThingsBox.mirror == "yes" ? "mirror it or" : null} just accept it. Click on the symbol to use it.</p>
-        {theThingsBox.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, name, props.amount || 0)}>{things["shield"]}</div> : <div className="square">{theThingsBox.shield == "gone" ? {things["shield"]} <div className="crossout" /> : null}</div>}
-        {theThingsBox.mirror == "yes" ? <div className="square" onClick={()=>mirror(props.what, name, props.amount || 0)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.mirror == "gone" ? {things["mirror"]} <div className="crossout" /> : null}</div>}
+        {theThingsBox.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, name, props.amount || 0)}>{things["shield"]}</div> : <div className="square">{theThingsBox.shield == "gone" ? <React.Fragment> {things["shield"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+        {theThingsBox.mirror == "yes" ? <div className="square" onClick={()=>mirror(props.what, name, props.amount || 0)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.mirror == "gone" ? <React.Fragment> {things["mirror"]} <div className="crossout" /> </React.Fragment> : null}</div>}
         <button className="close" onClick={()=>okay(props.what, name, props.amount || 0)}>Okay!</button>
     </div></div>;
 };
