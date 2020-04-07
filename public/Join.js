@@ -643,6 +643,7 @@ function ShieldMirror(props){
 };
 
 function okay(what, name, amount){
+  document.getElementById("shieldMirror").style.display = "none";
   switch(what){
     case "rob":
       socket.emit('robbed', name, theThingsBox.state.cash);
@@ -659,6 +660,7 @@ function okay(what, name, amount){
 };
 
 function shield(what, name, amount){
+  document.getElementById("shieldMirror").style.display = "none";
   theThingsBox.setState({shield: "gone"});
   switch(what){
     case "rob":
@@ -676,6 +678,7 @@ function shield(what, name, amount){
 };
 
 function mirror(what, name, amount){
+  document.getElementById("shieldMirror").style.display = "none";
   theThingsBox.setState({shield: "gone"});
   switch(what){
     case "rob":
