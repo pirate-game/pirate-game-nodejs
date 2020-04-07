@@ -336,7 +336,7 @@ io.on('connection', function(socket){
       var victim = gameAndNameToPlayer(games[pos], name);
       if (victim != {}){
         var perpetrator = gameAndPlayerToName(games[pos], socket);
-        victim.emit('kill');
+        victim.emit('kill', perpetrator);
         games[pos].leader.emit('some_event', ['kill', perpetrator, name]);
         var thoseWatching = games[pos].watching;
         for (var i = 0; i < thoseWatching.length; i++){
