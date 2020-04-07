@@ -4,6 +4,7 @@ var key = '';
 var globalCrew = [];
 var unreadyCrew = [];
 var toChoose;
+var round = 0;
 
 var x;//////////////
 var theBoard;
@@ -355,8 +356,8 @@ function nextSquareMid(){
   };
   globalCrew = globalCrew.filter(e=>!unreadyCrew.includes(e));
   unreadyCrew = globalCrew;
-  console.log(theBoard.state.done.length);
-  if (theBoard.state.done.length == 49){
+  round += 1;
+  if (round == 49){
     document.getElementById("nextSquare").style.display = "none";
     document.getElementById("showScores").style.display = "block";
   };
