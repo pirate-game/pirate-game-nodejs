@@ -455,6 +455,172 @@ io.on('connection', function(socket){
     };
   });
   
+  socket.on('mirror_rob', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('mirror_rob', perpetrator);
+      };
+    };
+  });
+  
+  socket.on('mirror_kill', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('mirror_kill', perpetrator);
+      };
+    };
+  });
+  
+  socket.on('mirror_robbed', function(name, amount){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var robber = gameAndNameToPlayer(games[pos], name);
+      if (robber != {}){
+        robber.emit('robbed', amount);
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['mirror_rob', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['mirror_rob', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('mirror_killed', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var robber = gameAndNameToPlayer(games[pos], name);
+      if (robber != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['mirror_kill', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['mirror_kill', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_mirror_rob', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_mirror_rob', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_mirror_rob', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_mirror_kill', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_mirror_kill', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_mirror_kill', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('mirror_mirror_rob', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('mirror_mirror_rob', perpetrator);
+      };
+    };
+  });
+  
+  socket.on('mirror_mirror_kill', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('mirror_mirror_kill', perpetrator);
+      };
+    };
+  });
+  
+  socket.on('mirror_mirror_robbed', function(name, amount){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var robber = gameAndNameToPlayer(games[pos], name);
+      if (robber != {}){
+        robber.emit('robbed', amount);
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['mirror_mirror_rob', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['mirror_mirror_rob', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('mirror_mirror_killed', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var robber = gameAndNameToPlayer(games[pos], name);
+      if (robber != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['mirror_mirror_kill', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['mirror_mirror_kill', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_mirror_mirror_rob', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_mirror_mirror_rob', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_mirror_mirror_rob', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_mirror_mirror_kill', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_mirror_mirror_kill', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_mirror_mirror_kill', name, victim]);
+        };
+      };
+    };
+  });
+  
 });
 
 //End of Game Section
