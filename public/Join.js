@@ -979,7 +979,7 @@ var toRender = <div>
           
       <div id="squareWas" className="stage2PopUp" />
         
-      <div id="shieldMirror" className="stage2PopUp" />
+      <div id="shieldMirror" />
 
     </div>
 
