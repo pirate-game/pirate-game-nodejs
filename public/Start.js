@@ -534,7 +534,7 @@ function eventReportThing(someEvent){
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;  
-    case "mirror_robbed":
+    case "mirror_rob":
       return (<div>
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Rob!</h3>
         <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
@@ -545,7 +545,7 @@ function eventReportThing(someEvent){
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
-    case "mirror_killed":
+    case "mirror_kill":
       return (<div>
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Kill!</h3>
         <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
@@ -578,7 +578,7 @@ function eventReportThing(someEvent){
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
-    case "mirror_mirror_robbed:
+    case "mirror_mirror_rob":
       return (<div>
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Mirrored Rob!</h3>
         <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
@@ -589,7 +589,7 @@ function eventReportThing(someEvent){
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
-    case "mirror_mirror_killed":
+    case "mirror_mirror_kill":
       return (<div>
         <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Mirrored Kill!</h3>
         <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
