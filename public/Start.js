@@ -366,6 +366,7 @@ function nextSquareMid(){
 function tooSlowToChoose(){
   globalCrew = globalCrew.filter(e=>e!=toChoose);
   socket.emit('too_slow', [toChoose]);
+  unreadyCrew = [];
   nextSquare();
 };
 
