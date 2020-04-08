@@ -533,7 +533,95 @@ function eventReportThing(someEvent){
         <p>{someEvent[2]} shielded being swapped with by {someEvent[1]}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
-      break;          
+      break;  
+    case "mirror_robbed:
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} mirrored being robbed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "mirror_killed":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} mirrored being killed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} shielded being mirror robbed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} shielded being mirror killed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "mirror_mirror_robbed:
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} mirrored being mirror robbed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "mirror_mirror_killed":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} mirrored being mirror killed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_mirror_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being mirror mirror robbed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_mirror_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being mirror mirror killed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
   };
 };
               
