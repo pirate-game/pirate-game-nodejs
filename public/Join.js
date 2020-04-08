@@ -4,6 +4,7 @@ var socket = io();
 var theBoard;
 var theThingsBox;
 var theStage3;
+var theChoosePlayer;
 var myName;
 var clickMod10 = 0;
 
@@ -16,6 +17,7 @@ const namePattern = /^[\w\'\-\". ]*$/;
 const exclPattern = /^\s*$/;
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
 const squarePattern = /^[ABCDEFG][1234567]$/;
+const numPattern = /^[0-9]*$/;
 
 function ordinal(someInt){
   var suffixes = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"];
@@ -38,6 +40,8 @@ function range(someInt){
   return out;
 };
 
+const thingsArray = ["rob","kill","present","parrot","swap","choose","shield","mirror","bomb","double","bank","200","1000","3000","5000"];
+
 const things = {
   "rob":<img src="imgs/rob.png" />,
   "kill":<img src="imgs/kill.svg" />,
@@ -54,6 +58,15 @@ const things = {
   "1000":<img src="imgs/sym1000.svg" />,
   "3000":<img src="imgs/sym3000.svg" />,
   "5000":<img src="imgs/sym5000.svg" />
+};
+
+function thingsInverse(thing){
+  for (var i = 0; i < thingsArray.length; i++){
+    if (things[thingsArray[i]].props.src == thing.props.src){
+      return thingsArray[i];
+    };
+  };
+  return "";
 };
 
 const nextPlace = {
@@ -104,7 +117,7 @@ socket.on('start_game', function(){
 socket.on('too_slow', function(){
   hidePopUps();
   document.getElementById("tooSlow").style.display = "block";
-  //document.removeEventListener("beforeunload",unloadFn);//Doesn't work
+  socket.close();
 });
 
 function attemptJoin(){
@@ -180,7 +193,7 @@ class Board extends React.Component {
         board[["A","B","C","D","E","F","G"][i]+["1","2","3","4","5","6","7"][j]] = null;
       };
     };
-    this.state = {board:{}, done:[], taken:[], choosing:true};
+    this.state = {board:{}, done:[], taken:[]};
     
     theBoard=this;
   }
@@ -198,7 +211,7 @@ class Board extends React.Component {
       possibleSquares = possibleSquares.filter((e)=>(e!=current));
       randBoard[current] = ordThing(i);
     };
-    this.setState({board:randBoard, choosing:false});
+    this.setState({board:randBoard});
   }
   updateBoard(square, thing){
     var temp = Object.assign({}, this.state.board);
@@ -225,7 +238,7 @@ class Board extends React.Component {
                            "E1","E2","E3","E4","E5","E6","E7",
                            "F1","F2","F3","F4","F5","F6","F7",
                            "G1","G2","G3","G4","G5","G6","G7"];
-    var temp = {choosing: false};
+    var temp = {};
     for (var i = 0; i < 49; i++){
       temp[possibleSquares[i]] = things["200"];
     };
@@ -247,7 +260,7 @@ class Board extends React.Component {
         <tr className="edge">
           <th className="edge">{col}</th>
           {["A","B","C","D","E","F","G"].map(row => (
-            <td id={row+col} className="square" onClick={this.state.choosing ? () => squareClicked(row+col) : null}>
+            <td id={row+col} className="square" onClick={() => squareClicked(row+col)}>
               {this.state.board[row+col]}
               {this.state.done.includes(row+col) ? <div className="crossout" /> : null}
             </td>
@@ -263,6 +276,7 @@ function squareClicked(square){
   for (var i = 0; i < placeInputs.length; i++){
     placeInputs[i].value = square;
   };
+  document.getElementById("chooseSquareInput").value = square;
   if (square == ""){
     document.getElementById("placeInput3000First").value = "";
     document.getElementById("placeInput3000Second").value = "";
@@ -402,17 +416,175 @@ function place200(){
 
 socket.on('current_square', function(square){
   hidePopUps();
-  /*stuff*/
+  theBoard.squareDone(square);
+  doThing(theBoard.state.board[square]);
 });
+
+function doThing(someThing){
+  switch(someThing.props.src){
+    case things["rob"].props.src:
+      socket.emit('request_crew');
+      ReactDOM.render(<ChoosePlayer what={"rob"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+    case things["kill"].props.src:
+      socket.emit('request_crew');
+      ReactDOM.render(<ChoosePlayer what={"kill"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+    case things["present"].props.src:
+      socket.emit('request_crew');
+      ReactDOM.render(<ChoosePlayer what={"present"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+    case things["parrot"].props.src:
+      socket.emit('gobby_parrot', theThingsBox.state.cash);
+      ReactDOM.render(
+        <div>
+          <h3 style={{display: "inline-block",verticalAlign: "top"}}>Gobby Parrot!</h3>
+          <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+            {things["parrot"]}
+          </div>
+          <hr />
+          <p>Now everyone knows &apos;ow much cash ye&apos;s be &apos;avin&apos;.</p>
+          <button className="choosePlace close" onClick={readyNow} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+        </div>,
+        document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+    case things["swap"].props.src:
+      socket.emit('request_crew');
+      ReactDOM.render(<ChoosePlayer what={"swap"} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+    case things["choose"].props.src:
+      socket.emit('got_choose');
+      ReactDOM.render(
+        <div>
+          <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;Choose&apos;</h3>
+          <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+            {things["choose"]}
+          </div>
+          <hr />
+          <p>You&apos;ll be told what to do when it is your turn to choose.</p>
+          <button className="choosePlace close" onClick={readyNow} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+        </div>,
+        document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+    default:
+      switch(someThing.props.src){
+        case things["shield"].props.src:
+          theThingsBox.setState({shield: "yes"});
+          break;
+        case things["mirror"].props.src:
+          theThingsBox.setState({mirror: "yes"});
+          break;
+        case things["bomb"].props.src:
+          theThingsBox.setState({cash: null});
+          break;
+        case things["double"].props.src:
+          if (theThingsBox.state.cash != null){
+            theThingsBox.setState({cash: 2 * theThingsBox.state.cash});
+          };
+          break;
+        case things["bank"].props.src:
+          theThingsBox.setState({cash: null, bank: theThingsBox.state.cash});
+          break;
+        default:
+          if (numPattern.test(thingsInverse(someThing))){
+            theThingsBox.setState({cash: parseInt(thingsInverse(someThing)) + theThingsBox.state.cash});
+          };
+          break;
+      };
+      ReactDOM.render(<YouGot what={thingsInverse(someThing)} />, document.getElementById("squareWas"));
+      document.getElementById("squareWas").style.display = "block";
+      break;
+  };  
+};
+
+class ChoosePlayer extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {crew:[]};
+    
+    theChoosePlayer = this;
+  }
+  render(){
+    return <div>
+      <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{this.props.what[0].toUpperCase()+this.props.what.substr(1)}&apos;</h3>
+      <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+        {things[this.props.what]}
+      </div>
+      <hr />
+      <p>Choose someone to {this.props.what=="present" ? "give a" : null} {this.props.what}. You can click on them to select them.</p>
+      <input type="text" id="choosePlayer" maxLength="172" />
+      <div className="choosePlayerList">
+        <ul>
+          {this.state.crew.map(crewMember => crewMember == myName ? null : (
+            <li style={{position:'relative'}} onClick={()=>{document.getElementById("choosePlayer").value=crewMember}}>
+              <div className="nameLiDiv">{crewMember}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <button className="choosePlace close" onClick={() => chooseThemTo(this.props.what)} style={{height:"unset",display:"block",marginTop:"10px"}}>Them!</button>
+    </div>;
+  }
+};
+
+socket.on('crew', function(someCrew){
+  console.log(someCrew);
+  theChoosePlayer.setState({crew:someCrew});
+});
+
+function chooseThemTo(what){
+  var name = document.getElementById("choosePlayer").value;
+  document.getElementById("choosePlayer").value = "";
+  if (namePattern.test(name) && !exclPattern.test(name)){
+    if (theChoosePlayer.state.crew.includes(name)){
+      if (what == "swap"){
+        socket.emit(what, name, theThingsBox.state.cash);
+      } else {
+        socket.emit(what, name);
+      };
+      readyNow();
+    } else {
+      hidePopUps();
+      document.getElementById("noSuchPlayer").style.display = "block";
+    };
+  } else {
+    hidePopUps();
+    document.getElementById("invalidName2").style.display = "block";
+  };
+};
+                      
+function YouGot(props){
+  return <div>
+    <h3 style={{display: "inline-block",verticalAlign: "top"}}>You Got &apos;{props.what[0].toUpperCase()+props.what.substr(1)}&apos;</h3>
+    <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+      {things[props.what]}
+    </div>
+    <hr />
+    <p>This doesn&apos;t require you to do anything.</p>
+    <button className="choosePlace close" onClick={readyNow} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+  </div>;
+};
+
+function readyNow(){
+ document.getElementById("squareWas").style.display = "none";
+ socket.emit('ready');
+};
 
 function attemptChooseSquare(){
   var proposedSquare = document.getElementById("chooseSquareInput").value;
   if (squarePattern.test(proposedSquare)){
-    if (theBoard.state.taken.includes(proposedSquare)){
+    if (theBoard.state.done.includes(proposedSquare)){
       hidePopUps();
-      document.getElementById("squareTaken").style.display = "block";
+      document.getElementById("squareDone").style.display = "block";
     } else {
       hidePopUps();
+      document.getElementById("chooseSquare").style.display = "none";
       document.getElementById("waitingForChoice").style.display = "block";
       socket.emit('chose', proposedSquare);
     };
@@ -421,6 +593,11 @@ function attemptChooseSquare(){
     document.getElementById("invalidSquare").style.display = "block";
   };
 };
+
+socket.on('choose', function(){
+  hidePopUps();
+  document.getElementById("chooseSquare").style.display = "block";
+});
 
 class ThingsBox extends React.Component {
   constructor(){
@@ -457,6 +634,109 @@ class ThingsBox extends React.Component {
   }
 };
 
+function ShieldMirror(props){
+  return <div className="popUp"><div style={{position:'relative'}}>
+        <h3>{props.name} is trying to {props.what} {props.what == "swap" ? "with" : null} you!</h3>
+        <hr />
+        <p>You can {theThingsBox.shield == "yes" ? "shield yourself or" : null} {theThingsBox.mirror == "yes" ? "mirror it or" : null} just accept it. Click on the symbol to use it. {props.what == "swap" ? "If you mirrored a swap it would still be a swap." : null}</p>
+        <div style={{textAlign:"center"}}>
+          {theThingsBox.state.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, props.name, props.amount)}>{things["shield"]}</div> : <div className="square">{theThingsBox.state.shield == "gone" ? <React.Fragment> {things["shield"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+          {theThingsBox.state.mirror == "yes" ? <div className="square" onClick={props.what == "swap" ? null : ()=>mirror(props.what, props.name, props.amount)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.state.mirror == "gone" ? <React.Fragment> {things["mirror"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+        </div>
+        <button className="close" onClick={()=>okay(props.what, props.name, props.amount)}>Okay!</button>
+    </div></div>;
+};
+
+function okay(what, name, amount){
+  if (document.getElementById("shieldMirror").childNodes.length != 0){
+    document.getElementById("shieldMirror").childNodes[0].style.display = "none";
+  };
+  switch(what){
+    case "rob":
+      socket.emit('robbed', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: null});
+      break;
+    case "kill":
+      socket.emit('killed', name);
+      theThingsBox.setState({cash: null});
+      break;
+    case "swap":
+      socket.emit('swapped', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: amount});
+      break;
+  };
+};
+
+function shield(what, name, amount){
+  document.getElementById("shieldMirror").childNodes[0].style.display = "none";
+  theThingsBox.setState({shield: "gone"});
+  switch(what){
+    case "rob":
+      socket.emit('shielded_rob', name);
+      break;
+    case "kill":
+      socket.emit('shielded_kill', name);
+      break;
+    case "swap":
+      socket.emit('shielded_swap', name);
+      break;
+  };
+};
+
+function mirror(what, name, amount){
+  document.getElementById("shieldMirror").childNodes[0].style.display = "none";
+  theThingsBox.setState({shield: "gone"});
+  switch(what){
+    case "rob":
+      socket.emit('mirrored_rob', name);
+      break;
+    case "kill":
+      socket.emit('mirrored_kill', name);
+      break;
+  };
+};
+
+socket.on('rob', function(name){
+  if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
+  } else {
+    okay("rob", name, 0);
+  };
+});
+
+socket.on('kill', function(name){
+  if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    ReactDOM.render(<ShieldMirror what="kill" name={name} amount={0} />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
+  } else {
+    okay("kill", name, 0);
+  };
+});
+
+socket.on('present', function(){
+  theThingsBox.setState({cash: theThingsBox.state.cash + 1000});
+});
+
+socket.on('swap', function(name, amount){
+  if (theThingsBox.state.shield == "yes"){
+    ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount} />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
+  } else {
+    okay("swap", name, amount);
+  };
+});
+
+socket.on('swapped', function(amount){
+  theThingsBox.setState({cash: amount});
+});
+
+socket.on('robbed', function(amount){
+  if (amount != null){
+    theThingsBox.setState({cash: theThingsBox.state.cash + amount});
+  };
+});
+
 class Stage3 extends React.Component {
   constructor(){
     super();
@@ -490,8 +770,14 @@ class Stage3 extends React.Component {
   }
 };
 
+socket.on('get_score', function(){
+  socket.emit('got_score', theThingsBox.state.cash + theThingsBox.state.bank);
+});
+
 socket.on('game_over', function(results){
   ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+  hideStage("stage2");
+  showStage("stage3");
 });
   
 var toRender = <div>
@@ -605,6 +891,10 @@ var toRender = <div>
         <input type="text" className="placeInput" id="chooseSquareInput" maxLength="2" />
         <button className="choosePlace close" onClick={attemptChooseSquare} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div></div>
+          
+      <div id="squareWas" className="stage2PopUp" />
+        
+      <div id="shieldMirror" />
 
     </div>
 
@@ -619,6 +909,13 @@ var toRender = <div>
         <hr />
         <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.
           <br />We be sorry if ye&apos;s name be &apos;aving accented characters in it etc.</p>
+       <button className="close" onClick={hidePopUps}>Okay!</button>
+    </div></div>
+    
+    <div id="invalidName2" className="popUp"><div>
+        <h3>Invalid Name</h3>
+        <hr />
+        <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.</p>
        <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
 
@@ -710,6 +1007,20 @@ var toRender = <div>
       <h3>Waiting for the Chosen Square</h3>
       <hr />
       <p>This won&apos;t take too long, I hope!</p>
+    </div></div>
+    
+    <div id="squareDone" className="popUp"><div>
+        <h3>Square Done</h3>
+        <hr />
+        <p>Oops! That square&apos;s been done already, choose another.</p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
+    </div></div>
+    
+    <div id="noSuchPlayer" className="popUp"><div>
+        <h3>No Such Player</h3>
+        <hr />
+        <p>Oops! That player doesn&apos;t exist, maybe check your spelling.</p>
+        <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
       
   </div>

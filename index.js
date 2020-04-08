@@ -81,7 +81,7 @@ io.on('connection', function(socket){
   socket.on('request_key', function(){
     var key = new_key();
     socket.emit('key', key);
-    var game = {leader: socket, game_key: key, crew: [], available: true, watchable:false, watching:[]};
+    var game = {leader: socket, game_key: key, crew: [], available: true, watchable:false, watching:[], scores:[]};
     games.push(game);
   }); 
     
@@ -179,6 +179,17 @@ io.on('connection', function(socket){
       games[pos].watching.push(socket);
       if (games[pos].watchable){
         socket.emit('start_game');
+        games[pos].leader.emit('request_state');
+      };
+    };
+  });
+  
+  socket.on('state', function(state){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var thoseWatching = games[pos].watching;
+      for (var i = 0; i < thoseWatching.length; i++){
+        thoseWatching[i].emit('state', state);
       };
     };
   });
@@ -212,7 +223,7 @@ io.on('connection', function(socket){
     if (pos != -1){
       var thoseWatching = games[pos].watching;
       for (var i = 0; i < thoseWatching.length; i++){
-        thoseWatching[i].emit('choose', player);
+        thoseWatching[i].emit('choose', toChoose);
       };
       var playerToChoose = gameAndNameToPlayer(games[pos], toChoose);
       if (playerToChoose != {}){
@@ -227,6 +238,220 @@ io.on('connection', function(socket){
     var pos = crewmemberToGame(socket);
     if (pos != -1){
       games[pos].leader.emit('chose', square);
+    };
+  });
+  
+  socket.on('ready', function(){
+    var thisGame = crewmemberToGame(socket);
+    if (thisGame != -1){
+      var thisName = gameAndPlayerToName(games[thisGame], socket);
+      if (thisName != ""){
+        games[thisGame].leader.emit('ready', thisName);
+      };
+    };
+  });
+  
+  socket.on('got_choose', function(){
+    var thisGame = crewmemberToGame(socket);
+    if (thisGame != -1){
+      var thisName = gameAndPlayerToName(games[thisGame], socket);
+      if (thisName != ""){
+        games[thisGame].leader.emit('got_choose', thisName);
+      };
+    };
+  });
+  
+  socket.on('gobby_parrot', function(score){
+    var thisGame = crewmemberToGame(socket);
+    if (thisGame != -1){
+      var thisName = gameAndPlayerToName(games[thisGame], socket);
+      if (thisName != ""){
+        games[thisGame].leader.emit('some_event', ["parrot", thisName, score]);
+      };
+      var thoseWatching = games[thisGame].watching;
+      for (var i = 0; i < thoseWatching.length; i++){
+        thoseWatching[i].emit('some_event', ["parrot", thisName, score]);
+      };
+    };
+  });
+  
+  socket.on('get_scores', function(){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var theCrew = games[pos].crew;
+      for (var i = 0; i < theCrew.length; i++){
+        theCrew[i].pirate.emit('get_score');
+      };
+    };
+  });
+  
+  socket.on('got_score', function(someScore){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      games[pos].scores.push({name: gameAndPlayerToName(games[pos], socket), score: someScore});
+    };
+    games[pos].leader.emit('got_scores', games[pos].scores);
+  });
+  
+  socket.on('game_over', function(leaderboard){
+    var pos = leaderToGame(socket);
+    if (pos != -1){
+      var theCrew = games[pos].crew;
+      for (var i = 0; i < theCrew.length; i++){
+        theCrew[i].pirate.emit('game_over', leaderboard);
+      };
+      var thoseWatching = games[pos].watching;
+      for (var j = 0; j < thoseWatching.length; j++){
+        thoseWatching[j].emit('game_over', leaderboard);
+      };
+    };
+  });
+  
+  socket.on('request_crew', function(){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      socket.emit('crew', games[pos].crew.map(e=>e.pirateName));
+    };
+  });
+  
+  socket.on('rob', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('rob', perpetrator);
+      };
+    };
+  });
+  
+  socket.on('kill', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('kill', perpetrator);
+      };
+    };
+  });
+  
+  socket.on('present', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('present');
+        games[pos].leader.emit('some_event', ['present', perpetrator, name]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['present', perpetrator, name]);
+        };
+      };
+    };
+  });
+  
+  socket.on('swap', function(name, amount){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var victim = gameAndNameToPlayer(games[pos], name);
+      if (victim != {}){
+        var perpetrator = gameAndPlayerToName(games[pos], socket);
+        victim.emit('swap', perpetrator, amount);
+      };
+    };
+  });
+  
+  socket.on('robbed', function(name, amount){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var robber = gameAndNameToPlayer(games[pos], name);
+      if (robber != {}){
+        robber.emit('robbed', amount);
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['rob', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['rob', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('swapped', function(name, amount){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var robber = gameAndNameToPlayer(games[pos], name);
+      if (robber != {}){
+        robber.emit('swapped', amount);
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['swap', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['swap', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('killed', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var robber = gameAndNameToPlayer(games[pos], name);
+      if (robber != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['kill', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['kill', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_rob', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_rob', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_rob', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_kill', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_kill', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_kill', name, victim]);
+        };
+      };
+    };
+  });
+  
+  socket.on('shielded_swap', function(name){
+    var pos = crewmemberToGame(socket);
+    if (pos != -1){
+      var perpetrator = gameAndNameToPlayer(games[pos], name);
+      if (perpetrator != {}){
+        var victim = gameAndPlayerToName(games[pos], socket);
+        games[pos].leader.emit('some_event', ['shielded_swap', name, victim]);
+        var thoseWatching = games[pos].watching;
+        for (var i = 0; i < thoseWatching.length; i++){
+          thoseWatching[i].emit('some_event', ['shielded_swap', name, victim]);
+        };
+      };
     };
   });
   

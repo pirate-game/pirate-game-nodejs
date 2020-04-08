@@ -5,8 +5,27 @@ var theBoard;
 var theCurrentSquare;
 var theChooseNextSquare;
 var theStage3;
+var theEventReport;
 
 const keyPattern = /^[0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef][0-9abcdef]$/;
+
+const things = {
+  "rob":<img src="imgs/rob.png" />,
+  "kill":<img src="imgs/kill.svg" />,
+  "present":<img src="imgs/present.png" />,
+  "parrot":<img src="imgs/parrot.png" />,
+  "swap":<img src="imgs/swap.png" />,
+  "choose":<img src="imgs/c.png" />,
+  "shield":<img src="imgs/shield.svg" />,
+  "mirror":<img src="imgs/mirror.png" />,
+  "bomb":<img src="imgs/bomb.svg" />,
+  "double":<img src="imgs/double.svg" />,
+  "bank":<img src="imgs/bank.svg" />,
+  "200":<img src="imgs/sym200.svg" />,
+  "1000":<img src="imgs/sym1000.svg" />,
+  "3000":<img src="imgs/sym3000.svg" />,
+  "5000":<img src="imgs/sym5000.svg" />
+};
 
 function range(someInt){
   var out = [];
@@ -134,6 +153,12 @@ socket.on('choose', function(player){
   theChooseNextSquare.removePlayers([player])
 });
 
+socket.on('state', function(gameState){
+  theBoard.setState(gameState[0]);
+  theCurrentSquare.setState(gameState[1]);
+  theChooseNextSquare.setState(gameState[2]);
+});
+
 
 class Stage3 extends React.Component {
   constructor(){
@@ -162,7 +187,126 @@ class Stage3 extends React.Component {
 
 socket.on('game_over', function(results){
   ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+  hideStage("stage2");
+  showStage("stage3");
 });
+  
+class EventReport extends React.Component {
+  constructor(){
+    super();
+    this.state = {queue: []};
+    
+    this.pop = this.pop.bind(this);
+    
+    theEventReport = this;
+  }
+  addEvent(someEvent){
+    this.setState({queue: [someEvent].concat(this.state.queue)});
+  }
+  pop(){
+    this.setState({queue: this.state.queue.slice(0, -1)});
+  }
+  render(){
+    return <div id="eventReport">
+      {this.state.queue.map(e=>(<div>{eventReportThing(e)}</div>))}
+    </div>;
+  }
+};
+
+socket.on('some_event', function(someEvent){theEventReport.addEvent(someEvent);});
+  
+function eventReportThing(someEvent){
+  switch(someEvent[0]){
+    case "rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has robbed {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has killed {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "present":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Present!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["present"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has given {someEvent[2]} a present!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "parrot":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Gobby Parrot!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["parrot"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has got {someEvent[2] || 0}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "swap":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Swap!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["swap"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has swapped score with {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being robbed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being killed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_swap":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["swap"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being swapped with by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;          
+  };
+};
 
 var toRender = <div>
   <div className="stage0">
@@ -174,6 +318,7 @@ var toRender = <div>
     <Board />
     <CurrentSquare />
     <ChooseNextSquare />
+    <EventReport />
   </div>
   <div id="stage3" className="stage3" />
   <div id="popUps">

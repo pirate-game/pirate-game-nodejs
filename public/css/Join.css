@@ -156,6 +156,10 @@ input {
     width: calc(98vw - (100vh - 156px));
     height: calc(90vh - 154px);
   }
+  
+  .choosePlayerList {
+    max-height: calc(100vh - 525px);
+  }
 }
 
 @media screen and (orientation:portrait){
@@ -194,10 +198,8 @@ input {
     width: 100%;
 }
 
-.leaderboardList {
+.leaderboardList, .choosePlayerList {
   position: relative;
-  top: 60px;
-  max-height: calc(100vh - 300px);
   min-height: 70px;
   background: white;
   overflow: auto;
@@ -205,17 +207,28 @@ input {
   width: calc(100% - 5px);
 }
 
-.leaderboardList ul {
+.leaderboardList {
+  max-height: calc(100vh - 300px);
+  top: 60px;
+}
+
+.choosePlayerList {
+  max-height: calc(60vh - 860px);
+  margin: 5px 0;
+  max-height: calc(60vh - 860px);
+}
+
+.leaderboardList ul, .choosePlayerList ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.leaderboardList ul li {
+.leaderboardList ul li, .choosePlayerList ul li {
   padding: 5px 10px;
 }
 
-.leaderboardList ul li:nth-child(odd) { background: #eee; }
+.leaderboardList ul li:nth-child(odd), .choosePlayerList ul li:nth-child(odd) { background: #eee; }
 
 .leaderboardRight {
   display: inline-block;
@@ -259,4 +272,13 @@ input {
 
 .backHome:hover {
    background-color: cornflowerblue;
+}
+
+#shieldMirror .square {
+  border: 2px solid black;
+  display: inline-block;
+  width: 40%;
+  height: 110px;
+  border-radius: 0;
+  margin: 0 5px 10px;
 }

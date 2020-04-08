@@ -2,12 +2,34 @@ var root = document.getElementById('root');
 var socket = io();
 var key = '';
 var globalCrew = [];
+var unreadyCrew = [];
+var toChoose;
+var round = 0;
 
 var x;//////////////
 var theBoard;
 var theCurrentSquare;
 var theChooseNextSquare;
 var theStage3;
+var theEventReport;
+
+const things = {
+  "rob":<img src="imgs/rob.png" />,
+  "kill":<img src="imgs/kill.svg" />,
+  "present":<img src="imgs/present.png" />,
+  "parrot":<img src="imgs/parrot.png" />,
+  "swap":<img src="imgs/swap.png" />,
+  "choose":<img src="imgs/c.png" />,
+  "shield":<img src="imgs/shield.svg" />,
+  "mirror":<img src="imgs/mirror.png" />,
+  "bomb":<img src="imgs/bomb.svg" />,
+  "double":<img src="imgs/double.svg" />,
+  "bank":<img src="imgs/bank.svg" />,
+  "200":<img src="imgs/sym200.svg" />,
+  "1000":<img src="imgs/sym1000.svg" />,
+  "3000":<img src="imgs/sym3000.svg" />,
+  "5000":<img src="imgs/sym5000.svg" />
+};
 
 function range(someInt){
   var out = [];
@@ -15,6 +37,20 @@ function range(someInt){
     out.push(i);
   };
   return out;
+};
+
+function sortByScore(results){
+  var out = [];
+  var toTest = 0;
+  while (out.length != results.length){
+    for (var i = 0; i < results.length; i++){
+      if (results[i].score == toTest){
+        out.push(results[i]);
+      };
+    };
+    toTest += 100;
+  };
+  return out.reverse();
 };
 
 class KeyBox extends React.Component {
@@ -261,19 +297,76 @@ var remainingSquares = ["A1","A2","A3","A4","A5","A6","A7",
                "F1","F2","F3","F4","F5","F6","F7",
                "G1","G2","G3","G4","G5","G6","G7"];
 
+function NextSquareConfirm(){
+  return (<React.Fragment>
+    <div className="popUp"><div>
+      <h3>Confirm Next Square</h3>
+      <hr />
+      <div>
+        <p style={{display: 'inline-block', width: 'calc(100% - 190px)'}}>The crewmembers below are not ready and will be dropped from the game.</p>
+        <div style={{display: 'inline-block'}}>
+          <button onClick={nextSquareMid}>Okay!</button>
+          <button onClick={hidePopUps}>Wait!</button>
+        </div>
+      </div>
+      <div className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
+        <ul>
+          {unreadyCrew.map(crewMember => (
+            <li style={{position:'relative'}}>
+              <div className="nameLiDiv">{crewMember}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div></div>
+  </React.Fragment>);
+};
+
 function nextSquare(){
-  if (theChooseNextSquare.players.length === 0){
+  hidePopUps();
+  if (globalCrew.length - unreadyCrew.length >= 2){
+    if (unreadyCrew.length == 0){
+      nextSquareMid();
+    } else {
+      ReactDOM.render(<NextSquareConfirm />, document.getElementById("nextSquareConfirm"));
+      document.getElementById("nextSquareConfirm").childNodes[0].style.display = "block";
+    };
+  } else {
+    document.getElementById("tooFewReady").style.display = "block";
+  };
+};
+
+function nextSquareMid(){
+  socket.emit('too_slow', unreadyCrew);
+  if (document.getElementById("nextSquareConfirm").childNodes.length != 0){
+    document.getElementById("nextSquareConfirm").childNodes[0].style.display = "none";
+  };
+  if (theChooseNextSquare.state.players.length === 0){
     var current = remainingSquares[Math.floor(Math.random() * remainingSquares.length)];
     remainingSquares = remainingSquares.filter(e=>e!=current);
     theCurrentSquare.setState({currentSquare: current});
     theBoard.squareDone(current);
     socket.emit('current_square', current);
   } else {
-    var toChoose = theChooseNextSquare.state.players[0];
+    toChoose = theChooseNextSquare.state.players[0];
+    theChooseNextSquare.removePlayers([toChoose]);
     socket.emit('choose', toChoose);
     hidePopUps();
     document.getElementById("waitForChoose").style.display = "block";
   };
+  globalCrew = globalCrew.filter(e=>!unreadyCrew.includes(e));
+  unreadyCrew = globalCrew;
+  round += 1;
+  if (round == 49){
+    document.getElementById("nextSquare").style.display = "none";
+    document.getElementById("showScores").style.display = "block";
+  };
+};
+
+function tooSlowToChoose(){
+  globalCrew = globalCrew.filter(e=>e!=toChoose);
+  socket.emit('too_slow', [toChoose]);
+  nextSquare();
 };
 
 socket.on('player_gone', function(player){
@@ -289,9 +382,18 @@ socket.on('chose', function(square){
   socket.emit('current_square', square);
 });
 
+socket.on('got_choose', function(player){
+  theChooseNextSquare.addPlayer(player);
+  socket.emit('choose_next_square', player);
+});
+
+socket.on('request_state', function(){
+  socket.emit('state', [theBoard.state, theCurrentSquare.state, theChooseNextSquare.state]);
+});
+
 class Stage3 extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     
     theStage3 = this;
   }
@@ -314,9 +416,142 @@ class Stage3 extends React.Component {
   }
 };
 
-function test2(results){
-  ReactDOM.render(<Stage3 leaderboard={results} />, document.getElementById("stage3"));
+socket.on('ready', function(name){
+  unreadyCrew = unreadyCrew.filter(e=>e!=name);
+});
+
+class EventReport extends React.Component {
+  constructor(){
+    super();
+    this.state = {queue: []};
+    
+    this.pop = this.pop.bind(this);
+    
+    theEventReport = this;
+  }
+  addEvent(someEvent){
+    this.setState({queue: [someEvent].concat(this.state.queue)});
+  }
+  pop(){
+    this.setState({queue: this.state.queue.slice(0, -1)});
+  }
+  render(){
+    return <div id="eventReport">
+      {this.state.queue.map(e=>(<div>{eventReportThing(e)}</div>))}
+    </div>;
+  }
 };
+
+socket.on('some_event', function(someEvent){theEventReport.addEvent(someEvent);});
+  
+function eventReportThing(someEvent){
+  switch(someEvent[0]){
+    case "rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has robbed {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has killed {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "present":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Present!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["present"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has given {someEvent[2]} a present!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "parrot":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Gobby Parrot!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["parrot"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has got {someEvent[2] || 0}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "swap":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Swap!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["swap"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} has swapped score with {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being robbed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being killed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_swap":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["swap"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being swapped with by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;          
+  };
+};
+              
+function showScores(){
+  socket.emit('get_scores');
+  hideStage("stage2");
+  hidePopUps();
+  document.getElementById("waiting").style.display = "block";
+};
+      
+socket.on('got_scores', function(results){
+  var leaderboard = sortByScore(results);
+  ReactDOM.render(<Stage3 leaderboard={leaderboard} />, document.getElementById("stage3"));
+  hideStage("stage2");
+  showStage("stage3");
+  hidePopUps();
+  socket.emit('game_over', leaderboard);
+});
 
 var toRender = <div>
     <div className="stage0">
@@ -334,7 +569,10 @@ var toRender = <div>
       <Board />
       <CurrentSquare />
       <ChooseNextSquare />
-      <button id="nextSquare" onclick={nextSquare}><h2>Next&nbsp;Square</h2></button>
+      <button id="nextSquare" onClick={nextSquare}><h2>Next&nbsp;Square</h2></button>
+      <button id="showScores" onClick={showScores} style={{display:"none"}}><h2>Show&nbsp;Scores</h2></button>
+      <div id="nextSquareConfirm" />
+      <EventReport />
     </div>
     <div id="stage3" className="stage3"></div>
     <div id="popUps">
@@ -363,6 +601,7 @@ var toRender = <div>
           <h3>Waiting For Next Square to be Chosen</h3>
           <hr />
           <p>This won&apos;t take too long, I hope!</p>
+          <button className="close" onClick={tooSlowToChoose}>Too Slow</button>
       </div></div>
         
       <div id="playerGone" className="popUp"><div>
