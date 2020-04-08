@@ -151,7 +151,7 @@ io.on('connection', function(socket){
         var player = gameAndNameToPlayer(games[pos], who[i]);
         if (player != {}){
           player.emit('too_slow');
-          games[pos].crew = games[pos].crew.filter((x)=>(x.id!=player.id));
+          games[pos].crew = games[pos].crew.filter((x)=>(x.pirateName!=who[i]));
         };
       };
       var thoseWatching = games[pos].watching;
