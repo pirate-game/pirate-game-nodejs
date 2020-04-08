@@ -635,16 +635,44 @@ class ThingsBox extends React.Component {
 };
 
 function ShieldMirror(props){
-  return <div className="popUp"><div style={{position:'relative'}}>
-        <h3>{props.name} is trying to {props.what} {props.what == "swap" ? "with" : null} you!</h3>
-        <hr />
-        <p>You can {theThingsBox.shield == "yes" ? "shield yourself or" : null} {theThingsBox.mirror == "yes" ? "mirror it or" : null} just accept it. Click on the symbol to use it. {props.what == "swap" ? "If you mirrored a swap it would still be a swap." : null}</p>
-        <div style={{textAlign:"center"}}>
-          {theThingsBox.state.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, props.name, props.amount)}>{things["shield"]}</div> : <div className="square">{theThingsBox.state.shield == "gone" ? <React.Fragment> {things["shield"]} <div className="crossout" /> </React.Fragment> : null}</div>}
-          {theThingsBox.state.mirror == "yes" ? <div className="square" onClick={props.what == "swap" ? null : ()=>mirror(props.what, props.name, props.amount)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.state.mirror == "gone" ? <React.Fragment> {things["mirror"]} <div className="crossout" /> </React.Fragment> : null}</div>}
-        </div>
-        <button className="close" onClick={()=>okay(props.what, props.name, props.amount)}>Okay!</button>
-    </div></div>;
+  switch(props.mirror){
+    case 0:
+      return <div className="popUp"><div style={{position:'relative'}}>
+            <h3>{props.name} is trying to {props.what} {props.what == "swap" ? "with" : null} you!</h3>
+            <hr />
+            <p>You can {theThingsBox.shield == "yes" ? "shield yourself or" : null} {theThingsBox.mirror == "yes" ? "mirror it or" : null} just accept it. Click on the symbol to use it. {props.what == "swap" ? "If you mirrored a swap it would still be a swap." : null}</p>
+            <div style={{textAlign:"center"}}>
+              {theThingsBox.state.shield == "yes" ? <div className="square" onClick={()=>shield(props.what, props.name, props.amount)}>{things["shield"]}</div> : <div className="square">{theThingsBox.state.shield == "gone" ? <React.Fragment> {things["shield"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+              {theThingsBox.state.mirror == "yes" ? <div className="square" onClick={props.what == "swap" ? null : ()=>mirror(props.what, props.name, props.amount)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.state.mirror == "gone" ? <React.Fragment> {things["mirror"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+            </div>
+            <button className="close" onClick={()=>okay(props.what, props.name, props.amount)}>Okay!</button>
+        </div></div>;
+      break;
+    case 1:
+      return <div className="popUp"><div style={{position:'relative'}}>
+            <h3>{props.name} reflected your {props.what}!</h3>
+            <hr />
+            <p>You can {theThingsBox.shield == "yes" ? "shield yourself or" : null} {theThingsBox.mirror == "yes" ? "mirror it again or" : null} just accept it. Click on the symbol to use it.</p>
+            <div style={{textAlign:"center"}}>
+              {theThingsBox.state.shield == "yes" ? <div className="square" onClick={()=>shield("mirror_"+props.what, props.name, props.amount)}>{things["shield"]}</div> : <div className="square">{theThingsBox.state.shield == "gone" ? <React.Fragment> {things["shield"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+              {theThingsBox.state.mirror == "yes" ? <div className="square" onClick={()=>mirror("mirror_"+props.what, props.name, props.amount)}>{things["mirror"]}</div> : <div className="square">{theThingsBox.state.mirror == "gone" ? <React.Fragment> {things["mirror"]} <div className="crossout" /> </React.Fragment> : null}</div>}
+            </div>
+            <button className="close" onClick={()=>okay("mirror_"+props.what, props.name, props.amount)}>Okay!</button>
+        </div></div>;
+      break;
+    case 2:
+      return <div className="popUp"><div style={{position:'relative'}}>
+            <h3>{props.name} reflected your reflected {props.what}!</h3>
+            <hr />
+            <p>You can shield yourself or just accept it. Click on the symbol to use it.</p>
+            <div style={{textAlign:"center"}}>
+              <div className="square" onClick={()=>shield("mirror_mirror_"+props.what, props.name, props.amount)}>{things["shield"]}</div>
+              <div className="square">{things["mirror"]}<div className="crossout" /></div>
+            </div>
+            <button className="close" onClick={()=>okay("mirror_mirror_"+props.what, props.name, props.amount)}>Okay!</button>
+        </div></div>;
+      break;
+  };
 };
 
 function okay(what, name, amount){
@@ -664,6 +692,22 @@ function okay(what, name, amount){
       socket.emit('swapped', name, theThingsBox.state.cash);
       theThingsBox.setState({cash: amount});
       break;
+    case "mirror_rob":
+      socket.emit('mirror_robbed', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: null});
+      break;
+    case "mirror_kill":
+      socket.emit('mirror_killed', name);
+      theThingsBox.setState({cash: null});
+      break;
+    case "mirror_mirror_rob":
+      socket.emit('mirror_mirror_robbed', name, theThingsBox.state.cash);
+      theThingsBox.setState({cash: null});
+      break;
+    case "mirror_mirror_kill":
+      socket.emit('mirror_mirror_killed', name);
+      theThingsBox.setState({cash: null});
+      break;
   };
 };
 
@@ -680,25 +724,30 @@ function shield(what, name, amount){
     case "swap":
       socket.emit('shielded_swap', name);
       break;
+    case "mirror_rob":
+      socket.emit('shielded_mirror_rob', name);
+      break;
+    case "mirror_kill":
+      socket.emit('shielded_mirror_kill', name);
+      break;
+    case "mirror_mirror_rob":
+      socket.emit('shielded_mirror_mirror_rob', name);
+      break;
+    case "mirror_mirror_kill":
+      socket.emit('shielded_mirror_mirror_kill', name);
+      break;
   };
 };
 
 function mirror(what, name, amount){
   document.getElementById("shieldMirror").childNodes[0].style.display = "none";
-  theThingsBox.setState({shield: "gone"});
-  switch(what){
-    case "rob":
-      socket.emit('mirrored_rob', name);
-      break;
-    case "kill":
-      socket.emit('mirrored_kill', name);
-      break;
-  };
+  theThingsBox.setState({mirror: "gone"});
+  socket.emit('mirror_'+what, name);
 };
 
 socket.on('rob', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
-    ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} />, document.getElementById("shieldMirror"));
+    ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} mirror={0} />, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
     okay("rob", name, 0);
@@ -707,10 +756,46 @@ socket.on('rob', function(name){
 
 socket.on('kill', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
-    ReactDOM.render(<ShieldMirror what="kill" name={name} amount={0} />, document.getElementById("shieldMirror"));
+    ReactDOM.render(<ShieldMirror what="kill" name={name} amount={0} mirror={0} />, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
     okay("kill", name, 0);
+  };
+});
+
+socket.on('mirror_rob', function(name){
+  if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} mirror={1} />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
+  } else {
+    okay("mirror_rob", name, 0);
+  };
+});
+
+socket.on('mirror_kill', function(name){
+  if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    ReactDOM.render(<ShieldMirror what="kill" name={name} amount={0} mirror={1} />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
+  } else {
+    okay("mirror_kill", name, 0);
+  };
+});
+
+socket.on('mirror_mirror_rob', function(name){
+  if (theThingsBox.state.shield == "yes"){
+    ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} mirror={2} />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
+  } else {
+    okay("mirror_mirror_rob", name, 0);
+  };
+});
+
+socket.on('mirror_mirror_kill', function(name){
+  if (theThingsBox.state.shield == "yes"){
+    ReactDOM.render(<ShieldMirror what="kill" name={name} amount={0} mirror={2} />, document.getElementById("shieldMirror"));
+    document.getElementById("shieldMirror").childNodes[0].style.display = "block";
+  } else {
+    okay("mirror_mirror_kill", name, 0);
   };
 });
 
@@ -720,7 +805,7 @@ socket.on('present', function(){
 
 socket.on('swap', function(name, amount){
   if (theThingsBox.state.shield == "yes"){
-    ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount} />, document.getElementById("shieldMirror"));
+    ReactDOM.render(<ShieldMirror what="swap" name={name} amount={amount} mirror={0} />, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
     okay("swap", name, amount);
@@ -894,7 +979,7 @@ var toRender = <div>
           
       <div id="squareWas" className="stage2PopUp" />
         
-      <div id="shieldMirror" />
+      <div id="shieldMirror" className="stage2PopUp" />
 
     </div>
 
