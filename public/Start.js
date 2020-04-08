@@ -631,10 +631,40 @@ function eventReportThing(someEvent){
 };
               
 function showScores(){
-  socket.emit('get_scores');
-  hideStage("stage2");
   hidePopUps();
-  document.getElementById("waiting").style.display = "block";
+  if (globalCrew.length - unreadyCrew.length >= 2){
+    if (unreadyCrew.length == 0){
+      socket.emit('get_scores');
+      hideStage("stage2");
+      document.getElementById("waiting").style.display = "block";
+    } else {
+      ReactDOM.render(<React.Fragment>
+        <div className="popUp"><div>
+          <h3>Confirm Show Scores</h3>
+          <hr />
+          <div>
+            <p style={{display: 'inline-block', width: 'calc(100% - 190px)'}}>The crewmembers below are not ready and their scores may not be shown.</p>
+            <div style={{display: 'inline-block'}}>
+              <button onClick={()=>{socket.emit('too_slow', unreadyCrew);unreadyCrew=[];showScores()}}>Okay!</button>
+              <button onClick={hidePopUps}>Wait!</button>
+            </div>
+          </div>
+          <div className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
+            <ul>
+              {unreadyCrew.map(crewMember => (
+                <li style={{position:'relative'}}>
+                  <div className="nameLiDiv">{crewMember}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div></div>
+      </React.Fragment>, document.getElementById("nextSquareConfirm"));
+      document.getElementById("nextSquareConfirm").childNodes[0].style.display = "block";
+    };
+  } else {
+    document.getElementById("tooFewReady").style.display = "block";
+  };
 };
       
 socket.on('got_scores', function(results){
