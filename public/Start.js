@@ -364,10 +364,14 @@ function nextSquareMid(){
 };
 
 function tooSlowToChoose(){
-  globalCrew = globalCrew.filter(e=>e!=toChoose);
-  socket.emit('too_slow', [toChoose]);
-  unreadyCrew = [];
-  nextSquare();
+  if (globalCrew.length > 2){
+    globalCrew = globalCrew.filter(e=>e!=toChoose);
+    socket.emit('too_slow', [toChoose]);
+    unreadyCrew = [];
+    nextSquare();
+  } else {
+    document.getElementById("tooFewReady").style.display = "block";
+  };
 };
 
 socket.on('player_gone', function(player){
