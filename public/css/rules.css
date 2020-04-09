@@ -1,5 +1,6 @@
 #symbols > div {
   display: flow-root;
+  margin: 20px;
 }
 
 #symbols p {
@@ -8,7 +9,7 @@
   width: calc(100% - 90px);
   position: relative;
   top: -18px;
-  font-size: 18px;
+  font-size: 36px;
 }
 
 .square {
