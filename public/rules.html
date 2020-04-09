@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8" />
+        <title>The Pirate Game</title>
+        <link rel="stylesheet" type="text/css" href="css/MainPage.css" />
+        <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+	<link rel="stylesheet" type="text/css" href="css/rules.css" />
+        <link rel="icon" href="logo.png" type="image/x-icon" />
+        <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="nav"></div>
+        <script type="text/babel" src="navbar.js"></script>
+        <br />
+        <div class="sometext" style="background-color:lightblue;">
+			<p>
+				To play a game, one o' ye's will be the Pirate King an' will click 'Start a Game'. The rest o' y'all'll be crew an' will click 'Join a Game'. 
+				The Pirate King will, then, share the key for the game which the crew will use to join the game. 
+				If ye's can't see the Pirate King's screen, ye's can click 'Watch a Game' and enter the key, and it will copy the Pirate King's screen.
+				<br /><br />
+				Now ye's 'ave set up a game, the crew must fill in their boards with the 49 symbols of 15 types. They can do it themselves or the computer can do it randomly.
+				If they do it manually, they can either type the name of the square where they want to place the symbol or can click on that square.
+				<br /><br />
+				When all crewmembers 'ave filled their boards, the game can begin.
+				<br /><br />
+				On each of the 49 rounds, a square is selected, either at random or by one of the players, and all players get the symbol in that square. 
+				Most of the symbols are amounts o' CASH. If a player gets a CASH symbol, their CASH is increased by that amount. There are other symbols which do other things as follows:
+			</p>
+			<div id="symbols">
+				<div>
+					<div class="square"><img src="imgs/rob.png" /></div>
+					<p>Rob: Allows you to take all of another player's CASH and add it to your own. Their Bank balance is safe from this. That you robbed them is announced to all players but how much CASH you took is kept secret.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/kill.svg" /></div>
+					<p>Kill: Allows you to reduce another player's CASH to zero. Their Bank balance is safe from this. This is announced to all players. That player is not out of the game, they must just start again from zero CASH.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/present.png" /></div>
+					<p>Present: Allows you to increase another player's CASH by 1000. This is announced to all players.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/parrot.png" /></div>
+					<p>Gobby Parrot: Announces your CASH to all players.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/swap.png" /></div>
+					<p>Swap: Allows you to swap CASH with another player. Both your Bank balances are safe from this. That you swapped with each other is announced to all players but how much CASH each of you had is kept secret.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/c.png" /></div>
+					<p>Choose Next Square: Adds you to a queue of people who will get to choose the next square. All players can see this queue.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/shield.svg" /></div>
+					<p>Shield: Block the bad! The Shield is placed in your 'Shield' box and you can choose to use it to block the bad at a later time. Nobody but you knows whether you have a Shield.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/mirror.png" /></div>
+					<p>Mirror: Reflect the bad! The Mirror is placed in your 'Mirror' box and you can choose to use it to reflect the bad back at the attacker at a later time. For example, if you were being robbed, you could mirror it and rob them instead. They could use their Shield or Mirror at this point. Nobody but you knows whether you have a Mirror.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/bomb.svg" /></div>
+					<p>Bomb: YOU go to zero! Your CASH goes to zero. Your Bank balance is safe from this. Nobody knows when this happens.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/double.svg" /></div>
+					<p>Double: Your CASH doubles. Your Bank balance is not affected. Nobody knows when this happens.</p>
+				</div>
+				<div>
+					<div class="square"><img src="imgs/bank.svg" /></div>
+					<p>Bank: Your CASH moves into your Bank.</p>
+				</div>
+			</div>
+			<p>The winner is the pirate whose final CASH and Bank balance total the most.</p>
+		</div>
+    </body>
+</html>

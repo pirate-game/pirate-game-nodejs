@@ -364,9 +364,14 @@ function nextSquareMid(){
 };
 
 function tooSlowToChoose(){
-  globalCrew = globalCrew.filter(e=>e!=toChoose);
-  socket.emit('too_slow', [toChoose]);
-  nextSquare();
+  if (globalCrew.length > 2){
+    globalCrew = globalCrew.filter(e=>e!=toChoose);
+    socket.emit('too_slow', [toChoose]);
+    unreadyCrew = [];
+    nextSquare();
+  } else {
+    document.getElementById("tooFewReady").style.display = "block";
+  };
 };
 
 socket.on('player_gone', function(player){
@@ -533,15 +538,133 @@ function eventReportThing(someEvent){
         <p>{someEvent[2]} shielded being swapped with by {someEvent[1]}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
-      break;          
+      break;  
+    case "mirror_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} mirrored being robbed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "mirror_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} mirrored being killed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} shielded being mirror robbed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[1]} shielded being mirror killed by {someEvent[2]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "mirror_mirror_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} mirrored being mirror robbed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "mirror_mirror_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Mirrored Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} mirrored being mirror killed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_mirror_rob":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Mirrored Rob!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["rob"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being mirror mirror robbed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
+    case "shielded_mirror_mirror_kill":
+      return (<div>
+        <h3 style={{display: "inline-block",verticalAlign: "top"}}>Shielded Mirrored Mirrored Kill!</h3>
+        <div style={{display:"inline-block",position: "absolute",right: "10px",top: "7px"}} className="square">
+          {things["kill"]}
+        </div>
+        <hr />
+        <p>{someEvent[2]} shielded being mirror mirror killed by {someEvent[1]}!</p>
+        <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
+      </div>);
+      break;
   };
 };
               
 function showScores(){
-  socket.emit('get_scores');
-  hideStage("stage2");
   hidePopUps();
-  document.getElementById("waiting").style.display = "block";
+  if (globalCrew.length - unreadyCrew.length >= 2){
+    if (unreadyCrew.length == 0){
+      socket.emit('get_scores');
+      hideStage("stage2");
+      document.getElementById("waiting").style.display = "block";
+    } else {
+      ReactDOM.render(<React.Fragment>
+        <div className="popUp"><div>
+          <h3>Confirm Show Scores</h3>
+          <hr />
+          <div>
+            <p style={{display: 'inline-block', width: 'calc(100% - 190px)'}}>The crewmembers below are not ready and their scores may not be shown.</p>
+            <div style={{display: 'inline-block'}}>
+              <button onClick={()=>{socket.emit('too_slow', unreadyCrew);unreadyCrew=[];showScores()}}>Okay!</button>
+              <button onClick={hidePopUps}>Wait!</button>
+            </div>
+          </div>
+          <div className="crewDiv" style={{maxHeight: 'calc(100vh - 400px)'}}>
+            <ul>
+              {unreadyCrew.map(crewMember => (
+                <li style={{position:'relative'}}>
+                  <div className="nameLiDiv">{crewMember}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div></div>
+      </React.Fragment>, document.getElementById("nextSquareConfirm"));
+      document.getElementById("nextSquareConfirm").childNodes[0].style.display = "block";
+    };
+  } else {
+    document.getElementById("tooFewReady").style.display = "block";
+  };
 };
       
 socket.on('got_scores', function(results){

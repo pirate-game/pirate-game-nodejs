@@ -19,5 +19,5 @@ img, button, a {cursor:pointer;}
 .sometext {
 	padding:25px;
 	margin:auto;
-	font-size: 18px;
+	font-size: 1em!important;
 }
