@@ -4,7 +4,6 @@
 }
 
 #symbols p {
-  display: inline-block;
   max-width: calc(100% - 90px);
   position: relative;
   top: -1em;
