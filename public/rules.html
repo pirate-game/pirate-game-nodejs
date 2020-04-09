@@ -5,6 +5,7 @@
         <title>The Pirate Game</title>
         <link rel="stylesheet" type="text/css" href="css/MainPage.css" />
         <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+	<link rel="stylesheet" type="text/css" href="css/rules.css" />
         <link rel="icon" href="logo.png" type="image/x-icon" />
         <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
@@ -28,7 +29,7 @@
 				On each of the 49 rounds, a square is selected, either at random or by one of the players, and all players get the symbol in that square. 
 				Most of the symbols are amounts o' CASH. If a player gets a CASH symbol, their CASH is increased by that amount. There are other symbols which do other things as follows:
 			</p>
-			<div>
+			<div id="symbols">
 				<div>
 					<div class="square"><img src="imgs/rob.png" /></div>
 					<p>Rob: Allows you to take all of another player's CASH and add it to your own. Their Bank balance is safe from this. That you robbed them is announced to all players but how much CASH you took is kept secret.</p>
