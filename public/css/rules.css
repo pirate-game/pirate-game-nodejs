@@ -6,6 +6,9 @@
   display: inline-block;
   float: right;
   width: calc(100% - 90px);
+  position: relative;
+  top: -18px;
+  font-size: 18px;
 }
 
 .square {
