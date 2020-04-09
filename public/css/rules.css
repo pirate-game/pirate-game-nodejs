@@ -4,12 +4,13 @@
 }
 
 #symbols p {
+  font-size: inherit;
   display: inline-block;
-  float: right;
-  width: calc(100% - 90px);
+  float: left;
+  margin-left: 20px;
+  max-width: calc(100% - 90px);
   position: relative;
-  top: -18px;
-  font-size: 36px;
+  top: -1em;
 }
 
 .square {
