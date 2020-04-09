@@ -1,0 +1,25 @@
+#symbols > div {
+  display: flow-root;
+}
+
+#symbols p {
+  display: inline-block;
+  float: right;
+  width: calc(100% - 90px);
+}
+
+.square {
+  display: inline-block;
+  height: 70px;
+  width: 70px;
+  float: left;
+}
+
+.square img {
+  max-height: 95%;
+  max-width: 95%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: cell;
+}
