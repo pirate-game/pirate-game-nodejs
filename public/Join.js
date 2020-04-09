@@ -596,6 +596,7 @@ function attemptChooseSquare(){
 
 socket.on('choose', function(){
   hidePopUps();
+  squareClicked("");
   document.getElementById("chooseSquare").style.display = "block";
 });
 
@@ -992,7 +993,7 @@ var toRender = <div>
     <div id="invalidName" className="popUp"><div>
         <h3>Invalid Name</h3>
         <hr />
-        <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.
+        <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name. Ye&apos;s can also include single and double quotes.
           <br />We be sorry if ye&apos;s name be &apos;aving accented characters in it etc.</p>
        <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
@@ -1000,7 +1001,7 @@ var toRender = <div>
     <div id="invalidName2" className="popUp"><div>
         <h3>Invalid Name</h3>
         <hr />
-        <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name.</p>
+        <p>Please choose a name consisting of alphanumeric characters and spaces but which is not entirely whitespace and especially isn&apos;t the empty name. Ye&apos;s can also include single and double quotes.</p>
        <button className="close" onClick={hidePopUps}>Okay!</button>
     </div></div>
 
