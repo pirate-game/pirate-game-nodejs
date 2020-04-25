@@ -704,7 +704,7 @@ class ShowScores extends React.Component {
         theShowScores = this;
     }
     render(){
-        <button id="showScores" onClick={showScores} style={this.state.allReady ? {display:"none", border:'2px solid magenta'} : {display:"none"}}><h2>Show&nbsp;Scores</h2></button>;
+        return <button id="showScores" onClick={showScores} style={this.state.allReady ? {display:"none", border:'2px solid magenta'} : {display:"none"}}><h2>Show&nbsp;Scores</h2></button>;
     }
 };
 
