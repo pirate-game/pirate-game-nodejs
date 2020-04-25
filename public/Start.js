@@ -568,7 +568,7 @@ function eventReportThing(someEvent){
           {things["rob"]}
         </div>
         <hr />
-        <p>{someEvent[1]} shielded being mirror robbed by {someEvent[2]}!</p>
+        <p>{someEvent[2]} shielded being mirror robbed by {someEvent[1]}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
@@ -579,7 +579,7 @@ function eventReportThing(someEvent){
           {things["kill"]}
         </div>
         <hr />
-        <p>{someEvent[1]} shielded being mirror killed by {someEvent[2]}!</p>
+        <p>{someEvent[2]} shielded being mirror killed by {someEvent[1]}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
@@ -590,7 +590,7 @@ function eventReportThing(someEvent){
           {things["rob"]}
         </div>
         <hr />
-        <p>{someEvent[2]} mirrored being mirror robbed by {someEvent[1]}!</p>
+        <p>{someEvent[1]} mirrored being mirror robbed by {someEvent[2]}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
@@ -601,7 +601,7 @@ function eventReportThing(someEvent){
           {things["kill"]}
         </div>
         <hr />
-        <p>{someEvent[2]} mirrored being mirror killed by {someEvent[1]}!</p>
+        <p>{someEvent[1]} mirrored being mirror killed by {someEvent[2]}!</p>
         <button onClick={theEventReport.pop} style={{height:"unset",display:"block",marginTop:"10px"}}>Okay!</button>
       </div>);
       break;
