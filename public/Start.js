@@ -692,6 +692,7 @@ class NextSquare extends React.Component {
     }
     render(){
         return <button id="nextSquare" onClick={nextSquare} style={this.state.allReady ? {border: '2px solid magenta'} : {}}><h2>Next&nbsp;Square</h2></button>;
+    }
 };
 
 class ShowScores extends React.Component {
@@ -703,7 +704,8 @@ class ShowScores extends React.Component {
         theShowScores = this;
     }
     render(){
-        return <button id="showScores" onClick={showScores} style={{display:"none", border:{this.state.allReady ? '2px solid magenta' : 'none'}}}><h2>Show&nbsp;Scores</h2></button>;
+        <button id="showScores" onClick={showScores} style={this.state.allReady ? {display:"none", border:'2px solid magenta'} : {display:"none"}}><h2>Show&nbsp;Scores</h2></button>;
+    }
 };
 
 var toRender = <div>
