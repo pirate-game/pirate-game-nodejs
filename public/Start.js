@@ -12,6 +12,8 @@ var theCurrentSquare;
 var theChooseNextSquare;
 var theStage3;
 var theEventReport;
+var theNextSqaure;
+var theShowScores;
 
 const things = {
   "rob":<img src="imgs/rob.png" />,
@@ -423,6 +425,10 @@ class Stage3 extends React.Component {
 
 socket.on('ready', function(name){
   unreadyCrew = unreadyCrew.filter(e=>e!=name);
+  if (unreadyCrew.length==0){
+      theNextSquare.setState({allready: true});
+      theShowScores.setState({allready: true});
+  };
 });
 
 class EventReport extends React.Component {
@@ -676,6 +682,30 @@ socket.on('got_scores', function(results){
   socket.emit('game_over', leaderboard);
 });
 
+class NextSquare extends React.Component {
+    constructor(){
+        super();
+        
+        this.state = {allReady: false};
+        
+        theNextSquare = this;
+    }
+    render(){
+        return <button id="nextSquare" onClick={nextSquare} style={this.state.allReady ? {border: '2px solid magenta'} : {}}><h2>Next&nbsp;Square</h2></button>;
+};
+
+class ShowScores extends React.Component {
+    constructor(){
+        super();
+        
+        this.state = {allReady: false};
+        
+        theShowScores = this;
+    }
+    render(){
+        return <button id="showScores" onClick={showScores} style={{display:"none", border:{this.state.allReady ? '2px solid magenta' : 'none'}}}><h2>Show&nbsp;Scores</h2></button>;
+};
+
 var toRender = <div>
     <div className="stage0">
       <div style={{position: 'relative', minHeight: 'calc(100vh - 230px)'}}>
@@ -692,8 +722,8 @@ var toRender = <div>
       <Board />
       <CurrentSquare />
       <ChooseNextSquare />
-      <button id="nextSquare" onClick={nextSquare}><h2>Next&nbsp;Square</h2></button>
-      <button id="showScores" onClick={showScores} style={{display:"none"}}><h2>Show&nbsp;Scores</h2></button>
+      <NextSquare />
+      <ShowScores />
       <div id="nextSquareConfirm" />
       <EventReport />
     </div>
