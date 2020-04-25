@@ -12,7 +12,7 @@ var theCurrentSquare;
 var theChooseNextSquare;
 var theStage3;
 var theEventReport;
-var theNextSqaure;
+var theNextSquare;
 var theShowScores;
 
 const things = {
