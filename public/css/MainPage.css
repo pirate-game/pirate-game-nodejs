@@ -1,5 +1,7 @@
 * {cursor: cell;}
 
+* * {cursor: inherit;}
+
 body {
 	background-color:#DCDCC4;
 	font-family: 'Calibri', Fallback, sans-serif;
