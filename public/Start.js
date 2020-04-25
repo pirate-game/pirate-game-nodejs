@@ -426,8 +426,8 @@ class Stage3 extends React.Component {
 socket.on('ready', function(name){
   unreadyCrew = unreadyCrew.filter(e=>e!=name);
   if (unreadyCrew.length==0){
-      theNextSquare.setState({allready: true});
-      theShowScores.setState({allready: true});
+      theNextSquare.setState({allReady: true});
+      theShowScores.setState({allReady: true});
   };
 });
 
