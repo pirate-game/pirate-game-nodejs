@@ -766,6 +766,7 @@ socket.on('rob', function(name){
 
 socket.on('kill', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    waitingOn = true;
     globalWhat = "kill";
     globalName = name;
     globalAmount = 0;
@@ -778,6 +779,7 @@ socket.on('kill', function(name){
 
 socket.on('mirror_rob', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    waitingOn = true;
     globalWhat = "mirror_rob";
     globalName = name;
     globalAmount = 0;
@@ -790,6 +792,7 @@ socket.on('mirror_rob', function(name){
 
 socket.on('mirror_kill', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    waitingOn = true;
     globalWhat = "mirror_kill";
     globalName = name;
     globalAmount = 0;
@@ -802,6 +805,7 @@ socket.on('mirror_kill', function(name){
 
 socket.on('mirror_mirror_rob', function(name){
   if (theThingsBox.state.shield == "yes"){
+    waitingOn = true;
     globalWhat = "mirror_mirror_rob";
     globalName = name;
     globalAmount = 0;
@@ -814,6 +818,7 @@ socket.on('mirror_mirror_rob', function(name){
 
 socket.on('mirror_mirror_kill', function(name){
   if (theThingsBox.state.shield == "yes"){
+    waitingOn = true;
     globalWhat = "mirror_mirror_kill";
     globalName = name;
     globalAmount = 0;
@@ -830,6 +835,7 @@ socket.on('present', function(){
 
 socket.on('swap', function(name, amount){
   if (theThingsBox.state.shield == "yes"){
+    waitingOn = true;
     globalWhat = "swap";
     globalName = name;
     globalAmount = amount;
