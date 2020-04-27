@@ -41,7 +41,7 @@ function range(someInt){
   return out;
 };
 
-function sortByScore(results){
+/*function sortByScore(results){
   var out = [];
   var toTest = 0;
   while (out.length != results.length){
@@ -53,6 +53,12 @@ function sortByScore(results){
     toTest += 100;
   };
   return out.reverse();
+};*/
+
+function sortByScore(results){
+  var out = results.slice();
+  out.sort((a,b)=>(a.score<b.score)?1:-1);
+  return out;
 };
 
 class KeyBox extends React.Component {
