@@ -686,7 +686,7 @@ function ShieldMirror(props){
 };
 
 function okay(what, name, amount){
-  waitingOn = true;
+  waitingOn = false;
   if (document.getElementById("shieldMirror").childNodes.length != 0){
     document.getElementById("shieldMirror").childNodes[0].style.display = "none";
   };
@@ -723,7 +723,7 @@ function okay(what, name, amount){
 };
 
 function shield(what, name, amount){
-  waitingOn = true;
+  waitingOn = false;
   document.getElementById("shieldMirror").childNodes[0].style.display = "none";
   theThingsBox.setState({shield: "gone"});
   switch(what){
@@ -752,7 +752,7 @@ function shield(what, name, amount){
 };
 
 function mirror(what, name, amount){
-  waitingOn = true;
+  waitingOn = false;
   document.getElementById("shieldMirror").childNodes[0].style.display = "none";
   theThingsBox.setState({mirror: "gone"});
   socket.emit('mirror_'+what, name);
@@ -760,6 +760,9 @@ function mirror(what, name, amount){
 
 socket.on('rob', function(name){
   if (theThingsBox.state.shield == "yes" || theThingsBox.state.mirror == "yes"){
+    waitingOn = true;
+    globalWhat = "rob";
+    globalName = name;
     ReactDOM.render(<ShieldMirror what="rob" name={name} amount={0} mirror={0} />, document.getElementById("shieldMirror"));
     document.getElementById("shieldMirror").childNodes[0].style.display = "block";
   } else {
