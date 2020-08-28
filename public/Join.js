@@ -551,7 +551,7 @@ function chooseThemTo(what){
   var name = document.getElementById("choosePlayer").value;
   document.getElementById("choosePlayer").value = "";
   if (namePattern.test(name) && !exclPattern.test(name)){
-    if (theChoosePlayer.state.crew.includes(name)){
+    if (theChoosePlayer.state.crew.includes(name) && (name != myName)){
       if (what == "swap"){
         socket.emit(what, name, theThingsBox.state.cash);
       } else {
