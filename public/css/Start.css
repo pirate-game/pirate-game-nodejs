@@ -85,7 +85,7 @@
   background-color: cornflowerblue;
 }
 
-.cross {
+/*.cross {
   display: inline-block;
   float: right;
   font-size: 30px;
@@ -95,6 +95,18 @@
   position: absolute;
   right: 0;
   top: -15px;
+}*/
+
+.cross {
+  display: inline-block;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: -21px;
 }
 
 .nameLiDiv {
